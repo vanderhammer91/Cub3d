@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/23 22:18:00 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:30:28 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	if (closest_wall->direction == NORTH || closest_wall->direction == SOUTH)
 	{
 		start_y = 400 - raylength * 0.5;
-		ty = 0;
+		ty =  closest_wall->direction * 32;
 		ty_step = 32.0 / (float)raylength;
-		tx = (int)(ray_x/2.0) % 32;	
+		tx = (int)(ray_x/2.0) % 32;
+		if (closest_wall->direction == NORTH)
+			tx = 31 - tx;
 		while (y < raylength)
 		{
 			c = All_Textures[(int)(ty) * 32 + (int)(tx)];	
@@ -109,9 +111,11 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	else if (closest_wall->direction == EAST || closest_wall->direction == WEST)
 	{
 		start_y = 400 - raylength * 0.5;
-		ty = 0;
+		ty =  closest_wall->direction * 32;
 		ty_step = 32.0 / (float)raylength;
 		tx = (int)(ray_y/2.0) % 32;
+		if (closest_wall->direction == EAST)
+			tx = 31 - tx;
 		while (y < raylength)
 		{
 			c = All_Textures[(int)(ty) * 32 + (int)(tx)];	

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 20:38:02 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:43:41 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,19 @@ void	c3d_collider_check_up(t_game *game)
 {	
 	t_ray	this_ray;
 	int 	has_set;
+	int	j;
 	float	pt_dist;
-	t_bound	*current_wall;
 	t_point *point;
 
 	this_ray.pos.x = game->player.pos.x;
 	this_ray.pos.y = game->player.pos.y;
 	this_ray.rot = 90;
 	has_set = 0;
-
-	current_wall = *game->walls;
-    while (current_wall != NULL)
-    {
+	j = 0;
+	while (game->walls[j])
+	{	
 		point = NULL;
-		point = ray_cast(current_wall, &this_ray);
+		point = ray_cast(game->walls[j], &this_ray);
 		if (point)
 		{
 			pt_dist = -1;
@@ -63,17 +62,21 @@ void	c3d_collider_check_up(t_game *game)
 			{
 				has_set = 1;
 			}
+			free(point);
 		}
-		free(point);
-		if (!current_wall->next)
-			break;
-		current_wall = current_wall->next;
+		else
+		{
+		}
+		j++;
 	}
 	if (has_set)
 		game->player.ub = 1;
 	else
 		game->player.ub = 0;
 }
+
+
+
 
 int	test_down_hitray(t_game *game)
 {
@@ -100,7 +103,8 @@ int	test_down_hitray(t_game *game)
 	return (0);
 }
 
-void	c3d_collider_check_down(t_game *game)
+/*
+void	c3d_collider_check_up(t_game *game)
 {	
 	t_ray	this_ray;
 	int 	has_set;
@@ -133,8 +137,45 @@ void	c3d_collider_check_down(t_game *game)
 		current_wall = current_wall->next;
 	}
 	if (has_set)
+		game->player.ub = 1;
+	else
+		game->player.ub = 0;
+}
+*/
+void	c3d_collider_check_down(t_game *game)
+{	
+	t_ray	this_ray;
+	int 	has_set;
+	int	j;
+	float	pt_dist;
+	t_point *point;
+
+	this_ray.pos.x = game->player.pos.x;
+	this_ray.pos.y = game->player.pos.y;
+	this_ray.rot = 270;
+	has_set = 0;
+	j = 0;
+	while (game->walls[j])
+	{	
+		point = NULL;
+		point = ray_cast(game->walls[j], &this_ray);
+		if (point)
+		{
+			pt_dist = -1;
+			pt_dist = get_raylength(this_ray, *point);
+			if (pt_dist != -1 && pt_dist < 15)
+			{
+				has_set = 1;
+			}
+			free(point);
+		}
+		else
+		{
+		}
+		j++;
+	}
+	if (has_set)
 		game->player.db = 1;
 	else
 		game->player.db = 0;
 }
-

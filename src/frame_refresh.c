@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 20:55:34 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:13:19 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,12 +188,11 @@ int	frame_refresh(t_game *game)
 	//draw
 	c3d_draw_bounds(game, game->img);
 	c3d_draw_map_bounds(game);
+
 	filled_circle(game->img, game->player.pos.x, game->player.pos.y, 10, 0xFF0000);
 	rect(game->img, 800, 0, 800, 400, 0xFFFFFF);
 	c3d_player_look(game);
-
 	draw_dir_arrow(game);
-
 	test_hitrays(game);
 
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);

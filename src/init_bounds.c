@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 14:16:44 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:11:50 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	c3d_free_bounds(t_game *game)
 
 void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y) 
 {
-//	printf("dbg1 ");
-    	t_bound *new_bound = malloc(sizeof(t_bound));
+	t_bound *new_bound = malloc(sizeof(t_bound));
 	t_bound *temp;
     	if (new_bound == NULL)
 	{
@@ -55,13 +54,11 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y)
         	*game->walls = NULL;
         	return;
 	} 
-//	printf("dbg2 ");
-    	new_bound->start.x = s_x;
-    	new_bound->start.y = s_y;
-    	new_bound->end.x = e_x;
-    	new_bound->end.y = e_y;
+    new_bound->start.x = s_x;
+    new_bound->start.y = s_y;
+    new_bound->end.x = e_x;
+    new_bound->end.y = e_y;
 	new_bound->direction = UNSET;
-
 	if (new_bound->end.y > new_bound->start.y)
 		new_bound->direction = EAST;
 	else if (new_bound->end.y < new_bound->start.y)
@@ -73,7 +70,6 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y)
 		else
 			new_bound->direction = SOUTH;
 	}
-//	free(game->walls[game->num_walls]);
 	temp = game->walls[game->num_walls];
     	game->walls[game->num_walls] = new_bound;
 	free(temp);

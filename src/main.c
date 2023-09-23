@@ -6,12 +6,13 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 15:01:16 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:26:26 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
- 
+#include "textures.h"
+
 int	prev_x = 0;
 
 int	main(int argc, char **argv)

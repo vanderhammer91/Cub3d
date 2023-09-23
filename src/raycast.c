@@ -6,12 +6,14 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 15:27:57 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:18:00 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 #include "frame_refresh.h"
+
+extern int All_Textures[];
 
 t_point *ray_cast(t_bound *current_wall, t_ray *this_ray)
 {
@@ -68,9 +70,15 @@ float	get_raylength(t_ray ray, t_point end)
 	return (sqrt(x_diff * x_diff + y_diff * y_diff));
 }
 
-void	c3d_draw_projection(t_game *game, float raylength, int i, t_bound *closest_wall)
+void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ray_y, t_bound *closest_wall)
 {
 	int colour;
+	int	y; 
+	int		start_y;
+	float	ty;
+	float	ty_step;
+	float	tx;
+	float	c;
 
 	if (closest_wall->direction == EAST)
 		colour = 0x00FFFF;
@@ -82,7 +90,38 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, t_bound *closest_
 		colour = 0xFF0000;	
 	else
 		colour = 0xFFFFFF;
-	rect(game->img, 800 + i * 6, (400 - raylength * 0.5), 6, raylength, colour);
+	
+	y = 0;
+	if (closest_wall->direction == NORTH || closest_wall->direction == SOUTH)
+	{
+		start_y = 400 - raylength * 0.5;
+		ty = 0;
+		ty_step = 32.0 / (float)raylength;
+		tx = (int)(ray_x/2.0) % 32;	
+		while (y < raylength)
+		{
+			c = All_Textures[(int)(ty) * 32 + (int)(tx)];	
+			rect(game->img, 800 + i * 6, start_y + y, 6, 1, colour * c);
+			ty += ty_step;
+			y++;
+		}
+	}
+	else if (closest_wall->direction == EAST || closest_wall->direction == WEST)
+	{
+		start_y = 400 - raylength * 0.5;
+		ty = 0;
+		ty_step = 32.0 / (float)raylength;
+		tx = (int)(ray_y/2.0) % 32;
+		while (y < raylength)
+		{
+			c = All_Textures[(int)(ty) * 32 + (int)(tx)];	
+			rect(game->img, 800 + i * 6, start_y + y, 6, 1, colour * c);
+			ty += ty_step;
+			y++;
+		}
+	}
+	else
+		rect(game->img, 800 + i * 6, (400 - raylength * 0.5), 6, raylength, colour);
 }
 
 void	c3d_player_look(t_game *game)
@@ -137,7 +176,7 @@ void	c3d_player_look(t_game *game)
 			ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
 			pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200; 
 			if (has_collided)
-				c3d_draw_projection(game, pt_dist, i, closest_wall);
+				c3d_draw_projection(game, pt_dist, i, closest.x, closest.y, closest_wall);
 			i++;
 	}
 }

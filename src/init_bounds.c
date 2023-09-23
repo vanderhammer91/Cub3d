@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/23 21:11:50 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:59:28 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,12 @@ int	c3d_set_wall_bounds(t_game *game)
 	game->walls = malloc(sizeof(t_bound) * 200);
 	game->num_walls = 0;
 	int	i;
-//	int	j;
+	int	j;
+	int	m = 80;
 	int	map_height;
 	int	map_width;
 	int count;
-//	int s_x, s_y, e_x, e_y;
+	int s_x, s_y, e_x, e_y;
 
 	count = 0;
 	i = 0;
@@ -163,8 +164,6 @@ int	c3d_set_wall_bounds(t_game *game)
 	map_width = ft_strlen(game->raw[i]) - 1;
 	printf("map width here is: %d\n", map_width);
 
-/*
-//	while (game->raw[i])
 	while (i < map_height)
 	{
 		j = 0;
@@ -176,53 +175,38 @@ int	c3d_set_wall_bounds(t_game *game)
 				if ((i - 1) > -1 && game->raw[i - 1][j] == '0')
 				{
 					
-					s_x = (j + 1) * 80;
-					s_y = i * 80;
-					e_x = j * 80;
-					e_y = i * 80;
-					//	printf("add_bound(game, %d, %d, %d, %d);\n",
-					//			s_x, s_y, e_x, e_y);
-				//	add_bound(game, s_x, s_y, e_x, e_y);
-				//	add_bound(game, (j + 1) * 80, i * 80, j * 80, i * 80);
-					
+					s_x = (j + 1) * m;
+					s_y = i * m;
+					e_x = j * m;
+					e_y = i * m;
+					add_bound(game, s_x, s_y, e_x, e_y);	
 				}	
 				if ((j + 1) < map_width-1 && game->raw[i][j + 1] == '0')
 				{
 					
-					s_x = (j + 1) * 80;
-					s_y = (i + 1) * 80;
-					e_x = (j + 1) * 80;
-					e_y = i * 80;
-				//	printf("add_bound(game, %d, %d, %d, %d);\n",
-				//			s_x, s_y, e_x, e_y);
-				//	add_bound(game, s_x, s_y, e_x, e_y);
-					//	add_bound(game, (j + 1) * 80, (i + 1) * 80, (j + 1) * 80, i * 80);	
+					s_x = (j + 1) * m;
+					s_y = (i + 1) * m;
+					e_x = (j + 1) * m;
+					e_y = i * m;
+					add_bound(game, s_x, s_y, e_x, e_y);	
 				}
 				
 				if ((i + 1) < map_height && game->raw[i + 1][j] == '0')
 				{
-					
-				//	s_x = j * 80;
-				//	s_y = (i + 1) * 80;
-				//	e_x = (j + 1) * 80;
-				//	e_y = (i + 1) * 80;
-					//printf("add_bound(game, %d, %d, %d, %d);\n",
-					//		s_x, s_y, e_x, e_y);
-				//	add_bound(game, s_x, s_y, e_x, e_y);
-					//	add_bound(game, j * 80, (i + 1) * 80, (j + 1) * 80, (i + 1) * 80);
+					s_x = j * m;
+					s_y = (i + 1) * m;
+					e_x = (j + 1) * m;
+					e_y = (i + 1) * m;
+					add_bound(game, s_x, s_y, e_x, e_y);
 				}
 				
 				if ((j - 1) > -1 && game->raw[i][j - 1] == '0')
 				{	
-					s_x = j * 80;
-					s_y = i * 80;
-					e_x = j * 80;
-					e_y = (i + 1) * 80;
-					printf("add_bound(game, %d, %d, %d, %d);\n",
-							s_x, s_y, e_x, e_y);
-
-
-					//add_bound(game, j * 80, i * 80, j * 80, (i + 1) * 80);
+					s_x = j * m;
+					s_y = i * m;
+					e_x = j * m;
+					e_y = (i + 1) * m;
+					add_bound(game, s_x, s_y, e_x, e_y);
 				}
 				
 			}
@@ -236,10 +220,10 @@ int	c3d_set_wall_bounds(t_game *game)
 		i++;
 		
 	}
-	*/
+
 //	c3d_set_bounds(game);
 	//GREEN BOIZ
-	
+/*	
 	add_bound(game, 400, 240, 320, 240);
 	add_bound(game, 160, 320, 80, 320);
 	add_bound(game, 320, 320, 240, 320);
@@ -254,10 +238,10 @@ int	c3d_set_wall_bounds(t_game *game)
 	add_bound(game, 560, 720, 480, 720);
 	add_bound(game, 640, 720, 560, 720);
 	add_bound(game, 720, 720, 640, 720);
-
+*/
 	
 	//blue boiz.
-	
+/*	
 	add_bound(game, 80, 160, 80, 80);
 	add_bound(game, 400, 160, 400, 80);
 	add_bound(game, 80, 240, 80, 160);
@@ -272,8 +256,9 @@ int	c3d_set_wall_bounds(t_game *game)
 	add_bound(game, 80, 640, 80, 560);
 	add_bound(game, 400, 640, 400, 560);
 	add_bound(game, 80, 720, 80, 640);
+*/
 
-
+	/*
 	//red boiz.
 	add_bound(game, 80, 80, 160, 80);
 	add_bound(game, 160, 80, 240, 80);
@@ -289,9 +274,10 @@ int	c3d_set_wall_bounds(t_game *game)
 	add_bound(game, 560, 400, 640, 400);
 	add_bound(game, 640, 400, 720, 400);
 	add_bound(game, 320, 640, 400, 640);
+*/
 
 	//Teal BOIZ?
-
+/*
 	add_bound(game, 320, 80, 320, 160);
 	add_bound(game, 720, 80, 720, 160);
 	add_bound(game, 720, 160, 720, 240);
@@ -306,7 +292,7 @@ int	c3d_set_wall_bounds(t_game *game)
 	add_bound(game, 320, 560, 320, 640);
 	add_bound(game, 720, 560, 720, 640);
 	add_bound(game, 720, 640, 720, 720);
-
+*/
 	return (0);
 }
 

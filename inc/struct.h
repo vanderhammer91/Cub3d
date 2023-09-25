@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 16:01:42 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:15:08 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ typedef struct s_game
 	int		w_height;
 	int		w_width;
 	char	**raw;
+	void	*north_texture;
 //	int	map_height;
 //	int	map_width;
-	
+
 	t_bound	**walls;
 	int num_walls;
 	t_player player;

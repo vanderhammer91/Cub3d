@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/23 22:30:28 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:57:37 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_point *ray_cast(t_bound *current_wall, t_ray *this_ray)
       	}
 	else 
 	{  
-	 		return NULL;
-      	}
+	 	return NULL;
+	}
 	}
 	else
 	{
@@ -89,8 +89,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	else if (closest_wall->direction == NORTH)
 		colour = 0xFF0000;	
 	else
-		colour = 0xFFFFFF;
-	
+		colour = 0x000000;
+
 	y = 0;
 	if (closest_wall->direction == NORTH || closest_wall->direction == SOUTH)
 	{
@@ -124,8 +124,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 			y++;
 		}
 	}
-	else
-		rect(game->img, 800 + i * 6, (400 - raylength * 0.5), 6, raylength, colour);
+//	else
+//		rect(game->img, 800 + i * 6, (400 - raylength * 0.5), 6, raylength, colour);
 }
 
 void	c3d_player_look(t_game *game)

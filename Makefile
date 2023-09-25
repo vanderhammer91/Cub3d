@@ -31,6 +31,7 @@ SRC_FILES = draw.c			\
 			init_bounds.c	\
 			box_collider.c	\
 			box_collider2.c	\
+			parse.c \
 			main.c
 
 SRC_DIR = src

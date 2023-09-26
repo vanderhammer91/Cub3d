@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 16:36:11 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:25:56 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	c3d_update_player_pos(t_game *game)
 
 	radians = game->player.rot * M_PI / 180;
 	perp_rad = get_safe_angle((game->player.rot + 90)) * (M_PI / 180);
-	speed = 3;
+	speed = 5;
 	if (game->keys.SH_KEY_DOWN == 1)
 		speed *= 2;
 	new_x = 0;
@@ -177,21 +177,22 @@ int	draw_dir_arrow(t_game *game)
 	return (0);
 }
 
+
 int	frame_refresh(t_game *game)
 {	
 	mlx_clear_window(game->mlx, game->mlx_win);
-	game->img = mlx_new_image(game->mlx, 1600, 800);	
+	game->img = mlx_new_image(game->mlx, 3000, 3000);	
 	
 	//update
 	c3d_update_player_pos(game);			
 	
 	//draw minimap and player circle
-//	c3d_draw_bounds(game, game->img);
+	c3d_draw_bounds(game, game->img);
 //	c3d_draw_map_bounds(game);
-//	filled_circle(game->img, game->player.pos.x, game->player.pos.y, 10, 0xFF0000);
+	filled_circle(game->img, game->player.pos.x, game->player.pos.y, 10, 0xFF0000);
 
 	//sky colour
-	rect(game->img, 0, 0, 1000, 400, 0x000066);
+	rect(game->img, 800, 0, 1200, 400, 0x000066);
 	//rect(game->img, 0, 0, 1000, 400, game->skycolour);
 	
 	//floor colour
@@ -201,9 +202,8 @@ int	frame_refresh(t_game *game)
 	draw_dir_arrow(game);
 	test_hitrays(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-
-
-
+	
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 0, 0);
 	mlx_destroy_image(game->mlx, game->img);
 	return (0);
 }

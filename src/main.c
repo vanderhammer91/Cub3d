@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 18:01:17 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:36:39 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,29 @@
 #include "textures.h"
 
 int	prev_x = 0;
+void	c3d_initialize_textures(t_game *game)
+{
+    int	width;
+	int	height;
+
+	game->north_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/wall.xpm", &width, &height);
+	game->east_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/wall.xpm", &width, &height);
+  	game->south_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/wall.xpm", &width, &height);
+    game->west_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/wall.xpm", &width, &height);
+    game->door_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/door.xpm", &width, &height);
+    game->gun_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/gun.xpm", &width, &height);
+}
 
 
 int	main(int argc, char **argv)
 {
 	t_game	*m_game;
-	int width;
-	int height;
-
 	if (argc != 2)
 		return (1);
 	m_game	= initialize_game();
@@ -33,11 +48,7 @@ int	main(int argc, char **argv)
 	m_game->mlx = mlx_init();
 	m_game->mlx_win = mlx_new_window(m_game->mlx, m_game->w_width,
 		m_game->w_height, "Cub3d");
-    m_game->north_texture = mlx_xpm_file_to_image(m_game->mlx, "images/north.xpm", &width, &height);
-	m_game->east_texture = mlx_xpm_file_to_image(m_game->mlx, "images/east.xpm", &width, &height);
-  	m_game->south_texture = mlx_xpm_file_to_image(m_game->mlx, "images/south.xpm", &width, &height);
-    m_game->west_texture = mlx_xpm_file_to_image(m_game->mlx, "images/west.xpm", &width, &height);
-
+	c3d_initialize_textures(m_game);
 	m_game->img = mlx_new_image(m_game->mlx, m_game->w_width, m_game->w_height);	
 	mlx_hook(m_game->mlx_win, 2, 1L<<0, key_press, m_game);	 
 	mlx_hook(m_game->mlx_win, 3, 1L<<0, key_release, m_game);

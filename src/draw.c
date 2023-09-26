@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:47 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/20 14:46:53 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:40:49 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void img_pixel_put(void *img, int x, int y, int color)
     int     size_line;
     int     endian;
 	
-    if (x < 0 || y < 0 || x >= 1600 || y >= 800)
+    if (x < 0 || y < 0 || x >= 2000 || y >= 1000)
         return;
 
     dst = mlx_get_data_addr(img, &bpp, &size_line, &endian);

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 16:37:47 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:23:31 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_game *initialize_game(void)
     }
     game->mlx = NULL;
     game->mlx_win = NULL;
-	game->w_width = 1000;
+	game->w_width = 2000;
 	game->w_height = 1000;
 	game->raw = NULL;
     game->num_walls = 0;

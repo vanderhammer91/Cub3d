@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 16:18:05 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:36:11 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,12 @@ int	frame_refresh(t_game *game)
 //	c3d_draw_map_bounds(game);
 //	filled_circle(game->img, game->player.pos.x, game->player.pos.y, 10, 0xFF0000);
 
-	//roof colour
+	//sky colour
 	rect(game->img, 0, 0, 1000, 400, 0x000066);
+	//rect(game->img, 0, 0, 1000, 400, game->skycolour);
 	
 	//floor colour
-	rect(game->img, 0, 400, 1000, 400, 0x000000);
+	//rect(game->img, 0, 400, 1000, 400, game->floorcolour);
 
 	c3d_player_look(game);
 	draw_dir_arrow(game);

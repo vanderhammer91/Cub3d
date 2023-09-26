@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 14:33:57 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:35:16 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct s_game
 	void	*east_texture;
 	void	*south_texture;
 	void	*west_texture;
+	int		skycolour;
+	int		floorcolour;
 //	int	map_height;
 //	int	map_width;
 

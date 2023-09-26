@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:41:56 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 15:35:01 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:32:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define CUB3D_H
 
 # include "libraries.h"
-# include "init.h"
+# include "init_bounds.h"
 # include "key_events.h"
 # include "gen_utils.h"
 # include "raycast.h"
 # include "bounds.h"
 # include "draw.h"
 # include "frame_refresh.h"
+# include "init_player.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024

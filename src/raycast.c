@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/25 19:57:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:15:51 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,21 @@ float	get_raylength(t_ray ray, t_point end)
 	return (sqrt(x_diff * x_diff + y_diff * y_diff));
 }
 
+
+
+int retrieve_colour(void *img, int x, int y)
+{
+    char    *data;
+    int     bpp;
+    int     size_line;
+    int     endian;
+    int     colour;
+
+    data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
+    colour = *(int *)(data + ((x * bpp / 8) + (y * size_line)));
+    return (colour);
+}
+
 void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ray_y, t_bound *closest_wall)
 {
 	int colour;
@@ -78,7 +93,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	float	ty;
 	float	ty_step;
 	float	tx;
-	float	c;
+	int	x_offset = 0;
+	int	cw = 5;
+//	float	c;
 
 	if (closest_wall->direction == EAST)
 		colour = 0x00FFFF;
@@ -92,22 +109,77 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 		colour = 0x000000;
 
 	y = 0;
-	if (closest_wall->direction == NORTH || closest_wall->direction == SOUTH)
+ 	if (closest_wall->direction == SOUTH)
 	{
-		start_y = 400 - raylength * 0.5;
-		ty =  closest_wall->direction * 32;
-		ty_step = 32.0 / (float)raylength;
-		tx = (int)(ray_x/2.0) % 32;
-		if (closest_wall->direction == NORTH)
-			tx = 31 - tx;
-		while (y < raylength)
-		{
-			c = All_Textures[(int)(ty) * 32 + (int)(tx)];	
-			rect(game->img, 800 + i * 6, start_y + y, 6, 1, colour * c);
-			ty += ty_step;
-			y++;
-		}
+    	start_y = 400 - raylength * 0.5;
+    	ty = 0;
+    	ty_step = 64.0 / (float)raylength;
+    	tx = (int)(ray_x/2.0) % 64;
+		tx = (int)(ray_x) % 64;
+		tx = 63 - tx;
+    	while (y < raylength)
+    	{
+    	    //tx = round(tx);
+    	    //ty = round(ty);
+    	  	int pixel_colour = retrieve_colour(game->south_texture, tx, ty);
+		   	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	    ty += ty_step;
+    	    y++;
+    	}
 	}
+ 	else if (closest_wall->direction == NORTH)
+	{
+    	start_y = 400 - raylength * 0.5;
+    	ty = 0;
+    	ty_step = 64.0 / (float)raylength;
+    	tx = (int)(ray_x/2.0) % 64;
+		tx = (int)(ray_x) % 64;
+    	while (y < raylength)
+    	{
+    	    //tx = round(tx);
+    	    //ty = round(ty);
+    	 	int pixel_colour = retrieve_colour(game->north_texture, tx, ty);
+    	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	    ty += ty_step;
+    	    y++;
+    	}
+	}
+	else if (closest_wall->direction == EAST)
+	{
+    	start_y = 400 - raylength * 0.5;
+    	ty = 0;
+    	ty_step = 64.0 / (float)raylength;
+    	tx = (int)(ray_y/2.0) % 64;
+		tx = (int)(ray_y) % 64;
+    	while (y < raylength)
+    	{
+    	    //tx = round(tx);
+    	    //ty = round(ty);
+    	  	int pixel_colour = retrieve_colour(game->east_texture, tx, ty);
+		   	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	    ty += ty_step;
+    	    y++;
+    	}
+	}
+ 	else if (closest_wall->direction == WEST)
+	{
+    	start_y = 400 - raylength * 0.5;
+    	ty = 0;
+    	ty_step = 64.0 / (float)raylength;
+    	tx = (int)(ray_y/2.0) % 64;
+		tx = (int)(ray_y) % 64;
+		tx = 63 - tx;
+    	while (y < raylength)
+    	{
+    	    //tx = round(tx);
+    	    //ty = round(ty);
+    	 	int pixel_colour = retrieve_colour(game->west_texture, tx, ty);
+    	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	    ty += ty_step;
+    	    y++;
+    	}
+	}
+/*
 	else if (closest_wall->direction == EAST || closest_wall->direction == WEST)
 	{
 		start_y = 400 - raylength * 0.5;
@@ -124,6 +196,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 			y++;
 		}
 	}
+	*/
 //	else
 //		rect(game->img, 800 + i * 6, (400 - raylength * 0.5), 6, raylength, colour);
 }
@@ -139,42 +212,42 @@ void	c3d_player_look(t_game *game)
 	double	ray_angle;
 	int	has_collided;
 	float	max_dist;
-	int i = 0;
+	float i = 0;
 	int j;
-	while (i < 140)
+	while (i < 280)
 	{
 		has_collided = 0;	
 		max_dist = 100000;
 		this_ray.pos.x = game->player.pos.x;
 		this_ray.pos.y = game->player.pos.y;
-		this_ray.rot = get_safe_angle(game->player.rot + i*0.5 -35);
+		this_ray.rot = get_safe_angle(game->player.rot + i*0.25 -35);
 		closest.x = -1;
 		closest.y = -1;
 	//	current_wall = *game->walls;
     	//while (current_wall != NULL)
     //	{
-	j = 0;
-	while (game->walls[j])
-	{	
-		point = NULL;
-    	  	point = ray_cast(game->walls[j], &this_ray);
-			if (point)
-			{
-				has_collided = 1;
-				pt_dist = -1;
-				pt_dist = get_raylength(this_ray, *point);
-				if (pt_dist != -1 && pt_dist < max_dist)
+		j = 0;
+		while (game->walls[j])
+		{	
+			point = NULL;
+    		  	point = ray_cast(game->walls[j], &this_ray);
+				if (point)
 				{
-					max_dist = pt_dist;
-					closest = *point;
-					closest_wall = game->walls[j];
+					has_collided = 1;
+					pt_dist = -1;
+					pt_dist = get_raylength(this_ray, *point);
+					if (pt_dist != -1 && pt_dist < max_dist)
+					{
+						max_dist = pt_dist;
+						closest = *point;
+						closest_wall = game->walls[j];
+					}
+					free(point);
 				}
-				free(point);
-			}
-			else
-			{
-			}
-			j++;
+				else
+				{
+				}
+				j++;
 		}
 		//	line(game->img, this_ray.pos, closest, 0x00FF00);
 			ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;

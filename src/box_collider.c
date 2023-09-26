@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/23 19:39:30 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:59:41 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,13 @@ void	c3d_collider_check_left(t_game *game)
 
 void	test_hitrays(t_game *game)
 {
-	test_right_hitray(game);
-	test_left_hitray(game);
-	test_down_hitray(game);
-	test_up_hitray(game);
+	//test_right_hitray(game);
+	//test_left_hitray(game);
+	//test_down_hitray(game);
+	//test_up_hitray(game);
+	
+	c3d_collider_check_left(game);
+	c3d_collider_check_right(game);
+	c3d_collider_check_down(game);
+	c3d_collider_check_up(game);
 }

@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 20:41:02 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:13:22 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
+#include "init_bounds.h"
 
 t_game *initialize_game(void)
 {
@@ -21,15 +21,15 @@ t_game *initialize_game(void)
     }
     game->mlx = NULL;
     game->mlx_win = NULL;
-	game->w_width = 1600;
-	game->w_height = 800;
+	game->w_width = 1000;
+	game->w_height = 1000;
 	game->raw = NULL;
    // game->walls = NULL;
 //	game->walls = malloc(sizeof(t_bound) * 200);
     game->num_walls = 0;
-	game->player.pos.x = 100;
-	game->player.pos.y = 100;
-	game->player.rot = 0;
+//	game->player.pos.x = 100;
+//	game->player.pos.y = 100;
+//	game->player.rot = 0;
 	game->player.rb = 0;
 	game->player.lb = 0;
 	game->player.ub = 0;

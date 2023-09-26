@@ -6,12 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/23 23:20:15 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:38:23 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
-
+#include "init_bounds.h"
 
 void	c3d_print_bounds(t_game *game)
 {
@@ -102,25 +101,23 @@ int	c3d_set_wall_bounds(t_game *game)
 		{
 			if (game->raw[i][j] == '1')
 			{
-				if ((i - 1) > -1 && game->raw[i - 1][j] == '0')
-				{
-					
+				if ((i - 1) > -1 && (game->raw[i - 1][j] == '0' || is_player_char(game->raw[i - 1][j])))
+				{	
 					s_x = (j + 1) * m;
 					s_y = i * m;
 					e_x = j * m;
 					e_y = i * m;
 					add_bound(game, s_x, s_y, e_x, e_y);	
 				}	
-				if ((j + 1) < map_width-1 && game->raw[i][j + 1] == '0')
-				{
-					
+				if ((j + 1) < map_width-1 && (game->raw[i][j + 1] == '0'|| is_player_char(game->raw[i][j + 1])))
+				{	
 					s_x = (j + 1) * m;
 					s_y = (i + 1) * m;
 					e_x = (j + 1) * m;
 					e_y = i * m;
 					add_bound(game, s_x, s_y, e_x, e_y);	
 				}
-				if ((i + 1) < map_height && game->raw[i + 1][j] == '0')
+				if ((i + 1) < map_height && (game->raw[i + 1][j] == '0'|| is_player_char(game->raw[i + 1][j])))
 				{
 					s_x = j * m;
 					s_y = (i + 1) * m;
@@ -129,7 +126,7 @@ int	c3d_set_wall_bounds(t_game *game)
 					add_bound(game, s_x, s_y, e_x, e_y);
 				}
 				
-				if ((j - 1) > -1 && game->raw[i][j - 1] == '0')
+				if ((j - 1) > -1 && (game->raw[i][j - 1] == '0'|| is_player_char(game->raw[i][j - 1])))
 				{	
 					s_x = j * m;
 					s_y = i * m;

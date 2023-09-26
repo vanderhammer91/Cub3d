@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/25 20:15:08 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:33:57 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ typedef struct s_keys
 }	t_keys;
 
 typedef struct s_game
-{
-	 
+{ 
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
@@ -79,6 +78,9 @@ typedef struct s_game
 	int		w_width;
 	char	**raw;
 	void	*north_texture;
+	void	*east_texture;
+	void	*south_texture;
+	void	*west_texture;
 //	int	map_height;
 //	int	map_width;
 

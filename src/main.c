@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 16:37:17 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:01:17 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ int	main(int argc, char **argv)
 	c3d_set_wall_bounds(m_game);
 	c3d_set_player_pos(m_game);
 	
-	//	c3d_print_bounds(m_game);
-
-
-
 	m_game->mlx = mlx_init();
 	m_game->mlx_win = mlx_new_window(m_game->mlx, m_game->w_width,
 		m_game->w_height, "Cub3d");

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 14:33:40 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:52:37 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int prev_x;
 
 int	key_press(int keycode, t_game *game)
 {
-//	printf("hello from keycode %d!\n", keycode);
+	printf("hello from keycode %d!\n", keycode);
 	
 	if (keycode == 53)
 		ft_start_exit("ESC", game);
@@ -27,7 +27,9 @@ int	key_press(int keycode, t_game *game)
 	else if (game->keys.R_KEY_DOWN == 0 && keycode == 2)
 		game->keys.R_KEY_DOWN = 1;
 	else if (game->keys.U_KEY_DOWN == 0 && keycode == 13)
-		game->keys.U_KEY_DOWN = 1;	
+		game->keys.U_KEY_DOWN = 1;
+	else if (game->keys.E_KEY_DOWN == 0 && keycode == 14)
+		game->keys.E_KEY_DOWN = 1;	
 	else if (game->keys.SH_KEY_DOWN == 0 && keycode == 257)
 		game->keys.SH_KEY_DOWN = 1;
 	else if (game->keys.SP_KEY_DOWN == 0 && keycode == 49)
@@ -49,6 +51,8 @@ int key_release(int keycode, t_game *game)
 		game->keys.R_KEY_DOWN = 0;
 	else if (keycode == 13)
 		game->keys.U_KEY_DOWN = 0;
+	else if (keycode == 14)
+		game->keys.E_KEY_DOWN = 0;
 	else if (keycode == 49)
 		game->keys.SP_KEY_DOWN = 0;	
 	else if (keycode == 257)

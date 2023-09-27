@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 15:35:03 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:59:27 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,16 +206,18 @@ void	c3d_draw_overlay(t_game *game, int start_x, int start_y)
 
 void	c3d_draw_overlay(t_game *game)
 {
-	if (game->pt_dist < 100)
+	printf("%f\n",game->pt_dist);
+	if (fabs(game->pt_dist) < 150)
 	{	
-		mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 1000, 100);
-		if (game->keys.SP_KEY_DOWN == 1)
+		if (!game->closest_wall_dir)
+		{
+			printf("wall dir undefined\n");
+			return ;
+		}
+		if(game->closest_wall_dir == DOOR)
+			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 1000, 100);
+		if (game->keys.E_KEY_DOWN == 1)
 		{	
-			if (!game->closest_wall_dir)
-			{
-				printf("wall dir undefined\n");
-				return ;
-			}
 			if (!game->pt_dist)
 			{
 				printf("pt_dist undefined\n");
@@ -226,9 +228,10 @@ void	c3d_draw_overlay(t_game *game)
 				printf("close_index undefined\n");
 				return ;
 			}
+		if(game->closest_wall_dir == DOOR)
 			c3d_remove_bound(game, game->close_index);
 		}
-		printf("E TO INTERACT\n");
+		//printf("E TO INTERACT\n");
 	}
 }
 
@@ -261,8 +264,8 @@ int	frame_refresh(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	c3d_draw_overlay(game);
 
-
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 1200, 470);
+	int x_offset = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 1200, 470 + x_offset);
 	mlx_destroy_image(game->mlx, game->img);
 	return (0);
 }

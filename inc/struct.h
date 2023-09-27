@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 15:25:57 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:50:48 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_keys
 	int R_KEY_DOWN;
 	int	SH_KEY_DOWN;
 	int	SP_KEY_DOWN;
+	int	E_KEY_DOWN;
 	int L_ROT_KEY_DOWN;
 	int R_ROT_KEY_DOWN;
 }	t_keys;

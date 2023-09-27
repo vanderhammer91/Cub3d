@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 15:30:00 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:40:15 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,28 +226,36 @@ void	c3d_player_look(t_game *game)
 		while (game->walls[j])
 		{	
 			point = NULL;
-    		  	point = ray_cast(game->walls[j], &this_ray);
-				if (point)
+			point = ray_cast(game->walls[j], &this_ray);
+			if (point)
+			{
+				has_collided = 1;
+				pt_dist = -1;
+				pt_dist = get_raylength(this_ray, *point);
+				if (pt_dist != -1 && pt_dist < max_dist)
 				{
-					has_collided = 1;
-					pt_dist = -1;
-					pt_dist = get_raylength(this_ray, *point);
-					if (pt_dist != -1 && pt_dist < max_dist)
+					max_dist = pt_dist;
+					closest = *point;
+					closest_wall = game->walls[j];
+					if (this_ray.rot == game->player.rot)
 					{
-						max_dist = pt_dist;
-						closest = *point;
-						closest_wall = game->walls[j];
 						game->close_index = j;
+						game->closest_wall_dir = closest_wall->direction;
+						game->pt_dist = pt_dist;
 					}
-					free(point);
 				}
-				else
-				{
-				}
-				j++;
+				free(point);
+			}
+			else
+			{
+			}
+			j++;
 		}
-		game->closest_wall_dir = closest_wall->direction;
-		game->pt_dist = pt_dist;
+		if (this_ray.rot == game->player.rot)
+		{
+			//game->closest_wall_dir = closest_wall->direction;
+		//	game->pt_dist = pt_dist;
+		}
 		ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
 		pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200; 
 		if (has_collided)

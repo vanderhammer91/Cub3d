@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 16:52:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:25:04 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int prev_x;
 
 int	key_press(int keycode, t_game *game)
 {
-	printf("hello from keycode %d!\n", keycode);
+	//printf("hello from keycode %d!\n", keycode);
 	
 	if (keycode == 53)
 		ft_start_exit("ESC", game);

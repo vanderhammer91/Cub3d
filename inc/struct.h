@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 16:50:48 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:55:20 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_bound {
     t_point 			start;
     t_point 			end;
 	enum e_wall_type	direction;
+	int					is_active;
 	struct s_bound		*next;
 } 						t_bound;
 
@@ -90,7 +91,7 @@ typedef struct s_game
 	enum	e_wall_type	closest_wall_dir;
 	float	pt_dist;
 	int		close_index;
-
+	t_bound	*closest_wall;
 	int		skycolour;
 	int		floorcolour;
 //	int	map_height;

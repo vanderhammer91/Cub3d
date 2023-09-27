@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 14:23:43 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:53:13 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
     new_bound->end.y = e_y;
 	new_bound->direction = UNSET;
 	if (wall_type > 0)
+	{
 		new_bound->direction = DOOR;
+		new_bound->is_active = 1;
+	}
 	else if (new_bound->end.y > new_bound->start.y)
 		new_bound->direction = EAST;
 	else if (new_bound->end.y < new_bound->start.y)

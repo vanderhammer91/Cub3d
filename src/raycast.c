@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 16:40:15 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:05:14 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ void	c3d_player_look(t_game *game)
 						game->close_index = j;
 						game->closest_wall_dir = closest_wall->direction;
 						game->pt_dist = pt_dist;
+						game->closest_wall = game->walls[j];
 					}
 				}
 				free(point);
@@ -250,11 +251,6 @@ void	c3d_player_look(t_game *game)
 			{
 			}
 			j++;
-		}
-		if (this_ray.rot == game->player.rot)
-		{
-			//game->closest_wall_dir = closest_wall->direction;
-		//	game->pt_dist = pt_dist;
 		}
 		ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
 		pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200; 

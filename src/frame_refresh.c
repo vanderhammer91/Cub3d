@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 16:59:27 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:57:09 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void	c3d_draw_overlay(t_game *game, int start_x, int start_y)
 
 void	c3d_draw_overlay(t_game *game)
 {
-	printf("%f\n",game->pt_dist);
+	//printf("%f\n",game->pt_dist);
 	if (fabs(game->pt_dist) < 150)
 	{	
 		if (!game->closest_wall_dir)
@@ -215,7 +215,10 @@ void	c3d_draw_overlay(t_game *game)
 			return ;
 		}
 		if(game->closest_wall_dir == DOOR)
-			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 1000, 100);
+		{
+			printf("E TO INTERACT\n");
+			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 900, 900);
+		}
 		if (game->keys.E_KEY_DOWN == 1)
 		{	
 			if (!game->pt_dist)
@@ -228,11 +231,12 @@ void	c3d_draw_overlay(t_game *game)
 				printf("close_index undefined\n");
 				return ;
 			}
-		if(game->closest_wall_dir == DOOR)
-			c3d_remove_bound(game, game->close_index);
+			//if (game->closest_wall->direction == DOOR)
+			//	printf("BAZINGA!\n");
+			if(game->closest_wall_dir == DOOR)
+				c3d_remove_bound(game, game->close_index);
 		}
-		//printf("E TO INTERACT\n");
-	}
+		}
 }
 
 

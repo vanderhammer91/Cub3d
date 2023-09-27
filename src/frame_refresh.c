@@ -6,14 +6,14 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 17:57:09 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 22:03:22 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "frame_refresh.h"
 #include <stdio.h>
-#include <math.h>  // For sqrt function
+#include <math.h>  
 
 double get_safe_angle(double angle)
 {
@@ -211,12 +211,12 @@ void	c3d_draw_overlay(t_game *game)
 	{	
 		if (!game->closest_wall_dir)
 		{
-			printf("wall dir undefined\n");
+			//printf("wall dir undefined\n");
 			return ;
 		}
 		if(game->closest_wall_dir == DOOR)
 		{
-			printf("E TO INTERACT\n");
+		//	printf("E TO INTERACT\n");
 			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 900, 900);
 		}
 		if (game->keys.E_KEY_DOWN == 1)

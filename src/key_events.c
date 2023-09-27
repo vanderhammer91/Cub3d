@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 14:15:33 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:33:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	key_press(int keycode, t_game *game)
 		game->keys.U_KEY_DOWN = 1;	
 	else if (game->keys.SH_KEY_DOWN == 0 && keycode == 257)
 		game->keys.SH_KEY_DOWN = 1;
+	else if (game->keys.SP_KEY_DOWN == 0 && keycode == 49)
+		game->keys.SP_KEY_DOWN = 1;
 	else if (game->keys.R_ROT_KEY_DOWN == 0 && keycode == 123)
 		game->keys.R_ROT_KEY_DOWN = 1;	
 	else if (game->keys.L_ROT_KEY_DOWN == 0 && keycode == 124)
@@ -47,6 +49,8 @@ int key_release(int keycode, t_game *game)
 		game->keys.R_KEY_DOWN = 0;
 	else if (keycode == 13)
 		game->keys.U_KEY_DOWN = 0;
+	else if (keycode == 49)
+		game->keys.SP_KEY_DOWN = 0;	
 	else if (keycode == 257)
 		game->keys.SH_KEY_DOWN = 0;
 	else if (keycode == 124)

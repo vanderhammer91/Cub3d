@@ -6,15 +6,16 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:12:21 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 12:28:54 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:25:21 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
-#include "libraries.h"
+# include "libraries.h"
 # include "draw.h"
+# include "init_bounds.h"
 
  void	c3d_player_look(t_game *game);
 float	get_raylength(t_ray ray, t_point end);

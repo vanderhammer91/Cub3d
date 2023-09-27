@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 21:26:18 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:23:43 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,29 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
     	game->num_walls++;
 }
 
+/*
+void	c3d_remove_bound(t_game *game, t_bound *closest_wall)
+{
+	(void)game;
+	(void)closest_wall;
+	printf("WE ARE CLOSE TO A DOOR YAY!\n");
+}
+*/
+void c3d_remove_bound(t_game *game, int bound_index) 
+{
+    if (bound_index < 0 || bound_index >= game->num_walls) 
+    {
+        printf("remove bound: index out of bounds!\n");
+        return;
+    }
+    
+    free(game->walls[bound_index]);
 
+    // Shift remaining elements
+    memmove(&game->walls[bound_index], &game->walls[bound_index + 1], (game->num_walls - bound_index - 1) * sizeof(t_bound*));
 
-
+    game->num_walls--;
+}
 
 
 int	is_space_char(char c)

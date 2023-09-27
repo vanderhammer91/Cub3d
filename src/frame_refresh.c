@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 13:02:44 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:35:03 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int	draw_dir_arrow(t_game *game)
 	return (0);
 }
 
-
+/*
 void	c3d_draw_overlay(t_game *game, int start_x, int start_y)
 {
 
@@ -201,6 +201,36 @@ void	c3d_draw_overlay(t_game *game, int start_x, int start_y)
         }
     }
 }
+*/
+
+
+void	c3d_draw_overlay(t_game *game)
+{
+	if (game->pt_dist < 100)
+	{	
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 1000, 100);
+		if (game->keys.SP_KEY_DOWN == 1)
+		{	
+			if (!game->closest_wall_dir)
+			{
+				printf("wall dir undefined\n");
+				return ;
+			}
+			if (!game->pt_dist)
+			{
+				printf("pt_dist undefined\n");
+				return ;
+			}
+			if (!game->close_index)
+			{
+				printf("close_index undefined\n");
+				return ;
+			}
+			c3d_remove_bound(game, game->close_index);
+		}
+		printf("E TO INTERACT\n");
+	}
+}
 
 
 int	frame_refresh(t_game *game)
@@ -217,18 +247,21 @@ int	frame_refresh(t_game *game)
 	filled_circle(game->img, game->player.pos.x, game->player.pos.y, 10, 0xFF0000);
 
 	//sky colour
-	rect(game->img, 800, 0, 1200, 400, 0x000066);
+	rect(game->img, 800, 0, 1200, 500, 0x000066);
 	//rect(game->img, 0, 0, 1000, 400, game->skycolour);
 	
 	//floor colour
-	//rect(game->img, 0, 400, 1000, 400, game->floorcolour);
+//	rect(game->img, 0, 400, 1000, 400, game->floorcolour);
 
 	c3d_player_look(game);
 	draw_dir_arrow(game);
 	test_hitrays(game);
+	//cursor
 	rect(game->img, 1400, 500, 10, 10, 0xFFFFFF);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-//	c3d_draw_overlay(game, 1000, 400);
+	c3d_draw_overlay(game);
+
+
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 1200, 470);
 	mlx_destroy_image(game->mlx, game->img);
 	return (0);

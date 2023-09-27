@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 22:25:56 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:02:44 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,31 @@ int	draw_dir_arrow(t_game *game)
 }
 
 
+void	c3d_draw_overlay(t_game *game, int start_x, int start_y)
+{
+
+    int bits_per_pixel;
+    int size_line;
+    int endian;
+    char *image_data = mlx_get_data_addr(game->gun_texture, &bits_per_pixel, &size_line, &endian);
+    for (int y = 0; y < 523; y++)
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            int pixel_index = (y * size_line) + (x * (bits_per_pixel / 8));
+            unsigned char red = image_data[pixel_index];
+            unsigned char green = image_data[pixel_index + 1];
+            unsigned char blue = image_data[pixel_index + 2];
+
+            if (red != 255 || green != 0 || blue != 255)
+            {
+                mlx_pixel_put(game->mlx, game->mlx_win, start_x + x, start_y + y, retrieve_colour(game->gun_texture, x, y));
+            }
+        }
+    }
+}
+
+
 int	frame_refresh(t_game *game)
 {	
 	mlx_clear_window(game->mlx, game->mlx_win);
@@ -201,9 +226,10 @@ int	frame_refresh(t_game *game)
 	c3d_player_look(game);
 	draw_dir_arrow(game);
 	test_hitrays(game);
+	rect(game->img, 1400, 500, 10, 10, 0xFFFFFF);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
-	
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 0, 0);
+//	c3d_draw_overlay(game, 1000, 400);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 1200, 470);
 	mlx_destroy_image(game->mlx, game->img);
 	return (0);
 }

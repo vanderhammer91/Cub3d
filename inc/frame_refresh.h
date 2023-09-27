@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:20:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 14:55:48 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:29:18 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libraries.h"
 # include "draw.h"
 # include "box_collider.h"
+# include "raycast.h"
 
 double get_safe_angle(double angle);
 int	frame_refresh(t_game *game);

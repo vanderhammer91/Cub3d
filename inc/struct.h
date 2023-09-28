@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 17:55:20 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:54:28 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_game
 	void	*img;
 	int		w_height;
 	int		w_width;
+	int		prev_x;
+	int		frame;
 	char	**raw;
 	void	*north_texture;
 	void	*east_texture;
@@ -88,6 +90,9 @@ typedef struct s_game
 	void	*door_texture;
 	void	*gun_texture;
 	void	*e_texture;
+	int		door_state;
+	char	*door_path;
+	char	*door_frame[22];
 	enum	e_wall_type	closest_wall_dir;
 	float	pt_dist;
 	int		close_index;

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 17:25:04 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:56:31 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int key_release(int keycode, t_game *game)
 	else if (keycode == 49)
 		game->keys.SP_KEY_DOWN = 0;	
 	else if (keycode == 257)
-		game->keys.SH_KEY_DOWN = 0;
+		
 	else if (keycode == 124)
 		game->keys.L_ROT_KEY_DOWN = 0;	
 	else if (keycode == 123)
@@ -69,20 +69,20 @@ int key_release(int keycode, t_game *game)
 int mouse_move(int x, int y, t_game *game)
 {
 	(void)y;
-	if (x > prev_x)
+	if (x > game->prev_x)
 	{
-		game->player.rot += (x - prev_x) * 0.3;	
+		game->player.rot += (x - game->prev_x) * 0.3;	
 		if (game->player.rot < 0)
 			game->player.rot += 360; 
 
 	}
-	else if (x < prev_x)
+	else if (x < game->prev_x)
 	{
-		game->player.rot += (x - prev_x) * 0.3;	
+		game->player.rot += (x - game->prev_x) * 0.3;	
 		if (game->player.rot < 0)
 			game->player.rot += 360; 
 	}
-	prev_x = x;
+	game->prev_x = x;
 	return 0;
 }
 

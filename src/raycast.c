@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 18:05:14 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:59:23 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
-    	tx = (int)(ray_x/2.0) % 64;
+    //	tx = (int)(ray_x/2.0) % 64;
 		tx = (int)(ray_x) % 64;
 		tx = 63 - tx;
     	while (y < raylength)
@@ -133,7 +133,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
-    	tx = (int)(ray_x/2.0) % 64;
+    //	tx = (int)(ray_x/2.0) % 64;
 		tx = (int)(ray_x) % 64;
     	while (y < raylength)
     	{
@@ -150,7 +150,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
-    	tx = (int)(ray_y/2.0) % 64;
+    //	tx = (int)(ray_y/2.0) % 64;
 		tx = (int)(ray_y) % 64;
     	while (y < raylength)
     	{
@@ -167,7 +167,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
-    	tx = (int)(ray_y/2.0) % 64;
+    //	tx = (int)(ray_y/2.0) % 64;
 		tx = (int)(ray_y) % 64;
 		tx = 63 - tx;
     	while (y < raylength)
@@ -184,14 +184,13 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	{
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
-    	ty_step = 64.0 / (float)raylength;
-    	tx = (int)(ray_x/2.0) % 64;
-		tx = (int)(ray_x) % 64;
+    	ty_step = 128.0 / (float)raylength;
+    	tx = (int)(ray_x) % 128;
     	while (y < raylength)
     	{
     	    //tx = round(tx);
     	    //ty = round(ty);
-    	 	int pixel_colour = retrieve_colour(game->door_texture, tx, ty);
+    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2, ty);
     	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;

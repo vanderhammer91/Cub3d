@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/28 16:59:23 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 17:20:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    //tx = round(tx);
     	    //ty = round(ty);
     	 	int pixel_colour = retrieve_colour(game->west_texture, tx, ty);
-    	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -188,18 +188,16 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	tx = (int)(ray_x) % 128;
     	while (y < raylength)
     	{
-    	    //tx = round(tx);
-    	    //ty = round(ty);
-    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2, ty);
-    	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2, ty + game->door_state * 128);
+			int alpha = (pixel_colour >> 24) & 0xFF; 
+            if (!alpha) // != 0xFF000000)
+    	 		rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
 	}
 }
-
-
-
+/*
 void	c3d_player_look(t_game *game)
 {
 	t_ray	this_ray;
@@ -258,4 +256,64 @@ void	c3d_player_look(t_game *game)
 		i++;
 	}
 }
+*/
 
+void c3d_player_look(t_game *game) {
+    t_ray this_ray;
+    t_point closest, second_closest;
+    t_bound *closest_wall, *second_closest_wall;
+    float pt_dist, second_pt_dist;
+    double ray_angle;
+    int has_collided;
+    float max_dist, second_max_dist;
+    float i = 0;
+    int j;
+
+    while (i < 280) {
+        has_collided = 0;
+        max_dist = 100000;
+        second_max_dist = 100000;
+        this_ray.pos.x = game->player.pos.x;
+        this_ray.pos.y = game->player.pos.y;
+        this_ray.rot = get_safe_angle(game->player.rot + i*0.25 - 35);
+        closest.x = -1;
+        closest.y = -1;
+        second_closest.x = -1;
+        second_closest.y = -1;
+        j = 0;
+
+        while (game->walls[j]) {
+            t_point *point = ray_cast(game->walls[j], &this_ray);
+            if (point) {
+                has_collided = 1;
+                pt_dist = get_raylength(this_ray, *point);
+                if (pt_dist != -1 && pt_dist < max_dist) {
+                    second_max_dist = max_dist;
+                    second_closest = closest;
+                    second_closest_wall = closest_wall;
+
+                    max_dist = pt_dist;
+                    closest = *point;
+                    closest_wall = game->walls[j];
+                } else if (pt_dist != -1 && pt_dist < second_max_dist) {
+                    second_max_dist = pt_dist;
+                    second_closest = *point;
+                    second_closest_wall = game->walls[j];
+                }
+                free(point);
+            }
+            j++;
+        }
+
+        ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
+        pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200;
+        second_pt_dist = (200 / (get_raylength(this_ray, second_closest)* cos(ray_angle))) * 200;
+        if (has_collided) {
+			c3d_draw_projection(game, second_pt_dist, i, second_closest.x, second_closest.y, 
+				second_closest_wall);
+			c3d_draw_projection(game, pt_dist, i, closest.x, closest.y, closest_wall);
+		}
+
+        i++;
+    }
+}

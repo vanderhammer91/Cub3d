@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/28 18:55:09 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 17:08:14 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,11 +242,21 @@ void	c3d_draw_overlay(t_game *game)
 
 int	frame_refresh(t_game *game)
 {
-	int	width;
-	int	height;
+
 
 	game->frame++;
-	
+	if (game->frame >= 10)
+	{
+		game->frame = 0;
+		game->door_state++;
+		if (game->door_state > 20)
+			game->door_state = 0;
+	}
+
+
+/*	
+	int	width;
+	int	height;
 	if (game->frame >= 10)
 	{
 		game->frame = 0;
@@ -261,7 +271,7 @@ int	frame_refresh(t_game *game)
 		game->door_texture = mlx_xpm_file_to_image(game->mlx,
 			game->door_frame[game->door_state], &width, &height);
 	}
-	
+*/	
 	mlx_clear_window(game->mlx, game->mlx_win);
 	game->img = mlx_new_image(game->mlx, 3000, 3000);	
 	

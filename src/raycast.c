@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 17:20:40 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:41:07 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,8 @@ void c3d_player_look(t_game *game) {
             if (point) {
                 has_collided = 1;
                 pt_dist = get_raylength(this_ray, *point);
-                if (pt_dist != -1 && pt_dist < max_dist) {
+                if (pt_dist != -1 && pt_dist < max_dist)
+				{
                     second_max_dist = max_dist;
                     second_closest = closest;
                     second_closest_wall = closest_wall;
@@ -295,7 +296,7 @@ void c3d_player_look(t_game *game) {
                     max_dist = pt_dist;
                     closest = *point;
                     closest_wall = game->walls[j];
-                } else if (pt_dist != -1 && pt_dist < second_max_dist) {
+				} else if (pt_dist != -1 && pt_dist < second_max_dist) {
                     second_max_dist = pt_dist;
                     second_closest = *point;
                     second_closest_wall = game->walls[j];
@@ -307,6 +308,13 @@ void c3d_player_look(t_game *game) {
 
         ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
         pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200;
+		if (this_ray.rot == game->player.rot)
+		{
+		//	printf("BAZINGA\n");
+		//
+			game->closest_wall_dir = closest_wall->direction;
+			game->pt_dist = pt_dist;
+		}
         second_pt_dist = (200 / (get_raylength(this_ray, second_closest)* cos(ray_angle))) * 200;
         if (has_collided) {
 			c3d_draw_projection(game, second_pt_dist, i, second_closest.x, second_closest.y, 

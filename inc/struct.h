@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/28 16:54:28 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:21:45 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_game
 	void	*gun_texture;
 	void	*e_texture;
 	int		door_state;
+	int		true_state;
 	char	*door_path;
 	char	*door_frame[22];
 	enum	e_wall_type	closest_wall_dir;

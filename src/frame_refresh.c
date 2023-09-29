@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 19:09:16 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:26:13 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ void	c3d_draw_overlay(t_game *game)
 			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 900, 900);
 			if (game->keys.E_KEY_DOWN == 1)
 			{
+				printf("E key pressed: door state: %d\n", game->door_state);
 				if(game->door_state == 0)
 					game->door_state = 1;
 				else if(game->door_state == 10)
@@ -286,12 +287,21 @@ int	frame_refresh(t_game *game)
 	if (game->frame >= 8)
 	{
 		game->frame = 0;
-		if (game->door_state > 0 && game->door_state < 9)
+		if (game->door_state > 0 && game->door_state < 10)
+		{
 			game->door_state++;
+			game->true_state++;
+		}
 		else if (game->door_state > 10 && game->door_state < 18)
+		{
 			game->door_state++;
+			game->true_state--;
+		}
 		else if (game->door_state == 18 || game->door_state == 19)
+		{
 			game->door_state = 0;
+			game->true_state = 0;
+		}
 		else if (game->door_state > 20 && game->door_state < 32)
 			game->door_state++;
 	}

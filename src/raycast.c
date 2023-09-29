@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 18:58:05 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:22:54 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	tx = (int)(ray_x) % 128;
     	while (y < raylength)
     	{
-    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2, ty + game->door_state * 128);
+    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2, ty + game->true_state * 128);
 			int alpha = (pixel_colour >> 24) & 0xFF; 
             if (!alpha) // != 0xFF000000)
     	 		rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);

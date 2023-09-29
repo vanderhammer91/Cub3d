@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 18:54:31 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:23:13 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_game *initialize_game(void)
 	game->w_width = 2000;
 	game->w_height = 1000;
 	game->door_state = 0;
+	game->true_state = 0;
 	game->raw = NULL;
     game->num_walls = 0;
 	game->player.rb = 0;

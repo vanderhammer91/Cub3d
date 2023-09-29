@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 22:29:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:39:00 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ int	frame_refresh(t_game *game)
 
 	int j;
 
-	if(game->true_state != 0)
+	if(game->true_state > 5 )
 	{
 		j = 0;
     	while (game->walls[j])

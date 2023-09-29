@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 22:39:00 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:51:29 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,8 +270,6 @@ void	c3d_draw_overlay(t_game *game)
 
 int	frame_refresh(t_game *game)
 {
-
-
 	game->frame++;
 	if (game->frame >= 8)
 	{
@@ -318,25 +316,6 @@ int	frame_refresh(t_game *game)
 		}
 
 	}
-
-/*	
-	int	width;
-	int	height;
-	if (game->frame >= 10)
-	{
-		game->frame = 0;
-		game->door_state++;
-		if (game->door_state > 21)
-			game->door_state = 0;
-		printf("door_state: %d\n", game->door_state);
-		//free(game->door_texture);
-		printf("game->door_frame[%d]: %s\n", game->door_state, game->door_frame[game->door_state]);
-		if (!game->door_frame[game->door_state]) 	
-			printf("HOOHAH GLEN MCGRATH\n");
-		game->door_texture = mlx_xpm_file_to_image(game->mlx,
-			game->door_frame[game->door_state], &width, &height);
-	}
-*/	
 	mlx_clear_window(game->mlx, game->mlx_win);
 	game->img = mlx_new_image(game->mlx, 3000, 3000);	
 	
@@ -345,12 +324,10 @@ int	frame_refresh(t_game *game)
 	
 	//draw minimap and player circle
 	c3d_draw_bounds(game, game->img);
-//	c3d_draw_map_bounds(game);
 	filled_circle(game->img, game->player.pos.x, game->player.pos.y, 10, 0xFF0000);
 
 	//sky colour
 	rect(game->img, 800, 0, 1200, 500, 0x000066);
-	//rect(game->img, 0, 0, 1000, 400, game->skycolour);
 	
 	//floor colour
 //	rect(game->img, 0, 400, 1000, 400, game->floorcolour);

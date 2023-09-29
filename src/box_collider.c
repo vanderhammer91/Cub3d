@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 17:44:59 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:10:31 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,5 +316,5 @@ int	c3d_collider_feedback(t_game *game)
 void	test_hitrays(t_game *game)
 {
 	c3d_collider_check_all(game);
-	c3d_collider_feedback(game);
+	//c3d_collider_feedback(game);
 }

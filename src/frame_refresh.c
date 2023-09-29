@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 18:40:03 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:09:16 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	c3d_update_player_pos(t_game *game)
 		speed *= 2;
 	new_x = 0;
 	new_y = 0;
-	if (game->keys.U_KEY_DOWN&& !game->keys.D_KEY_DOWN)
+	if (game->keys.U_KEY_DOWN && !game->keys.D_KEY_DOWN)
 	{
 		new_x = game->player.pos.x + speed * cos(radians);
 		new_y = game->player.pos.y + speed * sin(radians);
@@ -243,39 +243,24 @@ void	c3d_draw_overlay(t_game *game)
 void	c3d_draw_overlay(t_game *game)
 {
 	//printf("%f\n",game->pt_dist);
-	if (game->pt_dist < 150)
+	if (game->pt_dist > 500)
 	{	
 		if(game->closest_wall_dir == DOOR)
 		{
-			printf("E TO INTERACT\n");
+		//	printf("E TO INTERACT\n");
 			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 900, 900);
-		}
-			if (game->keys.E_KEY_DOWN == 1 && game->closest_wall_dir)
-			{	
-				if (!game->pt_dist)
-				{
-					printf("pt_dist undefined\n");
-					return ;
-				}
-				if (!game->close_index)
-				{
-					printf("close_index undefined\n");
-					return ;
-				}
-				
-				//if (game->closest_wall->direction == DOOR)
-				//	printf("BAZINGA!\n");
-				if(game->closest_wall_dir == DOOR && game->door_state == 0)
+			if (game->keys.E_KEY_DOWN == 1)
+			{
+				if(game->door_state == 0)
 					game->door_state = 1;
-				else if(game->closest_wall_dir == DOOR && game->door_state == 10)
+				else if(game->door_state == 10)
 					game->door_state = 11;		
-				else if(game->closest_wall_dir == DOOR && game->door_state == 20)
+				else if(game->door_state == 20)
 					game->door_state = 21;
-				else if(game->closest_wall_dir == DOOR && game->door_state == 32)
+				else if(game->door_state == 32)
 					game->door_state = 1;	
-			//	c3d_remove_bound(game, game->close_index);
 			}
-	//	}
+		}
 	}
 }
 
@@ -298,30 +283,17 @@ int	frame_refresh(t_game *game)
 */
 //	int	width;
 //	int	height;
-		if (game->frame >= 10)
+	if (game->frame >= 8)
 	{
 		game->frame = 0;
-		printf("game->door_frame[%d]: %s\n", game->door_state, game->door_frame[game->door_state]);	
-		if (game->door_state > 0 && game->door_state < 10)
-		{
-		//	game->door_texture = mlx_xpm_file_to_image(game->mlx,
-		//		game->door_frame[game->door_state], &width, &height);
+		if (game->door_state > 0 && game->door_state < 9)
 			game->door_state++;
-		}
 		else if (game->door_state > 10 && game->door_state < 18)
-		{
-		//	game->door_texture = mlx_xpm_file_to_image(game->mlx,
-		//		game->door_frame[game->door_state], &width, &height);
 			game->door_state++;
-		}
 		else if (game->door_state == 18 || game->door_state == 19)
 			game->door_state = 0;
 		else if (game->door_state > 20 && game->door_state < 32)
-		{
-		//	game->door_texture = mlx_xpm_file_to_image(game->mlx,
-		//		game->door_frame[game->door_state], &width, &height);
 			game->door_state++;
-		}
 	}
 
 

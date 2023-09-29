@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 18:41:07 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:58:05 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,10 +310,11 @@ void c3d_player_look(t_game *game) {
         pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200;
 		if (this_ray.rot == game->player.rot)
 		{
-		//	printf("BAZINGA\n");
-		//
+		//	printf("Setting player ray:\n");
 			game->closest_wall_dir = closest_wall->direction;
 			game->pt_dist = pt_dist;
+		//	printf("closest wall dir: %d\n", game->closest_wall_dir);
+		//	printf("pt_dist = %f\n", game->pt_dist);
 		}
         second_pt_dist = (200 / (get_raylength(this_ray, second_closest)* cos(ray_angle))) * 200;
         if (has_collided) {

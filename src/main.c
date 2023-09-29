@@ -6,39 +6,12 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 17:09:01 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 23:04:11 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "textures.h"
-
-void	c3d_set_door_frames(t_game *game)
-{
-	game->door_frame[0] = "images/door/d1.xpm";
-	game->door_frame[1] = "images/door/d2.xpm";
-	game->door_frame[2] = "images/door/d3.xpm";
-	game->door_frame[3] = "images/door/d4.xpm";
-	game->door_frame[4] = "images/door/d5.xpm";
-	game->door_frame[5] = "images/door/d6.xpm";
-	game->door_frame[6] = "images/door/d7.xpm";
-	game->door_frame[7] = "images/door/d8.xpm";
-	game->door_frame[8] = "images/door/d9.xpm";
-	game->door_frame[9] = "images/door/d10.xpm";
-	game->door_frame[10] = "images/door/d11.xpm";
-	game->door_frame[11] = "images/door/d12.xpm";
-	game->door_frame[12] = "images/door/d13.xpm";
-	game->door_frame[13] = "images/door/d14.xpm";
-	game->door_frame[14] = "images/door/d15.xpm";
-	game->door_frame[15] = "images/door/d16.xpm";
-	game->door_frame[16] = "images/door/d17.xpm";
-	game->door_frame[17] = "images/door/d18.xpm";
-	game->door_frame[18] = "images/door/d19.xpm";
-	game->door_frame[19] = "images/door/d20.xpm";
-	game->door_frame[20] = "images/door/d21.xpm";
-	game->door_frame[21] = "images/door/d22.xpm";
-}
-
 
 void	c3d_initialize_textures(t_game *game)
 {
@@ -77,7 +50,6 @@ int	main(int argc, char **argv)
 	m_game->mlx_win = mlx_new_window(m_game->mlx, m_game->w_width,
 		m_game->w_height, "Cub3d");
 	c3d_initialize_textures(m_game);
-	c3d_set_door_frames(m_game);
 	m_game->img = mlx_new_image(m_game->mlx, m_game->w_width, m_game->w_height);	
 	mlx_hook(m_game->mlx_win, 2, 1L<<0, key_press, m_game);	 
 	mlx_hook(m_game->mlx_win, 3, 1L<<0, key_release, m_game);

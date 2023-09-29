@@ -30,7 +30,6 @@ SRC_FILES = draw.c			\
 			init.c			\
 			init_bounds.c	\
 			box_collider.c	\
-			box_collider2.c	\
 			init_player.c	\
 			main.c
 

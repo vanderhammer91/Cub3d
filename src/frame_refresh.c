@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 19:26:13 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:29:37 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,17 +273,6 @@ int	frame_refresh(t_game *game)
 
 
 	game->frame++;
-	/*
-	if (game->frame >= 10)
-	{
-		game->frame = 0;
-		game->door_state++;
-		if (game->door_state > 20)
-			game->door_state = 0;
-	}
-*/
-//	int	width;
-//	int	height;
 	if (game->frame >= 8)
 	{
 		game->frame = 0;
@@ -306,7 +295,29 @@ int	frame_refresh(t_game *game)
 			game->door_state++;
 	}
 
+	int j;
 
+	if(game->true_state != 0)
+	{
+		j = 0;
+    	while (game->walls[j])
+		{
+       		if(game->walls[j]->is_active)
+				game->walls[j]->is_active = 0;
+            j++;
+		}
+	}
+	else
+	{
+		j = 0;
+    	while (game->walls[j])
+		{
+       		if(!game->walls[j]->is_active)
+				game->walls[j]->is_active = 1;
+            j++;
+		}
+
+	}
 
 /*	
 	int	width;

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 22:22:31 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/09/29 23:13:47 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,20 @@ t_point *ray_cast(t_bound *current_wall, t_ray *this_ray)
 	{
 		float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denominator;
 		float u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denominator;
-	if (t > 0 && t < 1 && u > 0)
-	{
-        	pt = malloc(sizeof(t_point));
-		if (!pt)
+		if (t > 0 && t < 1 && u > 0)
 		{
-			printf("c3d_internal: raycast: failed malloc\n");
-			return (NULL);
+    	    	pt = malloc(sizeof(t_point));
+			if (!pt)
+			{
+				printf("c3d_internal: raycast: failed malloc\n");
+				return (NULL);
+			}
+    	    	pt->x = x1 + t * (x2 - x1);
+    	    	pt->y = y1 + t * (y2 - y1);
+    	    	return pt;
 		}
-        	pt->x = x1 + t * (x2 - x1);
-        	pt->y = y1 + t * (y2 - y1);
-        	return pt;
-      	}
-	else 
-	{  
-	 	return NULL;
 	}
-	}
-	else
-	{
-		return NULL;
-	}	
+	return NULL;
 }
 
 float	get_raylength(t_ray ray, t_point end)
@@ -66,11 +59,8 @@ float	get_raylength(t_ray ray, t_point end)
 
 	x_diff = end.x - ray.pos.x;
 	y_diff = end.y - ray.pos.y;
-
 	return (sqrt(x_diff * x_diff + y_diff * y_diff));
 }
-
-
 
 int retrieve_colour(void *img, int x, int y)
 {
@@ -96,7 +86,6 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	int	x_offset = 800;
 	int y_offset = 500;
 	int	cw = 5;
-//	float	c;
 
 	if (closest_wall->direction == EAST)
 		colour = 0x00FFFF;
@@ -176,7 +165,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	tx = (int)(ray_x) % 128;
     	while (y < raylength)
     	{
-    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2, ty + game->true_state * 128);
+    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2,
+					ty + game->true_state * 128);
 			int alpha = (pixel_colour >> 24) & 0xFF; 
             if (!alpha)
 				rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
@@ -212,7 +202,8 @@ void c3d_player_look(t_game *game) {
 
         while (game->walls[j]) {
             t_point *point = ray_cast(game->walls[j], &this_ray);
-            if (point) {
+            if (point)
+			{
                 has_collided = 1;
                 pt_dist = get_raylength(this_ray, *point);
                 if (pt_dist != -1 && pt_dist < max_dist)
@@ -220,11 +211,12 @@ void c3d_player_look(t_game *game) {
                     second_max_dist = max_dist;
                     second_closest = closest;
                     second_closest_wall = closest_wall;
-
                     max_dist = pt_dist;
                     closest = *point;
                     closest_wall = game->walls[j];
-				} else if (pt_dist != -1 && pt_dist < second_max_dist) {
+				}
+				else if (pt_dist != -1 && pt_dist < second_max_dist) 
+				{
                     second_max_dist = pt_dist;
                     second_closest = *point;
                     second_closest_wall = game->walls[j];
@@ -233,25 +225,21 @@ void c3d_player_look(t_game *game) {
             }
             j++;
         }
-
         ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
         pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200;
 		if (this_ray.rot == game->player.rot)
 		{
-		//	printf("Setting player ray:\n");
 			game->closest_wall_dir = closest_wall->direction;
 			game->pt_dist = pt_dist;
-		//	printf("closest wall dir: %d\n", game->closest_wall_dir);
-		//	printf("pt_dist = %f\n", game->pt_dist);
 		}
         second_pt_dist = (200 / (get_raylength(this_ray, second_closest)* cos(ray_angle))) * 200;
-        if (has_collided) {
+        if (has_collided)
+		{
 			if (closest_wall->direction == DOOR)
 				c3d_draw_projection(game, second_pt_dist, i, second_closest.x, second_closest.y, 
 				second_closest_wall);
 			c3d_draw_projection(game, pt_dist, i, closest.x, closest.y, closest_wall);
 		}
-
         i++;
     }
 }

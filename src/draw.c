@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:47 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 20:40:49 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:27:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,18 @@ void line(void *img, t_point a, t_point b, int color)
             y1 += sy;
         }
     }
+}
+
+void draw_square(void *img, t_point p, int length, int color)
+{
+    t_point top_left = p;
+    t_point top_right = {p.x + length, p.y};
+    t_point bottom_left = {p.x, p.y + length};
+    t_point bottom_right = {p.x + length, p.y + length};
+
+    line(img, top_left, top_right, color);
+    line(img, top_right, bottom_right, color);
+    line(img, bottom_right, bottom_left, color);
+    line(img, bottom_left, top_left, color);
 }
 

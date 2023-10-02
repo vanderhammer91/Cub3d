@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 23:09:25 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:44:58 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	key_press(int keycode, t_game *game)
 	//printf("hello from keycode %d!\n", keycode);
 	
 	if (keycode == 53)
-		ft_start_exit("ESC", game);
+		ft_start_exit("", game);
 	if (game->keys.L_KEY_DOWN == 0 && keycode == 0)
 		game->keys.L_KEY_DOWN = 1;
 	else if (game->keys.D_KEY_DOWN == 0 && keycode == 1)

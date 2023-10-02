@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 23:04:11 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:36:05 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	m_game->mlx_win = mlx_new_window(m_game->mlx, m_game->w_width,
 		m_game->w_height, "Cub3d");
 	c3d_initialize_textures(m_game);
-	m_game->img = mlx_new_image(m_game->mlx, m_game->w_width, m_game->w_height);	
+	m_game->img = mlx_new_image(m_game->mlx, m_game->w_width, m_game->w_height);
 	mlx_hook(m_game->mlx_win, 2, 1L<<0, key_press, m_game);	 
 	mlx_hook(m_game->mlx_win, 3, 1L<<0, key_release, m_game);
 	mlx_hook(m_game->mlx_win, 6, 0, &mouse_move, m_game);

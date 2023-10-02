@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:22:18 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 14:56:42 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:26:52 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	rect(void *img, int x, int y, int width, int height, int color);
 void	circle(void *img, int xc, int yc, int r, int color);
 void	line(void *img, t_point a, t_point b, int color);
 void	filled_circle(void *img, int xc, int yc, int r, int color);
+void	draw_square(void *img, t_point p, int length, int color);
 
 #endif

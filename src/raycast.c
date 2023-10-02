@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 23:13:47 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:34:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	float	ty;
 	float	ty_step;
 	float	tx;
-	int	x_offset = 800;
+	int	x_offset = 0;
 	int y_offset = 500;
 	int	cw = 5;
 

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:56:55 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 16:40:03 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:44:50 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	on_x_press(void)
 void	ft_start_exit(char *error_msg, t_game *m_game)
 {
 	
-	printf("%s\n", error_msg);
+	if (ft_strlen(error_msg))
+		printf("%s\n", error_msg);
 	free_array(m_game->raw);	
 	exit(1);
 }

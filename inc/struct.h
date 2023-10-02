@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 19:21:45 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:44:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_bound {
     t_point 			end;
 	enum e_wall_type	direction;
 	int					is_active;
+	int					is_vert;
 	struct s_bound		*next;
 } 						t_bound;
 

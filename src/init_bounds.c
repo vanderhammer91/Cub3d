@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 17:53:13 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:56:19 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 	{
 		new_bound->direction = DOOR;
 		new_bound->is_active = 1;
+		if (s_y != e_y)
+			new_bound->is_vert = 1;
+		else
+			new_bound->is_vert = 0;
 	}
 	else if (new_bound->end.y > new_bound->start.y)
 		new_bound->direction = EAST;
@@ -81,30 +85,17 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
     	game->num_walls++;
 }
 
-/*
-void	c3d_remove_bound(t_game *game, t_bound *closest_wall)
-{
-	(void)game;
-	(void)closest_wall;
-	printf("WE ARE CLOSE TO A DOOR YAY!\n");
-}
-*/
 void c3d_remove_bound(t_game *game, int bound_index) 
 {
     if (bound_index < 0 || bound_index >= game->num_walls) 
     {
         printf("remove bound: index out of bounds!\n");
         return;
-    }
-    
+    } 
     free(game->walls[bound_index]);
-
-    // Shift remaining elements
     memmove(&game->walls[bound_index], &game->walls[bound_index + 1], (game->num_walls - bound_index - 1) * sizeof(t_bound*));
-
     game->num_walls--;
 }
-
 
 int	is_space_char(char c)
 {
@@ -177,11 +168,22 @@ int	c3d_set_wall_bounds(t_game *game)
 			}
 			else if (game->raw[i][j] == '2')
 			{
-					s_x = j * m;
-					s_y = (i + 0.5) * m;
-					e_x = (j + 1) * m;
-					e_y = (i + 0.5) * m;
-					add_bound(game, s_x, s_y, e_x, e_y, 1);
+					if (game->raw[i][j-1] == '1' && game->raw[i][j + 1] == '1')
+					{
+						s_x = j * m;
+						s_y = (i + 0.5) * m;
+						e_x = (j + 1) * m;
+						e_y = (i + 0.5) * m;
+						add_bound(game, s_x, s_y, e_x, e_y, 1);
+					}
+					if (game->raw[i - 1][j] == '1' && game->raw[i + 1][j] == '1')
+					{
+						s_x = (j + 0.5) * m;
+						s_y = i * m;
+						e_x = (j + 0.5) * m;
+						e_y = (i + 1) * m;
+						add_bound(game, s_x, s_y, e_x, e_y, 1);
+					}
 			}			
 			j++;
 		}	

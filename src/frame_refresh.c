@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 18:43:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:10:01 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,76 +23,6 @@ double get_safe_angle(double angle)
 		angle -= 360;
 	return (angle);
 }
-
-/*
-int	c3d_draw_map_bounds(t_game *game)
-{
-	int	i;
-	int	j;
-	int	map_height;
-	int	map_width;
-	t_point	start;
-	t_point end;
-
-	i = 0;
-	map_height = get_mapheight(game);
-	map_width = ft_strlen(game->raw[i]);
-	while (game->raw[i])
-	{
-		j = 0;
-		while (game->raw[i][j])
-		{
-			if (game->raw[i][j] == '1')
-			{
-				if ((i - 1) > -1 && game->raw[i - 1][j] == '0')
-				{
-					//clockwise, drawing top face.
-					start.y = i * 80 ;
-					start.x = j * 80 ;
-					end.y = i * 80;
-					end.x = (j + 1) * 80 ;
-					line(game->img, start, end, 0x00FF00);
-				}
-				if ((j + 1) < map_width && game->raw[i][j + 1] == '0')
-				{					
-					//drawing right face:
-					start.y = i * 80 ;
-					start.x = (j + 1) * 80 ;
-					end.y = (i + 1) * 80;
-					end.x = (j + 1) * 80 ;
-					line(game->img, start, end, 0x0000FF);
-				}
-				if ((i + 1) < map_height && game->raw[i + 1][j] == '0')
-				{				
-					//clockwise, drawing bot face.
-					start.y = (i + 1) * 80 ;
-					start.x = (j + 1) * 80 ;
-					end.y = (i + 1) * 80;
-					end.x = j * 80 ;
-					line(game->img, start, end, 0xFF0000);
-				}
-				if ((j - 1) > -1 && game->raw[i][j - 1] == '0')
-				{			
-				//drawing left face:
-				start.y = (i + 1) * 80 ;
-				start.x = j * 80 ;
-				end.y = i * 80;
-				end.x = j * 80 ;
-				line(game->img, start, end, 0x00FFFF);	
-				}			
-			}
-			else if (game->raw[i][j] == '0')
-			{
-			}
-			//	rect(game->img, i * 80, j * 80, 79, 79, 0xFFFFFF);
-			j++;
-		}	
-		i++;
-	}
-	return (0);
-}
-*/
-
 
 int	c3d_update_player_pos(t_game *game)
 {

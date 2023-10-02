@@ -6,12 +6,13 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:44:26 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/21 16:35:25 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:44:16 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 //#include "bounds.h"
+
 
 void free_bounds(t_bound* head)
 {
@@ -23,6 +24,7 @@ void free_bounds(t_bound* head)
     }
 }
 
+/*
 void print_bounds(t_bound *head)
 {
     t_bound* current_wall = head;
@@ -37,7 +39,7 @@ void print_bounds(t_bound *head)
         i++;
     }
 }
-
+*/
 /*
 void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y) 
 {

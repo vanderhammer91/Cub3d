@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 22:28:43 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/02 23:12:47 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	c3d_initialize_textures(t_game *game)
     game->door_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/door/door_128.xpm", &width, &height);
     game->gun_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/gunsprite.xpm", &width, &height);
+			"images/gun_sprite.xpm", &width, &height);
 	game->e_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/e_msg.xpm", &width, &height);
 }

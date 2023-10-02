@@ -1,2 +1,6 @@
 .DS_Store
 *.swp
+obj/
+mlx/*
+cub3d
+libft/*

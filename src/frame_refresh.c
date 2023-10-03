@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 20:44:58 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 21:01:37 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	c3d_update_player_pos(t_game *game)
 
 	radians = game->player.rot * M_PI / 180;
 	perp_rad = get_safe_angle((game->player.rot + 90)) * (M_PI / 180);
-	speed = 4;
+	speed = 3;
 	if (game->keys.SH_KEY_DOWN == 1)
 		speed *= 2;
 	new_x = 0;
@@ -110,7 +110,7 @@ int	draw_dir_arrow(t_game *game)
 
 void	c3d_draw_overlay(t_game *game)
 {
-	if (game->pt_dist > 600)
+	if (game->pt_dist > 700)
 	{	
 		if(game->closest_wall_dir == DOOR)
 		{
@@ -280,7 +280,7 @@ void	frame_refresh_title(t_game *game)
         //int texture_y = sprite_y + y;
         for (int x = 0; x < 1200; x++)
         {
-            colour = texture_data[(y + sprite_y) * 1000 + x];
+            colour = texture_data[((y + sprite_y) * 1200) + x];
 			img_pixel_put(game->img, x, y, colour);            	
         }
     }		
@@ -307,7 +307,7 @@ int	frame_refresh_main(t_game *game)
 	c3d_player_look(game);
 
 	//output
-	rect(game->img, 600, 550, 10, 10, 0xFFFFFF);
+	rect(game->img, 600, 540, 10, 10, 0xFFFFFF);
 	c3d_draw_minimap(game, game->img);
 	test_hitrays(game);
 	draw_gun_state(game, game->gun_state, 350, 475);

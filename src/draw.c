@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:47 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 18:27:35 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:45:31 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,45 +37,6 @@ void rect(void *img, int x, int y, int width, int height, int color)
     }
 }
 
-void circle(void *img, int xc, int yc, int r, int color)
-{
-	int	x;
-	int	y;
-	int	d;
-
-	x = 0, y = r;
-	d = 3 - 2 * r;
-    while (y >= x) {
-        img_pixel_put(img, xc + x, yc + y, color);
-        img_pixel_put(img, xc - x, yc + y, color);
-        img_pixel_put(img, xc + x, yc - y, color);
-        img_pixel_put(img, xc - x, yc - y, color);
-        img_pixel_put(img, xc + y, yc + x, color);
-        img_pixel_put(img, xc - y, yc + x, color);
-        img_pixel_put(img, xc + y, yc - x, color);
-        img_pixel_put(img, xc - y, yc - x, color);
-        x++;
-        if (d > 0) {
-            y--;
-            d = d + 4 * (x - y) + 10;
-        } else {
-            d = d + 4 * x + 6;
-        }
-    }
-}
-
-void filled_circle(void *img, int xc, int yc, int r, int color)
-{
-	int	x;
-	int	y;
-
-	for (x = xc - r; x <= xc + r; x++) {
-		for (y = yc - r; y <= yc + r; y++) {
-			if ((x - xc) * (x - xc) + (y - yc) * (y - yc) <= r * r)
-				img_pixel_put(img, x, y, color);
-		}
-	}
-}
 
 void line(void *img, t_point a, t_point b, int color)
 {	
@@ -89,16 +50,21 @@ void line(void *img, t_point a, t_point b, int color)
     int sx = (x1 < x2) ? 1 : -1;
     int sy = (y1 < y2) ? 1 : -1;
     int err = dx - dy;
+	int	i;
+	int	j;
 
-    while (1) {
-       // img_pixel_put(img, x1, y1, color);
-
-	    // Draw a pixel at (x1, y1) with the specified color
-        for (int i = -thickness / 2; i <= thickness / 2; i++) {
-            for (int j = -thickness / 2; j <= thickness / 2; j++) {
-                img_pixel_put(img, x1 + i, y1 + j, color);
-            }
-        }
+    while (1) {	
+		i = -thickness / 2;
+		while (i <= (thickness / 2))
+		{
+			j = -thickness / 2;
+			while (j <= (thickness / 2))
+			{
+				img_pixel_put(img, x1 + i, y1 + j, color);
+				j++;
+			}
+			i++;
+		}
         if (x1 == x2 && y1 == y2) {
             break;
         }

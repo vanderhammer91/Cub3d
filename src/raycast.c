@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 14:26:26 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:49:16 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ extern int All_Textures[];
 
 t_point *ray_cast(t_bound *current_wall, t_ray *this_ray)
 {
-//	t_point *ret;
 	t_point *pt;
 	double radians = this_ray->rot * M_PI / 180.0;
 	
@@ -77,15 +76,15 @@ int retrieve_colour(void *img, int x, int y)
 
 void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ray_y, t_bound *closest_wall)
 {
-	int colour;
-	int	y; 
+	int 	colour;
+	int		y; 
 	int		start_y;
 	float	ty;
 	float	ty_step;
 	float	tx;
-	int	x_offset = 0;
-	int y_offset = 500;
-	int	cw = 5;
+	int		x_offset = 0;
+	int 	y_offset = 500;
+	int		cw = 5;
 
 	if (closest_wall->direction == EAST)
 		colour = 0x00FFFF;
@@ -181,17 +180,18 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 }
 
 void c3d_player_look(t_game *game) {
-    t_ray this_ray;
-    t_point closest, second_closest;
-    t_bound *closest_wall, *second_closest_wall;
-    float pt_dist, second_pt_dist;
-    double ray_angle;
-    int has_collided;
-    float max_dist, second_max_dist;
-    float i = 0;
-    int j;
+    t_ray	this_ray;
+    t_point	closest, second_closest;
+    t_bound	*closest_wall, *second_closest_wall;
+    float	pt_dist, second_pt_dist;
+    double	ray_angle;
+    int		has_collided;
+    float 	max_dist, second_max_dist;
+    float	i = 0;
+    int		j;
 
-    while (i < 280) {
+    while (i < 280)
+	{
         has_collided = 0;
         max_dist = 100000;
         second_max_dist = 100000;
@@ -203,8 +203,8 @@ void c3d_player_look(t_game *game) {
         second_closest.x = -1;
         second_closest.y = -1;
         j = 0;
-
-        while (game->walls[j]) {
+        while (game->walls[j])
+		{
             t_point *point = ray_cast(game->walls[j], &this_ray);
             if (point)
 			{

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 17:24:34 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:37:33 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,19 +213,21 @@ void	c3d_check_walls_call(t_game *game)
 void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
 {
     int sprite_y = gun_state * 523;  
-    int     bpp;
-    int     size_line;
-    int     endian;
+    int bpp;
+    int size_line;
+    int endian;
+	int	colour;
+	int alpha;
     int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
 	int m_off = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
+
     for (int y = 0; y < 523; y++)
     {
         int texture_y = sprite_y + y;
         for (int x = 0; x < 1000; x++)
         {
-            // Get the color of the pixel from the texture
-            int colour = texture_data[texture_y * 1000 + x];
-			int alpha = (colour >> 24) & 0xFF; 
+            colour = texture_data[texture_y * 1000 + x];
+			alpha = (colour >> 24) & 0xFF; 
             if (!alpha)
 				img_pixel_put(game->img, x + x_off, y + y_off + m_off, colour);            	
         }
@@ -270,11 +272,11 @@ int	frame_refresh(t_game *game)
 	
 	//raycasting
 	c3d_player_look(game);
-	test_hitrays(game);
 
 	//output
 	rect(game->img, 600, 550, 10, 10, 0xFFFFFF);
 	c3d_draw_minimap(game, game->img);
+	test_hitrays(game);
 	draw_gun_state(game, game->gun_state, 350, 475);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	c3d_draw_overlay(game);

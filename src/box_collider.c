@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/29 22:24:38 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:37:58 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	c3d_collider_feedback(t_game *game)
 	{
 		radians = i * (M_PI / 2);
 
-		start.x = game->player.pos.x;
-		start.y = game->player.pos.y;
+		start.x = 150;
+		start.y = 150;
 
 		//green line in the direction the player is facing.
 		unitVector.x = cos(radians) * radius;
@@ -145,5 +145,5 @@ int	c3d_collider_feedback(t_game *game)
 void	test_hitrays(t_game *game)
 {
 	c3d_collider_check_all(game);
-	//c3d_collider_feedback(game);
+//	c3d_collider_feedback(game);
 }

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 16:32:05 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:39:50 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	c3d_update_player_pos(t_game *game)
 
 	radians = game->player.rot * M_PI / 180;
 	perp_rad = get_safe_angle((game->player.rot + 90)) * (M_PI / 180);
-	speed = 3;
+	speed = 4;
 	if (game->keys.SH_KEY_DOWN == 1)
 		speed *= 2;
 	new_x = 0;

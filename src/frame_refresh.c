@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 16:39:50 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:24:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,29 +129,29 @@ void	c3d_draw_overlay(t_game *game)
 void c3d_draw_minimap(t_game *game, void *img)
 {
 	int offset = 300;
-	int y_bound = 300;
-	int x_bound = 300;
+	int bound = 300;
+	int	i;
 	t_point new_start;
 	t_point new_end;
 
 	rect(game->img, 0, 0, 300, 300, 0x0c212e);
 	rect(game->img, 145, 145, 10, 10, 0x00FFFF);
-   for (int i = 0; i < game->num_walls; i++) {
+	i = 0;
+	while (i < game->num_walls)
+	{
 		t_bound *wall = game->walls[i];
 		new_start.x = (wall->start.x - game->player.pos.x + offset) / 2;
 		new_start.y = (wall->start.y - game->player.pos.y + offset) / 2;
 		new_end.x = (wall->end.x - game->player.pos.x + offset) / 2;
 		new_end.y = (wall->end.y - game->player.pos.y + offset) / 2;
-
-		if (new_start.x > x_bound)
-			new_start.x = x_bound;
-		if (new_start.y > y_bound)
-			new_start.y = y_bound;
-		if (new_end.x > x_bound)
-			new_end.x = x_bound;
-		if (new_end.y > y_bound)
-			new_end.y = y_bound;
-
+		if (new_start.x > bound)
+			new_start.x = bound;
+		if (new_start.y > bound)
+			new_start.y = bound;
+		if (new_end.x > bound)
+			new_end.x = bound;
+		if (new_end.y > bound)
+			new_end.y = bound;
 		if (wall->direction != DOOR)
         	line(img, new_start, new_end, 0x0000FF);
 		else
@@ -159,6 +159,7 @@ void c3d_draw_minimap(t_game *game, void *img)
 			if (wall->is_active)
 				line(img, new_start, new_end, 0x00FFFF);
 		}
+		i++;
     }
 	draw_dir_arrow(game);
 	new_start.x = 0;
@@ -194,7 +195,7 @@ void	check_walls_2(t_game *game, int i)
 		game->walls[i]->is_active = 1;
 }
 
-void	check_walls_call(t_game *game)
+void	c3d_check_walls_call(t_game *game)
 {
 	int	i;
 
@@ -208,33 +209,7 @@ void	check_walls_call(t_game *game)
 		i++;
 	}
 }
-/*
-void draw_gun_state(t_game *game, int gun_state)
-{
 
-    // Create a new image for the sprite
- 	int     bpp;
-    int     size_line;
-    int     endian;
-	int		sprite_y = gun_state * 523;	
-	(void)sprite_y;
-   int *data = (int*)mlx_get_data_addr(game->img, &bpp, &size_line, &endian);
-   (void)data;
-   // int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
-//	(void)texture_data;
-	for (int y = 0; y < 523; y++)
-	{
-    //	int texture_y = sprite_y + y;
-    	for (int x = 0; x < 1000; x++)
-    	{
-    	   // data[y * 1000 + x] = texture_data[texture_y * 1000 + x];
-    	}
-	}
-    //int y_offset = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
-    //mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 400, 480 + y_offset);
-   // mlx_destroy_image(game->mlx, game->img);
-}
-*/
 void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
 {
     int sprite_y = gun_state * 523;  
@@ -257,14 +232,8 @@ void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
     }
 }
 
-int	frame_refresh(t_game *game)
+void	c3d_check_gun_state(t_game *game)
 {
-	game->frame++;
-	if (game->frame >= 8)
-		game->frame = 0;
-	if (game->frame % 2 == 0)
-	{
-		check_walls_call(game);	
 		if (game->keys.SP_KEY_DOWN && game->gun_state == 7)
 		{
 			game->gun_state++;
@@ -279,25 +248,36 @@ int	frame_refresh(t_game *game)
 		{
 			game->gun_state++;
 		}
+}
+
+int	frame_refresh(t_game *game)
+{
+	game->frame++;
+	if (game->frame >= 8)
+		game->frame = 0;
+	if (game->frame % 2 == 0)
+	{
+		c3d_check_walls_call(game);
+		c3d_check_gun_state(game);
 	}
 	mlx_clear_window(game->mlx, game->mlx_win);
 	game->img = mlx_new_image(game->mlx, 2000, 2000);	
+	c3d_update_player_pos(game);
 
-	//update
-	c3d_update_player_pos(game);			
-	
-	//sky and floor colour respectively.
+	//sky and floor colour respectively parse this in.
 	rect(game->img, 0, 0, 1200, 500, 0x000066);
 	//	rect(game->img, 0, 400, 1000, 400, game->floorcolour);
-
+	
+	//raycasting
 	c3d_player_look(game);
 	test_hitrays(game);
+
+	//output
 	rect(game->img, 600, 550, 10, 10, 0xFFFFFF);
 	c3d_draw_minimap(game, game->img);
 	draw_gun_state(game, game->gun_state, 350, 475);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	c3d_draw_overlay(game);
 	mlx_destroy_image(game->mlx, game->img);
-
 	return (0);
 }

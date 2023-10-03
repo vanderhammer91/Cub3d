@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 20:56:19 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:40:44 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
     new_bound->end.x = e_x;
     new_bound->end.y = e_y;
 	new_bound->direction = UNSET;
+	new_bound->door_state = 0;
+	new_bound->img_state = 0;
 	if (wall_type > 0)
 	{
 		new_bound->direction = DOOR;

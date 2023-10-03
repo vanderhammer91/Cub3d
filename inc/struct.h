@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 20:44:24 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:19:28 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ typedef struct s_bound {
     t_point 			start;
     t_point 			end;
 	enum e_wall_type	direction;
+	int					index;
 	int					is_active;
 	int					is_vert;
+	int					door_state;
+	int					img_state;
 	struct s_bound		*next;
 } 						t_bound;
 
@@ -96,6 +99,7 @@ typedef struct s_game
 	char	*door_path;
 	char	*door_frame[22];
 	enum	e_wall_type	closest_wall_dir;
+	int		closest_wall_index;
 	float	pt_dist;
 	int		close_index;
 	t_bound	*closest_wall;

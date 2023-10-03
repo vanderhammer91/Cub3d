@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 21:01:32 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:26:26 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	}
  	else if (closest_wall->direction == DOOR)
 	{
-    	start_y = y_offset - raylength * 0.5;
+		int img_state = game->walls[game->closest_wall_index]->img_state;
+		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 128.0 / (float)raylength;
 		if (closest_wall->is_vert == 0)
@@ -169,7 +170,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	while (y < raylength)
     	{
     	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2,
-					ty + game->true_state * 128);
+					ty + img_state * 128);
 			int alpha = (pixel_colour >> 24) & 0xFF; 
             if (!alpha)
 				rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
@@ -217,6 +218,7 @@ void c3d_player_look(t_game *game) {
                     max_dist = pt_dist;
                     closest = *point;
                     closest_wall = game->walls[j];
+					game->closest_wall_index = j;
 				}
 				else if (pt_dist != -1 && pt_dist < second_max_dist) 
 				{

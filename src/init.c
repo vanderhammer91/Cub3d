@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/02 18:40:09 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:16:53 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_game *initialize_game(void)
 	game->keys.SH_KEY_DOWN = 0;
 	game->keys.L_ROT_KEY_DOWN = 0;
 	game->keys.R_ROT_KEY_DOWN = 0;
+	game->gun_state = 7;
 
 	return game;
 } 

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 14:57:50 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:32:05 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,37 +168,6 @@ void c3d_draw_minimap(t_game *game, void *img)
 	new_start.y = 5;
 	draw_square(img, new_start, 290, 0x00FFFF);
 }
-
-void draw_gun_state(t_game *game, int gun_state)
-{
-    // Create a new image for the sprite
- 	int     bpp;
-    int     size_line;
-    int     endian;
-	int		sprite_y = gun_state * 523;	
-    void *img = mlx_new_image(game->mlx, 1000, 523);
-    int *data = (int*)mlx_get_data_addr(img, &bpp, &size_line, &endian);
-
-    // Get the data of the texture
-    int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
-
-    // Copy the sprite from the texture to the new image
-	for (int y = 0; y < 523; y++)
-	{
-    	int texture_y = sprite_y + y;
-    	for (int x = 0; x < 1000; x++)
-    	{
-    	    data[y * 1000 + x] = texture_data[texture_y * 1000 + x];
-    	}
-	}
-
-    // Draw the new image
-    int y_offset = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
-    mlx_put_image_to_window(game->mlx, game->mlx_win, img, 400, 480 + y_offset);
-
-    // Destroy the new image
-    mlx_destroy_image(game->mlx, img);
-}
  
 void	check_walls_2(t_game *game, int i)
 {
@@ -239,8 +208,54 @@ void	check_walls_call(t_game *game)
 		i++;
 	}
 }
+/*
+void draw_gun_state(t_game *game, int gun_state)
+{
 
-
+    // Create a new image for the sprite
+ 	int     bpp;
+    int     size_line;
+    int     endian;
+	int		sprite_y = gun_state * 523;	
+	(void)sprite_y;
+   int *data = (int*)mlx_get_data_addr(game->img, &bpp, &size_line, &endian);
+   (void)data;
+   // int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
+//	(void)texture_data;
+	for (int y = 0; y < 523; y++)
+	{
+    //	int texture_y = sprite_y + y;
+    	for (int x = 0; x < 1000; x++)
+    	{
+    	   // data[y * 1000 + x] = texture_data[texture_y * 1000 + x];
+    	}
+	}
+    //int y_offset = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
+    //mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 400, 480 + y_offset);
+   // mlx_destroy_image(game->mlx, game->img);
+}
+*/
+void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
+{
+    int sprite_y = gun_state * 523;  
+    int     bpp;
+    int     size_line;
+    int     endian;
+    int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
+	int m_off = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
+    for (int y = 0; y < 523; y++)
+    {
+        int texture_y = sprite_y + y;
+        for (int x = 0; x < 1000; x++)
+        {
+            // Get the color of the pixel from the texture
+            int colour = texture_data[texture_y * 1000 + x];
+			int alpha = (colour >> 24) & 0xFF; 
+            if (!alpha)
+				img_pixel_put(game->img, x + x_off, y + y_off + m_off, colour);            	
+        }
+    }
+}
 
 int	frame_refresh(t_game *game)
 {
@@ -248,32 +263,40 @@ int	frame_refresh(t_game *game)
 	if (game->frame >= 8)
 		game->frame = 0;
 	if (game->frame % 2 == 0)
+	{
 		check_walls_call(game);	
+		if (game->keys.SP_KEY_DOWN && game->gun_state == 7)
+		{
+			game->gun_state++;
+		}
+		if (game->gun_state > 7)
+		{
+			game->gun_state++;
+			if (game->gun_state > 10)
+				game->gun_state = 0;
+		}
+		else if (game->gun_state < 7)
+		{
+			game->gun_state++;
+		}
+	}
 	mlx_clear_window(game->mlx, game->mlx_win);
 	game->img = mlx_new_image(game->mlx, 2000, 2000);	
-	
+
 	//update
 	c3d_update_player_pos(game);			
 	
-	//sky colour
+	//sky and floor colour respectively.
 	rect(game->img, 0, 0, 1200, 500, 0x000066);
-	
-	//floor colour
-//	rect(game->img, 0, 400, 1000, 400, game->floorcolour);
+	//	rect(game->img, 0, 400, 1000, 400, game->floorcolour);
 
 	c3d_player_look(game);
 	test_hitrays(game);
-	//cursor
-	rect(game->img, 600, 500, 10, 10, 0xFFFFFF);
+	rect(game->img, 600, 550, 10, 10, 0xFFFFFF);
 	c3d_draw_minimap(game, game->img);
-
-
-//	draw_gun_state(game, 1);
+	draw_gun_state(game, game->gun_state, 350, 475);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	c3d_draw_overlay(game);
-	int y_offset = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->gun_texture, 400, 480 + y_offset);
-
 	mlx_destroy_image(game->mlx, game->img);
 
 	return (0);

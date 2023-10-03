@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 14:19:28 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:08:22 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,7 @@ typedef struct s_game
 	t_bound	*closest_wall;
 	int		skycolour;
 	int		floorcolour;
-//	int	map_height;
-//	int	map_width;
-
+	int		gun_state;
 	t_bound	**walls;
 	int num_walls;
 	t_player player;

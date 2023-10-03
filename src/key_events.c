@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 17:47:01 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 20:43:04 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 extern int prev_x;
 
 int	key_press(int keycode, t_game *game)
-{
+{	
 	if (keycode == 53)
 		ft_start_exit("", game);
 	if (game->keys.L_KEY_DOWN == 0 && keycode == 0)
@@ -32,6 +32,8 @@ int	key_press(int keycode, t_game *game)
 		game->keys.SH_KEY_DOWN = 1;
 	else if (game->keys.SP_KEY_DOWN == 0 && keycode == 49)
 		game->keys.SP_KEY_DOWN = 1;
+	else if (game->keys.ENTER_KEY_DOWN == 0 && keycode == 36)
+		game->keys.ENTER_KEY_DOWN = 1;
 	else if (game->keys.R_ROT_KEY_DOWN == 0 && keycode == 123)
 		game->keys.R_ROT_KEY_DOWN = 1;	
 	else if (game->keys.L_ROT_KEY_DOWN == 0 && keycode == 124)
@@ -55,6 +57,8 @@ int key_release(int keycode, t_game *game)
 		game->keys.SP_KEY_DOWN = 0;	
 	else if (keycode == 257)
 		game->keys.SH_KEY_DOWN = 0;
+	else if (keycode == 36)
+		game->keys.ENTER_KEY_DOWN = 0;	
 	else if (keycode == 124)
 		game->keys.L_ROT_KEY_DOWN = 0;	
 	else if (keycode == 123)

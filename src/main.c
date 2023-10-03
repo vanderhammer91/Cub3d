@@ -6,12 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 15:43:36 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 20:35:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "textures.h"
 
 void	c3d_initialize_textures(t_game *game)
 {
@@ -32,6 +31,8 @@ void	c3d_initialize_textures(t_game *game)
 			"images/gun_sprite.xpm", &width, &height);
 	game->e_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/e_msg.xpm", &width, &height);
+	game->title_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/title_screen.xpm", &width, &height);
 }
 
 

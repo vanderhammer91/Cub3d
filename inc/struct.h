@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 16:08:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 20:40:49 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_keys
 	int	E_KEY_DOWN;
 	int L_ROT_KEY_DOWN;
 	int R_ROT_KEY_DOWN;
+	int	ENTER_KEY_DOWN;
 }	t_keys;
 
 typedef struct s_game
@@ -93,9 +94,12 @@ typedef struct s_game
 	void	*west_texture;
 	void	*door_texture;
 	void	*gun_texture;
+	void	*title_texture;
 	void	*e_texture;
+	int		game_state;
 	int		door_state;
 	int		true_state;
+	int		splash_state;
 	char	*door_path;
 	char	*door_frame[22];
 	enum	e_wall_type	closest_wall_dir;

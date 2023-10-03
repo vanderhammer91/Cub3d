@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 17:37:33 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/03 20:44:58 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,11 +252,44 @@ void	c3d_check_gun_state(t_game *game)
 		}
 }
 
-int	frame_refresh(t_game *game)
+void	frame_refresh_title(t_game *game)
 {
+	mlx_clear_window(game->mlx, game->mlx_win);
+	game->img = mlx_new_image(game->mlx, 2000, 2000);	
+	if (game->keys.ENTER_KEY_DOWN)
+		game->game_state = 1;
 	game->frame++;
 	if (game->frame >= 8)
+	{
 		game->frame = 0;
+		game->splash_state++;
+		if (game->splash_state > 1)
+		{
+			game->splash_state = 0;
+		}		
+	}			
+	int sprite_y = game->splash_state * 1000;  
+    int bpp;
+    int size_line;
+    int endian;
+	int	colour;
+    int *texture_data = (int*)mlx_get_data_addr(game->title_texture, &bpp, &size_line, &endian);
+    
+	for (int y = 0; y < 1000; y++)
+    {
+        //int texture_y = sprite_y + y;
+        for (int x = 0; x < 1200; x++)
+        {
+            colour = texture_data[(y + sprite_y) * 1000 + x];
+			img_pixel_put(game->img, x, y, colour);            	
+        }
+    }		
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
+	mlx_destroy_image(game->mlx, game->img);
+}
+
+int	frame_refresh_main(t_game *game)
+{
 	if (game->frame % 2 == 0)
 	{
 		c3d_check_walls_call(game);
@@ -281,5 +314,16 @@ int	frame_refresh(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	c3d_draw_overlay(game);
 	mlx_destroy_image(game->mlx, game->img);
+	return (0);
+}
+
+
+
+int	frame_refresh(t_game *game)
+{
+	if (!game->game_state)
+		frame_refresh_title(game);
+	else if (game->game_state)
+		frame_refresh_main(game);
 	return (0);
 }

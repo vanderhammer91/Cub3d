@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/04 16:29:15 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:54:43 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	int		x_offset = 0;
 	int 	y_offset = 500;
 	int		cw = 5;
-//	int		pcolo = 0x4a3f38;
+	int		cpolo = 0xb0b7c2;
 
-	/*
-	if (closest_wall->direction == EAST)
-		colour = 0x00FFFF;
-	else if (closest_wall->direction == WEST)
-		colour = 0x0000FF;			
-	else if (closest_wall->direction == SOUTH)
-		colour = 0x00FF00;
-	else if (closest_wall->direction == NORTH)
-		colour = 0xFF0000;	
-	else
-		colour = 0x000000;
-*/
 	y = 0;
  	if (closest_wall->direction == SOUTH)
 	{
@@ -110,9 +98,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	while (y < raylength)
     	{
     	  	int pixel_colour = retrieve_colour(game->south_texture, tx, ty);
-	//		if (closest_wall->texture == PILLAR)
-	//			pixel_colour = pcolo;
-		   	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			if (closest_wall->texture == PILLAR)
+				pixel_colour = cpolo;
+			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -127,7 +115,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	{
     	 	int pixel_colour = retrieve_colour(game->north_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour = retrieve_colour(game->pillar_texture, tx, ty);
+				pixel_colour = cpolo;
     	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
@@ -142,9 +130,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	while (y < raylength)
     	{
     	  	int pixel_colour = retrieve_colour(game->east_texture, tx, ty);
-	//		if (closest_wall->texture == PILLAR)
-	//			pixel_colour = pcolo;
-		   	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			if (closest_wall->texture == PILLAR)
+				pixel_colour = cpolo + 50;		
+			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -159,8 +147,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	while (y < raylength)
     	{
     	 	int pixel_colour = retrieve_colour(game->west_texture, tx, ty);
-	//		if (closest_wall->texture == PILLAR)
-	//			pixel_colour = pcolo;
+			if (closest_wall->texture == PILLAR)
+				pixel_colour = cpolo + 50;
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;

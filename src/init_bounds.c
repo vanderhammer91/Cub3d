@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/04 16:16:50 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:45:31 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void c3d_remove_bound(t_game *game, int bound_index)
 
 int	is_space_char(char c)
 {
-	if (c == '0' || c == '2' || c == '3' || c == 'x')
+	if (c == '0' || c == '2' || c == '3' || c == 'X')
 		return (1);
 	return (0);
 }

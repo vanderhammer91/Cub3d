@@ -29,25 +29,46 @@ t_parsed_data	*new_parsed_data()
 	data->ceiling_g = -1;
 	data->ceiling_b = -1;
 	data->map = NULL;
+	data->starting_x = -1;
+	data->starting_y = -1;
+	data->starting_dir = UNSET;
 
 	return (data);
 }
 
 void	free_char_array(char **arr)
 {
-	char	*line_pointer;
+	size_t	i;
 
 	if (!arr)
 	{
 		return ;
 	}
-	line_pointer = arr;
-	while (line_pointer)
+	i = 0;
+	while (arr[i])
 	{
-		free(line_pointer);
-		line_pointer++;
+		free(arr[i]);
+		i++;
 	}
-	free (arr)
+	free(arr);
+}
+
+void	print_char_array(char **arr)
+{
+	printf("----char_array----\n");
+	if (!arr)
+		printf("(null)\n");
+	else
+	{
+		size_t i = 0;
+		while (arr[i])
+		{
+			printf("line %ld (p: %p): <%s>\n", i, arr[i], arr[i]);
+			i++;
+		}
+	}
+	printf("----end----\n");
+
 }
 
 void	delete_parsed_data(t_parsed_data *d)
@@ -62,14 +83,38 @@ void	delete_parsed_data(t_parsed_data *d)
 		free(d->south_texture);
 	if (d->west_texture)
 		free(d->west_texture);
-	if (d->south_texture)
-		free(d->south_texture);
+	if (d->east_texture)
+		free(d->east_texture);
 	if (d->map)
+	{
 		free_char_array(d->map);
+	}
 	free(d);
 	return ;
 }
 
+
+// Check for valid path string. Note that the main check is that the string
+// consists of alphanumeric chars and / chars. Does not check for order, doubled
+// slash chars, path name validity etc. Maybe add that in later.
+size_t	valid_path_string_length(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	if (ft_strncmp(line, "./", 2) != 0)
+	{
+		return (i);
+	}
+	i += 2;
+	//TODO decide what is a valid filename? apparently can contain any byte other than NUL or /
+	// Ref: https://stackoverflow.com/questions/4814040/allowed-characters-in-filename
+	while (ft_isalnum(line[i]) || line[i] == '/' || line[i] == '_')
+	{
+		i++;
+	}
+	return (i);
+}
 
 int	is_valid_line_texture(char *line)
 {
@@ -83,8 +128,8 @@ int	is_valid_line_texture(char *line)
 		i++;
 	}
 	if (!line[i] || !line[i + 1] || \
-		!(ft_strncmp(&line[i], "NO ", 3) || ft_strncmp(&line[i], "SO ", 3) ||
-		ft_strncmp(&line[i], "WE ", 3) || ft_strncmp(&line[i], "EA ", 3)))
+		(ft_strncmp(&line[i], "NO ", 3) != 0 && ft_strncmp(&line[i], "SO ", 3) != 0 &&
+		ft_strncmp(&line[i], "WE ", 3) != 0 && ft_strncmp(&line[i], "EA ", 3) != 0))
 	{
 		return (0);
 	}
@@ -110,26 +155,6 @@ int	is_valid_line_texture(char *line)
 	return (0);
 }
 
-// Check for valid path string. Note that the main check is that the string
-// consists of alphanumeric chars and / chars. Does not check for order, doubled
-// slash chars, path name validity etc. Maybe add that in later.
-size_t	valid_path_string_length(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	if (ft_strncmp(line, "./", 2) == 0)
-	{
-		return (i);
-	}
-	i += 2;
-	while (ft_isalnum(line[i]) || line[i] == '/')
-	{
-		i++;
-	}
-	return (i)
-}
-
 t_direction_and_string	line_to_texture_data(char *line)
 {
 	char 					*trimmed_line;
@@ -142,13 +167,13 @@ t_direction_and_string	line_to_texture_data(char *line)
 	{
 		return (res);
 	}
-	if (ft_strncmp(trimmed_line, "NO ", 3))
+	if (ft_strncmp(trimmed_line, "NO ", 3) == 0)
 		res.dir = NORTH;
-	else if (ft_strncmp(trimmed_line, "SO ", 3))
+	else if (ft_strncmp(trimmed_line, "SO ", 3) == 0)
 		res.dir = SOUTH;
-	else if (ft_strncmp(trimmed_line, "WE ", 3))
+	else if (ft_strncmp(trimmed_line, "WE ", 3) == 0)
 		res.dir = WEST;
-	else if (ft_strncmp(trimmed_line, "EA ", 3))
+	else if (ft_strncmp(trimmed_line, "EA ", 3) == 0)
 		res.dir = EAST;
 	else
 	{
@@ -216,7 +241,6 @@ void	poke_texture_data(t_parsed_data *data, t_direction_and_string pair)
 
 int	is_valid_line_colour(char *line)
 {
-	size_t	i;
 	char	*trimmed_line;
 
 	trimmed_line = ft_strtrim(line, " ");
@@ -224,8 +248,8 @@ int	is_valid_line_colour(char *line)
 	{
 		return (0);
 	}
-	if (ft_strncmp(trimmed_line, "F ", 2) == 0 && \
-		ft_strncmp(trimmed_line, "C ", 2) == 0)
+	if (ft_strncmp(trimmed_line, "F ", 2) != 0 && \
+		ft_strncmp(trimmed_line, "C ", 2) != 0)
 	{
 		free(trimmed_line);
 		return (0);
@@ -252,13 +276,13 @@ t_char_and_rgb line_to_colour_data(char *line)
 	char			*trimmed_line;
 	char			**split_strs;
 
-	res.c = '/0';
+	res.c = '\0';
 	trimmed_line = ft_strtrim(line, " ");
 	if (!trimmed_line)
 	{
 		return (res);
 	}
-	if (ft_strncmp(trimmed_line, "F ", 2) == 1)
+	if (ft_strncmp(trimmed_line, "F ", 2) == 0)
 	{
 		res.c = 'F';
 	}
@@ -267,19 +291,20 @@ t_char_and_rgb line_to_colour_data(char *line)
 		res.c = 'C';
 	}
 	split_strs = ft_split(&trimmed_line[2], ',');
+	free(trimmed_line);
 	if (arr_len(split_strs) != 3)
 	{
-		free(split_strs);
-		res.c = '/0';
+		free_char_array(split_strs);
+		res.c = '\0';
 		return (res);
 	}
 	res.r = ft_atoi(split_strs[0]);
 	res.g = ft_atoi(split_strs[1]);
 	res.b = ft_atoi(split_strs[2]);
-	free(split_strs);
+	free_char_array(split_strs);
 	if (res.r < 0 || res.r > 255 || res.g < 0 || res.g > 255 || res.b < 0 || res.b > 255)
 	{
-		res.c = '/0';
+		res.c = '\0';
 		return (res);
 	}
 	return (res);
@@ -314,27 +339,37 @@ void	poke_colour_data(t_parsed_data *data, t_char_and_rgb rgb)
 	}
 }
 
-void	*ft_realloc(void *ptr, size_t old, size_t new)
+char	**ft_realloc(char **ptr, size_t old, size_t new)
 {
-	void	*new_ptr;
+	char	**new_ptr;
+	size_t	i;
 
-	if(!ptr)
-	{
-		return (NULL);
-	}
+	// if(!ptr)
+	// {
+	// 	return (NULL);
+	// }
 	if (new < old)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	new_ptr = malloc(new);
+	new_ptr = malloc(sizeof (*ptr) * new);
 	if (!new_ptr)
 	{
 		free (ptr);
 		return (NULL);
 	}
-	ft_memset(new_ptr, 0, new);
-	ft_memcpy(new_ptr, ptr, old);
+	i = 0;
+	while (ptr && ptr[i] && i < new)
+	{
+		new_ptr[i] = ptr[i];
+		i++;
+	}
+	while (i < new)
+	{
+		new_ptr[i] = NULL;
+		i++;
+	}
 	free(ptr);
 	return(new_ptr);
 }
@@ -353,6 +388,7 @@ int	is_valid_line_map(char *line)
 		}
 		else
 		{
+			printf("not a valid map because char at %ld is <%c>\n", i, line[i]);
 			return (0);
 		}
 		i++;
@@ -417,6 +453,11 @@ char	*extend_map_line(char *line, size_t new_width)
 		return (line);
 	}
 	new_line = malloc(sizeof (*line) * (new_width + 1));
+	if (!new_line)
+	{
+		free (line);
+		return (NULL);
+	}
 	i = 0;
 	while (line[i])
 	{
@@ -428,7 +469,9 @@ char	*extend_map_line(char *line, size_t new_width)
 		new_line[i] = '0';
 		i++;
 	}
-	new_line[i] = '/0'
+	new_line[i] = '\0';
+	free(line);
+	return (new_line);
 }
 
 void	extend_map_lines_to_rectangle(t_parsed_data *d)
@@ -444,7 +487,7 @@ void	extend_map_lines_to_rectangle(t_parsed_data *d)
 	i = 0;
 	while (d->map[i])
 	{
-		extend_map_line(d->map[i], max_width);
+		d->map[i] = extend_map_line(d->map[i], max_width);
 		i++;
 	}
 }
@@ -505,8 +548,8 @@ t_coord	get_start_location(t_parsed_data *d)
 		{
 			if (d->map[i][j] == 'N' || d->map[i][j] == 'E' || d->map[i][j] == 'W' || d->map[i][j] == 'S')
 			{
-				res.x = i; // TODO Which way around do you want this
-				res.y = j;
+				res.x = j;
+				res.y = i;
 				return (res);
 			}
 			j++;
@@ -527,29 +570,12 @@ size_t	arr_height(char **arr)
 	return (height);
 }
 
-void	free_char_array(char **arr)
-{
-	size_t	i;
-	
-	if (!arr)
-	{
-		return ;
-	}
-	i = 0;
-	while(arr[i])
-	{
-		free(arr[i])
-		i++;
-	}
-	free(arr);
-}
-
 char	**duplicate_map(char **map)
 {
 	char	**dup;
 	size_t	height;
 	size_t	i;
-	size_t	j;
+	char	*line;
 
 	height = arr_height(map);
 	dup = malloc(sizeof (*map) * (height + 1));
@@ -557,11 +583,17 @@ char	**duplicate_map(char **map)
 	{
 		return (NULL);
 	}
-	dup[height + 1] = NULL;
+	dup[height] = NULL;
 	i = 0;
 	while (map[i])
 	{
-		dup[i] = ft_strdup(map[i]);
+		line = ft_strdup(map[i]);
+		if (!line)
+		{
+			free_char_array(dup);
+			return (NULL);
+		}
+		dup[i] = line;
 		if (!dup[i])
 		{
 			free_char_array(dup);
@@ -585,15 +617,15 @@ int is_valid_by_flood_fill(char **map, int x, int y)
 	{
 		return (0);
 	}
-	if (y >= arr_height(map))
+	if (y >= (int)arr_height(map))
 	{
 		return (0);
 	}
-	if (x >= ft_strlen(map[y]))
+	if (x >= (int)ft_strlen(map[y]))
 	{
 		return (0);
 	}
-	if (map[y][x] == '0')
+	if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
 	{
 		map[y][x] = 'x';
 		if (is_valid_by_flood_fill(map, x - 1, y) == 0 || \
@@ -642,7 +674,10 @@ int	parsed_data_is_valid(t_parsed_data *d)
 	d->ceiling_r < 0 || d->ceiling_r > 255 || \
 	d->ceiling_g < 0 || d->ceiling_g > 255 || \
 	d->ceiling_b < 0 || d->ceiling_b > 255 || \
-	d->map == NULL)
+	d->map == NULL || \
+	d->starting_x < 0 || \
+	d->starting_y < 0 || \
+	d->starting_dir == UNSET)
 	{
 		return (0);
 	}
@@ -650,7 +685,56 @@ int	parsed_data_is_valid(t_parsed_data *d)
 	return (1);
 }
 
-t_parsed_data	*file_to_data(char **file_name)
+void	remove_trailing_new_line_char(char *line)
+{
+	size_t	len;
+
+	if (!line)
+	{
+		return ;
+	}
+	len = ft_strlen(line);
+	if ((len >= 1) && line[len - 1] == '\n')
+	{
+		line[len - 1] = '\0';
+	}
+	return ;
+}
+
+void	set_starting_coordinates_and_direction(t_parsed_data *d)
+{
+	t_coord	start_loc;
+
+	if (!d)
+	{
+		return ;
+	}
+	start_loc = get_start_location(d);
+	d->starting_x = start_loc.x;
+	d->starting_y = start_loc.y;
+	if (!d->map)
+	{
+		return ;
+	}
+	if (d->map[start_loc.y][start_loc.x] == 'N')
+	{
+		d->starting_dir = NORTH;
+	}
+	if (d->map[start_loc.y][start_loc.x] == 'E')
+	{
+		d->starting_dir = EAST;
+	}
+	if (d->map[start_loc.y][start_loc.x] == 'W')
+	{
+		d->starting_dir = WEST;
+	}
+	if (d->map[start_loc.y][start_loc.x] == 'S')
+	{
+		d->starting_dir = SOUTH;
+	}
+}
+
+t_parsed_data	*file_to_data(char *file_name)
 {
 	int						fd;
 	t_parsed_data			*d;
@@ -675,8 +759,10 @@ t_parsed_data	*file_to_data(char **file_name)
 	while (1)
 	{
 		line = get_next_line(fd);
+		remove_trailing_new_line_char(line);
 		if (is_valid_line_texture(line))
 		{
+			// doing texture
 			texture_data = line_to_texture_data(line);
 			free(line);
 			if (can_poke_texture_data(d, texture_data) == 0)
@@ -690,6 +776,7 @@ t_parsed_data	*file_to_data(char **file_name)
 		}
 		else if (is_valid_line_colour(line))
 		{
+			// doing colour
 			colour_data = line_to_colour_data(line);
 			free(line);
 			if (can_poke_colour_data(d, colour_data) == 0)
@@ -700,31 +787,55 @@ t_parsed_data	*file_to_data(char **file_name)
 			}
 			poke_colour_data(d, colour_data);
 		}
+		else if (line[0] == '\0')
+		{
+			// empty line;
+			free(line);
+		}
+		else
+		{
+			// line is something else
+			break ;
+		}
 	}
 	map_buff_height = 0;
 	map_line_i = 0;
 	while (line)
 	{
-		if (is_valid_line_map(line) == 0)
+		if (line[0] == '\0')
 		{
+			// empty line
+			free(line);
+		}
+		if (is_valid_line_map(line) == 1)
+		{
+			// doing map line
+			if (map_line_i + 1 >= map_buff_height)
+			{
+				// doing realloc
+				d->map = ft_realloc(d->map, map_buff_height, map_buff_height + 10);
+				map_buff_height += 10;
+				if (!d->map)
+				{
+					delete_parsed_data(d);
+					return (NULL);
+				}
+			}
+			d->map[map_line_i] = ft_strdup(line);
+			free(line);
+			map_line_i++;
+			d->map[map_line_i] = NULL;
+		}
+		else
+		{
+			// some other line (so error as they should all be map lines by now)
 			free(line);
 			delete_parsed_data(d);
 			close(fd);
 			return (NULL);
 		}
-		if (map_line_i + 1 >= map_buff_height)
-		{
-			d->map = ft_realloc(d->map, map_buff_height, map_buff_height + 10);
-			map_buff_height += 10;
-			if (!d->map)
-			{
-				delete_parsed_data(d);
-				return (NULL);
-			}
-		}
-		d->map[map_line_i] = line;
-		map_line_i++;
 		line = get_next_line(fd);
+		remove_trailing_new_line_char(line);
 	}
 	// clean up
 	close(fd);
@@ -738,19 +849,22 @@ t_parsed_data	*file_to_data(char **file_name)
 		delete_parsed_data(d);
 		return (NULL);
 	}
+	// store starting coord and direction
+	set_starting_coordinates_and_direction(d);
 	// do flood fill check
 	if (is_enclosed_map(d) == 0)
 	{
+		// managed to flood fill but found it wasn't valid
 		delete_parsed_data(d);
 		return (NULL);
 	}
-	// do validity check (all fields filled)
-	if (parsed_data_is_valid == 0)
+	// managed to flood fill successfully (is enclosed)
+	// do final validity check (currently only checks if all fields are filled)
+	if (parsed_data_is_valid(d) == 0)
 	{
 		delete_parsed_data(d);
 		return (NULL);
 	}
-	// pull out NEWS?
 	// return
 	return (d);
 }
@@ -771,6 +885,33 @@ void	debug_print_parsed_data(t_parsed_data *d)
 	printf("east texture : %s\n", d->east_texture);
 	printf("ceiling (r, g, b): (%d, %d, %d)\n", d->ceiling_r, d->ceiling_g, d->ceiling_b);
 	printf("floor (r, g, b)  : (%d, %d, %d)\n", d->floor_r, d->floor_g, d->floor_b);
+	printf("starting location (x, y) (col, row): (%d, %d)\n", d->starting_x, d->starting_y);
+	printf("starting_direction: ");
+	if (d->starting_dir == UNSET)
+	{
+		printf("UNSET");
+	}
+	else if (d->starting_dir == NORTH)
+	{
+		printf("NORTH");
+	}
+	else if (d->starting_dir == EAST)
+	{
+		printf("EAST");
+	}
+	else if (d->starting_dir == WEST)
+	{
+		printf("WEST");
+	}
+	else if (d->starting_dir == SOUTH)
+	{
+		printf("SOUTH");
+	}
+	else
+	{
+		printf("UNKNOWN");
+	}
+	printf("\n");
 	if (!d->map)
 	{
 		printf("map: (null)\n");
@@ -781,108 +922,108 @@ void	debug_print_parsed_data(t_parsed_data *d)
 		i = 0;
 		while (d->map[i])
 		{
-			printf("  line %2d: <%s>\n", i, d->map[i]);
+			printf("  line %2ld: <%s>\n", i, d->map[i]);
 			i++;
 		}
 	}
 }
 
 
-size_t	get_line_width(char *str)
-{
-	size_t	width;
+// size_t	get_line_width(char *str)
+// {
+// 	size_t	width;
 
-	width = ft_strlen(str);
-	while (str[width] == ' ')
-	{
-		width--;
-	}
-	return (width);
-}
+// 	width = ft_strlen(str);
+// 	while (str[width] == ' ')
+// 	{
+// 		width--;
+// 	}
+// 	return (width);
+// }
 
-size_t	get_filewidth(char *str)
-{
-	int		fd;
-	char	*line;
-	size_t	max_width;
-	size_t	line_width;
+// size_t	get_filewidth(char *str)
+// {
+// 	int		fd;
+// 	char	*line;
+// 	size_t	max_width;
+// 	size_t	line_width;
 
-	max_width = 0;
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		return (0);
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-		{
-			break ;
-		}
-		line_width = get_line_width(line);
-		if (line_width > max_width)
-		{
-			max_width = line_width;
-		}
-	}
-	return (max_width);
-}
+// 	max_width = 0;
+// 	fd = open(str, O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		perror("open");
+// 		return (0);
+// 	}
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (line == NULL)
+// 		{
+// 			break ;
+// 		}
+// 		line_width = get_line_width(line);
+// 		if (line_width > max_width)
+// 		{
+// 			max_width = line_width;
+// 		}
+// 	}
+// 	return (max_width);
+// }
 
-void	print_char_table(char **dat)
-{
-	while (*dat)
-	{
-		printf("line is: <%s>\n", *dat);
-		dat++;
-	}
-	printf("done printing block\n");
-}
+// void	print_char_table(char **dat)
+// {
+// 	while (*dat)
+// 	{
+// 		printf("line is: <%s>\n", *dat);
+// 		dat++;
+// 	}
+// 	printf("done printing block\n");
+// }
 
-char	**file_to_block(char *file_name)
-{
-	int		fd;
-	char	**result;
-	size_t	width;
-	char	*line;
-	size_t	i;
+// char	**file_to_block(char *file_name)
+// {
+// 	int		fd;
+// 	char	**result;
+// 	size_t	width;
+// 	char	*line;
+// 	size_t	i;
 
-	result = malloc(sizeof (char *) * get_fileheight(file_name + 1));
-	if (!result)
-	{
-		return (NULL);
-	}
-	width = get_filewidth(file_name);
-	if (width == 0)
-	{
-		// error handle
-	}
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-	{
-		// error handle
-	}
-	i = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-		{
-			break ;
-		}
-		result[i] = malloc(sizeof (char) * width + 1);
-		if (result[i] == NULL)
-		{
-			// clean up and exit
-		}
-		ft_strlcpy(result[i], line, width + 1);
-		memset(&result[i][ft_strlen(line) - 1], ' ', width - ft_strlen(line) + 1);
-		result[i][width] = '\0';
-		free(line);
-		i++;
-	}
-	result[i] = NULL;
-	print_char_table(result);
-	return (result);
-}
+// 	result = malloc(sizeof (char *) * get_fileheight(file_name + 1));
+// 	if (!result)
+// 	{
+// 		return (NULL);
+// 	}
+// 	width = get_filewidth(file_name);
+// 	if (width == 0)
+// 	{
+// 		// error handle
+// 	}
+// 	fd = open(file_name, O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		// error handle
+// 	}
+// 	i = 0;
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 		{
+// 			break ;
+// 		}
+// 		result[i] = malloc(sizeof (char) * width + 1);
+// 		if (result[i] == NULL)
+// 		{
+// 			// clean up and exit
+// 		}
+// 		ft_strlcpy(result[i], line, width + 1);
+// 		memset(&result[i][ft_strlen(line) - 1], ' ', width - ft_strlen(line) + 1);
+// 		result[i][width] = '\0';
+// 		free(line);
+// 		i++;
+// 	}
+// 	result[i] = NULL;
+// 	print_char_table(result);
+// 	return (result);
+// }

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 14:40:44 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:16:50 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,15 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
     new_bound->end.x = e_x;
     new_bound->end.y = e_y;
 	new_bound->direction = UNSET;
+	new_bound->texture = DEFAULT;
 	new_bound->door_state = 0;
 	new_bound->img_state = 0;
-	if (wall_type > 0)
+	
+	if (wall_type == 2)
+	{
+		new_bound->texture = PILLAR;
+	}	
+	if (wall_type == 1)
 	{
 		new_bound->direction = DOOR;
 		new_bound->is_active = 1;
@@ -82,9 +88,9 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 			new_bound->direction = SOUTH;
 	}
 	temp = game->walls[game->num_walls];
-    	game->walls[game->num_walls] = new_bound;
+    game->walls[game->num_walls] = new_bound;
 	free(temp);
-    	game->num_walls++;
+    game->num_walls++;
 }
 
 void c3d_remove_bound(t_game *game, int bound_index) 
@@ -101,7 +107,7 @@ void c3d_remove_bound(t_game *game, int bound_index)
 
 int	is_space_char(char c)
 {
-	if (c == '0' || c == '2' || c == '3' )
+	if (c == '0' || c == '2' || c == '3' || c == 'x')
 		return (1);
 	return (0);
 }
@@ -186,6 +192,38 @@ int	c3d_set_wall_bounds(t_game *game)
 						e_y = (i + 1) * m;
 						add_bound(game, s_x, s_y, e_x, e_y, 1);
 					}
+			}
+			else if (game->raw[i][j] == 'X')
+			{
+				int os = 25;
+				//top face.
+				s_x = ((j + 1) * m) - os ;
+				s_y = ((i) * m) + os;
+				e_x = ((j) * m) + os;
+				e_y = ((i) * m) + os;
+				add_bound(game, s_x, s_y, e_x, e_y, 2);
+
+				//left face
+				s_x = ((j) * m) + os;
+				s_y = ((i) * m) + os;
+				e_x = ((j) * m) + os;
+				e_y = ((i + 1) * m) - os;
+				add_bound(game, s_x, s_y, e_x, e_y, 2);
+
+				//bot face.
+				s_x = ((j) * m) + os;
+				s_y = ((i + 1) * m) - os;
+				e_x = ((j + 1) * m) - os;
+				e_y = ((i + 1) * m) - os;
+				add_bound(game, s_x, s_y, e_x, e_y, 2);
+
+				//right face
+				s_x = ((j + 1) * m) - os;
+				s_y = ((i + 1) * m) - os;
+				e_x = ((j + 1) * m) - os;
+				e_y = ((i) * m) + os;
+				add_bound(game, s_x, s_y, e_x, e_y, 2);
+
 			}			
 			j++;
 		}	

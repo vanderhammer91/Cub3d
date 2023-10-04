@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 20:40:49 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:27:41 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@ enum e_wall_type {
 	UNSET
 };
 
+enum e_wall_texture {
+	PILLAR,
+	DEFAULT
+};
+
 typedef struct s_bound {
     t_point 			start;
     t_point 			end;
 	enum e_wall_type	direction;
+	enum e_wall_texture	texture;
 	int					index;
 	int					is_active;
 	int					is_vert;
@@ -95,6 +101,7 @@ typedef struct s_game
 	void	*door_texture;
 	void	*gun_texture;
 	void	*title_texture;
+	void	*pillar_texture;
 	void	*e_texture;
 	int		game_state;
 	int		door_state;

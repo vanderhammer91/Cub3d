@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 20:35:24 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:27:11 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	c3d_initialize_textures(t_game *game)
 			"images/e_msg.xpm", &width, &height);
 	game->title_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/title_screen.xpm", &width, &height);
+	game->pillar_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/pillar.xpm", &width, &height);
 }
 
 

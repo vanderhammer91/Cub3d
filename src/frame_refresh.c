@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 21:01:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:03:09 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,13 @@ void	c3d_draw_overlay(t_game *game)
 			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 100, 900);
 			if (game->keys.E_KEY_DOWN == 1)
 			{
-				if (game->walls[game->closest_wall_index]->door_state == 0)
+			//	printf("door state was: %d\n", game->walls[game->closest_wall_index]->door_state);
+						if (game->walls[game->closest_wall_index]->door_state == 0)
 					game->walls[game->closest_wall_index]->door_state = 1;
 				else if (game->walls[game->closest_wall_index]->door_state == 10)
 					game->walls[game->closest_wall_index]->door_state = 11;
+
+			//	printf("door state is: %d\n", game->walls[game->closest_wall_index]->door_state);
 			}
 		}
 	}
@@ -290,6 +293,9 @@ void	frame_refresh_title(t_game *game)
 
 int	frame_refresh_main(t_game *game)
 {
+	game->frame++;
+	if (game->frame >= 8)
+		game->frame = 0;
 	if (game->frame % 2 == 0)
 	{
 		c3d_check_walls_call(game);

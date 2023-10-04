@@ -208,33 +208,7 @@ void	check_walls_call(t_game *game)
 		i++;
 	}
 }
-/*
-void draw_gun_state(t_game *game, int gun_state)
-{
 
-    // Create a new image for the sprite
- 	int     bpp;
-    int     size_line;
-    int     endian;
-	int		sprite_y = gun_state * 523;	
-	(void)sprite_y;
-   int *data = (int*)mlx_get_data_addr(game->img, &bpp, &size_line, &endian);
-   (void)data;
-   // int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
-//	(void)texture_data;
-	for (int y = 0; y < 523; y++)
-	{
-    //	int texture_y = sprite_y + y;
-    	for (int x = 0; x < 1000; x++)
-    	{
-    	   // data[y * 1000 + x] = texture_data[texture_y * 1000 + x];
-    	}
-	}
-    //int y_offset = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
-    //mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 400, 480 + y_offset);
-   // mlx_destroy_image(game->mlx, game->img);
-}
-*/
 void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
 {
     int sprite_y = gun_state * 523;  
@@ -298,6 +272,5 @@ int	frame_refresh(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 	c3d_draw_overlay(game);
 	mlx_destroy_image(game->mlx, game->img);
-
 	return (0);
 }

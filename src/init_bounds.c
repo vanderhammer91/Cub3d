@@ -108,7 +108,6 @@ int	is_space_char(char c)
 
 int	c3d_set_wall_bounds(t_game *game)
 {
-
 	int	i;
 	int	j;
 	int	m = 64;

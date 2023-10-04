@@ -6,12 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 15:43:36 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:52:08 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "textures.h"
 
 void	c3d_initialize_textures(t_game *game)
 {

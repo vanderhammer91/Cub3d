@@ -2,7 +2,7 @@
 #	|    VARIABLES    |
 #	o-----------------o
 
-NAME = cub3d
+NAME = cub3D
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 LFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit

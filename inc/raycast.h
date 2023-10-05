@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:12:21 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/27 14:25:21 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:11:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libraries.h"
 # include "draw.h"
-# include "init_bounds.h"
+# include "initialize.h"
 
  void	c3d_player_look(t_game *game);
 float	get_raylength(t_ray ray, t_point end);

@@ -27,8 +27,8 @@ SRC_FILES = draw.c			\
 			raw_utils.c 	\
 			gen_utils.c		\
 			key_events.c	\
-			init.c			\
-			init_bounds.c	\
+			initialize.c	\
+			initialize2.c	\
 			init_player.c	\
 			box_collider.c	\
 			parse.c 		\

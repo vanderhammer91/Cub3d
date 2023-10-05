@@ -6,13 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 20:43:04 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:20:10 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_events.h"
-
-extern int prev_x;
 
 int	key_press(int keycode, t_game *game)
 {	

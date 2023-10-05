@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:41:56 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 17:22:19 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:07:59 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "libraries.h"
-# include "init_bounds.h"
+# include "initialize.h"
 # include "key_events.h"
 # include "gen_utils.h"
 # include "raycast.h"

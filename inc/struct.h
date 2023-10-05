@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 18:55:46 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:31:25 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,21 @@ typedef struct s_coord
     int y;
 }   t_coord;
 
+typedef	struct s_texture_lib
+{
+	void	*north_texture;
+	void	*east_texture;
+	void	*south_texture;
+	void	*west_texture;
+
+	void	*door_texture;
+	void	*e_texture;
+	void	*exit_msg_texture;
+	void	*exit_texture;
+	void	*gun_texture;
+	void	*pillar_texture;
+	void	*title_texture;
+}	t_texture_lib;
 
 
 typedef struct s_game
@@ -128,43 +143,36 @@ typedef struct s_game
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
+
+	char	**raw;
+	char	*door_path;
+	char	*door_frame[22];
+
 	int		w_height;
 	int		w_width;
 	int		prev_x;
 	int		frame;
-	char	**raw;
-	void	*north_texture;
-	void	*east_texture;
-	void	*south_texture;
-	void	*west_texture;
-	void	*door_texture;
-	void	*gun_texture;
-	void	*title_texture;
-	void	*pillar_texture;
-	void	*exit_texture;
-	void	*exit_msg_texture;
-	void	*e_texture;
 	int		msg_width;
 	int		msg_height;
 	int		game_state;
 	int		door_state;
 	int		true_state;
 	int		splash_state;
-	char	*door_path;
-	char	*door_frame[22];
-	enum	e_wall_type	closest_wall_dir;
 	int		closest_wall_index;
-	float	pt_dist;
 	int		close_index;
-	t_bound	*closest_wall;
 	int		skycolour;
 	int		floorcolour;
 	int		gun_state;
+	int		num_walls;
+
+	float	pt_dist;
+	enum	e_wall_type	closest_wall_dir;
+	t_bound	*closest_wall;
 	t_bound	**walls;
-	int num_walls;
 	t_parsed_data	*parsed_data;
-	t_player player;
-	t_keys keys;
+	t_texture_lib	t_lib;
+	t_player		player;
+	t_keys			keys;
 }	t_game;
 
 

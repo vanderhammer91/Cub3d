@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:16:43 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:32:42 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ void	c3d_initialize_textures(t_game *game, t_parsed_data *d)
     int	width;
 	int	height;
 
-	game->north_texture = mlx_xpm_file_to_image(game->mlx,
+	game->t_lib.north_texture = mlx_xpm_file_to_image(game->mlx,
 			d->north_texture, &width, &height);
-	game->east_texture = mlx_xpm_file_to_image(game->mlx,
+	game->t_lib.east_texture = mlx_xpm_file_to_image(game->mlx,
 			d->east_texture, &width, &height);
-  	game->south_texture = mlx_xpm_file_to_image(game->mlx,
+  	game->t_lib.south_texture = mlx_xpm_file_to_image(game->mlx,
 			d->south_texture, &width, &height);
-    game->west_texture = mlx_xpm_file_to_image(game->mlx,
+    game->t_lib.west_texture = mlx_xpm_file_to_image(game->mlx,
 			d->west_texture, &width, &height);
-	if (!game->north_texture
-			|| !game->east_texture
-			|| !game->south_texture
-			|| !game->west_texture)
+	if (!game->t_lib.north_texture
+			|| !game->t_lib.east_texture
+			|| !game->t_lib.south_texture
+			|| !game->t_lib.west_texture)
 	{
 		ft_start_exit("Error: Texture file not found\n", game);
 	}
@@ -88,18 +88,18 @@ void	c3d_initialize_textures2(t_game *game)
     int	width;
 	int	height;
 
-	game->door_texture = mlx_xpm_file_to_image(game->mlx,
+	game->t_lib.door_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/door/door_128.xpm", &width, &height);
-    game->gun_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/gun_sprite.xpm", &width, &height);
-	game->e_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/e_msg.xpm", &width, &height);
-	game->title_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/title_screen.xpm", &width, &height);
-	game->pillar_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/pillar/pillar3.xpm", &width, &height);
-	game->exit_texture = mlx_xpm_file_to_image(game->mlx,
+	game->t_lib.e_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/e_msg.xpm", &width, &height);	
+	game->t_lib.exit_msg_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/you_win.xpm", &game->msg_width, &game->msg_height);	
+	game->t_lib.exit_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/exit.xpm", &width, &height);
-	game->exit_msg_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/you_win.xpm", &game->msg_width, &game->msg_height);		
+	game->t_lib.gun_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/gun_sprite.xpm", &width, &height);
+	game->t_lib.pillar_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/pillar/pillar3.xpm", &width, &height);
+	game->t_lib.title_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/title_screen.xpm", &width, &height);
 }

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 20:46:35 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:35:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,10 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	while (y < raylength)
     	{
 			
-    	  	int pixel_colour = retrieve_colour(game->south_texture, tx, ty);
+    	  	int pixel_colour = retrieve_colour(game->t_lib.south_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
 			{
-				pixel_colour = retrieve_colour(game->pillar_texture, tx, ty);
+				pixel_colour = retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			}
 			pixel_colour = shade_pixel(pixel_colour, raylength);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
@@ -146,10 +146,10 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 		tx = (int)(ray_x) % 64;
     	while (y < raylength)
     	{
-    	 	int pixel_colour = retrieve_colour(game->north_texture, tx, ty);
+    	 	int pixel_colour = retrieve_colour(game->t_lib.north_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
 			{
-				pixel_colour = retrieve_colour(game->pillar_texture, tx, ty);
+				pixel_colour = retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			}
 			pixel_colour = shade_pixel(pixel_colour, raylength);
     	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
@@ -165,9 +165,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 		tx = (int)(ray_y) % 64;
     	while (y < raylength)
     	{
-    	  	int pixel_colour = retrieve_colour(game->east_texture, tx, ty);
+    	  	int pixel_colour = retrieve_colour(game->t_lib.east_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour= retrieve_colour(game->pillar_texture, tx, ty);
+				pixel_colour= retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
@@ -183,9 +183,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 		tx = 63 - tx;
     	while (y < raylength)
     	{
-    	 	int pixel_colour = retrieve_colour(game->west_texture, tx, ty);
+    	 	int pixel_colour = retrieve_colour(game->t_lib.west_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour= retrieve_colour(game->pillar_texture, tx, ty);
+				pixel_colour= retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
@@ -204,7 +204,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     		tx = (int)(ray_y) % 128;
     	while (y < raylength)
     	{
-    	 	int pixel_colour = retrieve_colour(game->door_texture, tx * 2,
+    	 	int pixel_colour = retrieve_colour(game->t_lib.door_texture, tx * 2,
 					ty + img_state * 128);
 			int alpha = (pixel_colour >> 24) & 0xFF; 
             if (!alpha)
@@ -220,7 +220,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	else if (closest_wall->direction == EXIT)
 	{
 		int img_state = game->walls[game->closest_wall_index]->img_state;
-		if (!game->exit_texture)
+		if (!game->t_lib.exit_texture)
 			printf("NO EXIT TEXTURE!\n");
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
@@ -231,7 +231,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     		tx = (int)(ray_y) % 128;
     	while (y < raylength)
     	{
-    	 	int pixel_colour = retrieve_colour(game->exit_texture, tx * 2,
+    	 	int pixel_colour = retrieve_colour(game->t_lib.exit_texture, tx * 2,
 					ty + img_state * 128);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;

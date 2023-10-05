@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 20:44:18 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:33:53 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	c3d_draw_overlay(t_game *game)
 	{	
 		if(game->closest_wall_dir == DOOR)
 		{
-			mlx_put_image_to_window(game->mlx, game->mlx_win, game->e_texture, 100, 900);
+			mlx_put_image_to_window(game->mlx, game->mlx_win, game->t_lib.e_texture, 100, 900);
 			if (game->keys.E_KEY_DOWN == 1)
 			{
 			//	printf("door state was: %d\n", game->walls[game->closest_wall_index]->door_state);
@@ -227,7 +227,7 @@ void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
     int endian;
 	int	colour;
 	int alpha;
-    int *texture_data = (int*)mlx_get_data_addr(game->gun_texture, &bpp, &size_line, &endian);
+    int *texture_data = (int*)mlx_get_data_addr(game->t_lib.gun_texture, &bpp, &size_line, &endian);
 	int m_off = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
 
     for (int y = 0; y < 523; y++)
@@ -282,7 +282,7 @@ void	frame_refresh_title(t_game *game)
     int size_line;
     int endian;
 	int	colour;
-    int *texture_data = (int*)mlx_get_data_addr(game->title_texture, &bpp, &size_line, &endian);
+    int *texture_data = (int*)mlx_get_data_addr(game->t_lib.title_texture, &bpp, &size_line, &endian);
     
 	for (int y = 0; y < W_HEIGHT; y++)
     {
@@ -303,7 +303,7 @@ void	frame_refresh_exit(t_game *game)
 		ft_start_exit("YOU WIN!\n", game);
 	mlx_clear_window(game->mlx, game->mlx_win);
 	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->exit_msg_texture, 
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->t_lib.exit_msg_texture, 
 			(W_WIDTH / 2) - (game->msg_width / 2), (W_HEIGHT / 2) - (game->msg_height / 2));
 	mlx_destroy_image(game->mlx, game->img);
 }

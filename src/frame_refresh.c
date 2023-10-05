@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 17:20:12 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:39:08 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ void	c3d_check_gun_state(t_game *game)
 void	frame_refresh_title(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->mlx_win);
-	game->img = mlx_new_image(game->mlx, 1200, 1000);	
+	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);	
 	if (game->keys.ENTER_KEY_DOWN)
 		game->game_state = 1;
 	game->frame++;
@@ -277,18 +277,18 @@ void	frame_refresh_title(t_game *game)
 			game->splash_state = 0;
 		}		
 	}			
-	int sprite_y = game->splash_state * 1000;  
+	int sprite_y = game->splash_state * W_HEIGHT;  
     int bpp;
     int size_line;
     int endian;
 	int	colour;
     int *texture_data = (int*)mlx_get_data_addr(game->title_texture, &bpp, &size_line, &endian);
     
-	for (int y = 0; y < 1000; y++)
+	for (int y = 0; y < W_HEIGHT; y++)
     {
-        for (int x = 0; x < 1200; x++)
+        for (int x = 0; x < W_WIDTH; x++)
         {
-            colour = texture_data[((y + sprite_y) * 1200) + x];
+          colour = texture_data[((y + sprite_y) * W_WIDTH) + x];
 			img_pixel_put(game->img, x, y, colour);            	
         }
     }		
@@ -302,9 +302,9 @@ void	frame_refresh_exit(t_game *game)
 	if (game->frame >= 80)
 		ft_start_exit("YOU WIN!\n", game);
 	mlx_clear_window(game->mlx, game->mlx_win);
-	game->img = mlx_new_image(game->mlx, 1200, 1000);
+	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->exit_msg_texture, 
-			600 - (game->msg_width / 2), 500 - (game->msg_height / 2));
+			(W_WIDTH / 2) - (game->msg_width / 2), (W_HEIGHT / 2) - (game->msg_height / 2));
 	mlx_destroy_image(game->mlx, game->img);
 }
 
@@ -320,7 +320,7 @@ int	frame_refresh_main(t_game *game)
 		c3d_check_gun_state(game);
 	}
 	mlx_clear_window(game->mlx, game->mlx_win);
-	game->img = mlx_new_image(game->mlx, 1400, 1200);	
+	game->img = mlx_new_image(game->mlx, 1400, 1000);	
 	c3d_update_player_pos(game);
 
 	//sky and floor colour respectively parse this in.

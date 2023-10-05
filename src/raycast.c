@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:35:34 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:27:02 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,24 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
+	else if (closest_wall->direction == AD)
+	{
+		int img_state = game->walls[game->closest_wall_index]->img_state;
+		start_y = y_offset - raylength * 0.5;
+    	ty = 0;
+    	ty_step = 64.0 / (float)raylength;
+		tx = (int)(ray_x) % 128;
+    	while (y < raylength)
+    	{
+    	  	int pixel_colour = retrieve_colour(game->t_lib.ad_texture, tx * 2,
+					ty + img_state * 64);
+			pixel_colour = shade_pixel(pixel_colour, raylength);
+			if (pixel_colour != 0x000000)
+				rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	    ty += ty_step;
+    	    y++;
+    	}
+	}
  	else if (closest_wall->direction == DOOR)
 	{
 		int img_state = game->walls[game->closest_wall_index]->img_state;
@@ -215,13 +233,10 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    ty += ty_step;
     	    y++;
     	}
-	}
-	
+	}	
 	else if (closest_wall->direction == EXIT)
 	{
 		int img_state = game->walls[game->closest_wall_index]->img_state;
-		if (!game->t_lib.exit_texture)
-			printf("NO EXIT TEXTURE!\n");
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 128.0 / (float)raylength;
@@ -307,7 +322,7 @@ void c3d_player_look(t_game *game) {
 			second_pt_dist = 3000;
         if (has_collided)
 		{
-			if (closest_wall->direction == DOOR)
+			if (closest_wall->direction == DOOR || closest_wall->direction == AD)
 				c3d_draw_projection(game, second_pt_dist, i, second_closest.x, second_closest.y, 
 				second_closest_wall);
 			c3d_draw_projection(game, pt_dist, i, closest.x, closest.y, closest_wall);

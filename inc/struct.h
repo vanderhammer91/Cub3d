@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:31:25 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:20:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ enum e_wall_type {
 	SOUTH,
 	DOOR,
 	EXIT,
+	AD,
 	UNSET
 };
 
@@ -128,6 +129,7 @@ typedef	struct s_texture_lib
 	void	*south_texture;
 	void	*west_texture;
 
+	void	*ad_texture;
 	void	*door_texture;
 	void	*e_texture;
 	void	*exit_msg_texture;
@@ -156,6 +158,7 @@ typedef struct s_game
 	int		msg_height;
 	int		game_state;
 	int		door_state;
+	int		ad_state;
 	int		true_state;
 	int		splash_state;
 	int		closest_wall_index;

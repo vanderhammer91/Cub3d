@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:33:53 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:34:06 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,13 @@ void	check_walls_2(t_game *game, int i)
 		game->walls[i]->is_active = 1;
 }
 
+void	check_walls_3(t_game *game, int i)
+{
+	game->walls[i]->img_state++;
+	if 	(game->walls[i]->img_state > 60)
+		game->walls[i]->img_state = 0;
+}
+
 void	c3d_check_walls_call(t_game *game)
 {
 	int	i;
@@ -214,6 +221,10 @@ void	c3d_check_walls_call(t_game *game)
 		if (game->walls[i]->direction == DOOR)
 		{	
 			check_walls_2(game, i);
+		}
+		else if(game->walls[i]->direction == AD)
+		{
+			check_walls_3(game, i);
 		}
 		i++;
 	}
@@ -316,6 +327,7 @@ int	frame_refresh_main(t_game *game)
 		game->frame = 0;
 	if (game->frame % 2 == 0)
 	{
+		game->ad_state++;
 		c3d_check_walls_call(game);
 		c3d_check_gun_state(game);
 	}

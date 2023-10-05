@@ -381,7 +381,7 @@ int	is_valid_line_map(char *line)
 	while (line[i])
 	{
 		if (line[i] == '0' || line[i] == '1' || line[i] == ' ' || \
-			line[i] == 'X' || line[i] == '2' || line[i] == '4' || \
+			line[i] == 'X' || line[i] == '2' || line[i] == '4' || line[i] == '5' || \
 		line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		{
 			// pass;

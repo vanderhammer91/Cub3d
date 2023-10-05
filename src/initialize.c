@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:32:42 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:14:05 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	c3d_initialize_key_states(t_game *game)
 	game->keys.SP_KEY_DOWN = 0;
 	game->keys.L_ROT_KEY_DOWN = 0;
 	game->keys.R_ROT_KEY_DOWN = 0;
+	game->keys.ENTER_KEY_DOWN = 0;
 }	
 
 t_game *c3d_initialize_game(t_parsed_data *d)
@@ -47,6 +48,7 @@ t_game *c3d_initialize_game(t_parsed_data *d)
 	game->game_state = 0;
 	game->door_state = 0;
 	game->true_state = 0;
+	game->ad_state = 0;
 	game->raw = d->map;
     game->num_walls = 0;
 	game->player.rb = 0;
@@ -89,7 +91,7 @@ void	c3d_initialize_textures2(t_game *game)
 	int	height;
 
 	game->t_lib.door_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/door/door_128.xpm", &width, &height);
+			"images/door_128.xpm", &width, &height);
 	game->t_lib.e_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/e_msg.xpm", &width, &height);	
 	game->t_lib.exit_msg_texture = mlx_xpm_file_to_image(game->mlx,
@@ -99,7 +101,9 @@ void	c3d_initialize_textures2(t_game *game)
 	game->t_lib.gun_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/gun_sprite.xpm", &width, &height);
 	game->t_lib.pillar_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/pillar/pillar3.xpm", &width, &height);
+			"images/pillar/pillar1.xpm", &width, &height);
 	game->t_lib.title_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/title_screen.xpm", &width, &height);
+	game->t_lib.ad_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/ad_64.xpm", &width, &height);
 }

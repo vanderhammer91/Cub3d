@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:13:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:38:01 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	c3d_free_bounds(t_game *game)
 void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wall_type) 
 {
 	t_bound *new_bound = malloc(sizeof(t_bound));
-	t_bound *temp;
+//	t_bound *temp;
     if (new_bound == NULL)
 	{
 		printf("add bound: malloc failed!\n");
@@ -66,7 +66,7 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 	if (wall_type == 2)
 	{
 		new_bound->texture = PILLAR;
-	}	
+	}
 	if (wall_type == 1)
 	{
 		new_bound->direction = DOOR;
@@ -84,6 +84,10 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 		else
 			new_bound->is_vert = 0;
 	}
+	else if (wall_type == 5)
+	{
+		new_bound->direction = AD;
+	}	
 	else if (new_bound->end.y > new_bound->start.y)
 		new_bound->direction = EAST;
 	else if (new_bound->end.y < new_bound->start.y)
@@ -95,9 +99,9 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 		else
 			new_bound->direction = SOUTH;
 	}
-	temp = game->walls[game->num_walls];
+//	temp = game->walls[game->num_walls];
     game->walls[game->num_walls] = new_bound;
-	free(temp);
+//	free(temp);
     game->num_walls++;
 }
 
@@ -115,7 +119,7 @@ void c3d_remove_bound(t_game *game, int bound_index)
 
 int	is_space_char(char c)
 {
-	if (c == '0' || c == '2' || c == '3' || c == 'X' || c == '4')
+	if (c == '0' || c == '2' || c == '3' || c == 'X' || c == '4' || c == '5')
 		return (1);
 	return (0);
 }
@@ -178,9 +182,7 @@ int	c3d_set_wall_bounds(t_game *game)
 					e_x = j * m;
 					e_y = (i + 1) * m;
 					add_bound(game, s_x, s_y, e_x, e_y, 0);
-				}
-				
-				
+				}	
 			}
 			else if (game->raw[i][j] == '2' || game->raw[i][j] == '4')
 			{
@@ -206,6 +208,14 @@ int	c3d_set_wall_bounds(t_game *game)
 						else
 							add_bound(game, s_x, s_y, e_x, e_y, 3);
 					}
+			}
+			else if (game->raw[i][j] == '5')
+			{
+				s_x = (j - 2) * m;
+				s_y = (i + 0.1) * m;
+				e_x = (j + 1) * m;
+				e_y = (i + 0.1) * m;
+				add_bound(game, s_x, s_y, e_x, e_y, 5);
 			}
 			else if (game->raw[i][j] == 'X')
 			{

@@ -120,6 +120,10 @@ int	is_valid_line_texture(char *line)
 	size_t	i;
 	size_t	path_length;
 
+	if (!line)
+	{
+		return (0);
+	}
 	i = 0;
 
 	while (line[i] == ' ')
@@ -242,6 +246,10 @@ int	is_valid_line_colour(char *line)
 {
 	char	*trimmed_line;
 
+	if (!line)
+	{
+		return (0);
+	}
 	trimmed_line = ft_strtrim(line, " ");
 	if (!trimmed_line)
 	{
@@ -377,6 +385,10 @@ int	is_valid_line_map(char *line)
 {
 	size_t	i;
 
+	if (!line)
+	{
+		return (0);
+	}
 	i = 0;
 	while (line[i])
 	{
@@ -388,8 +400,6 @@ int	is_valid_line_map(char *line)
 		}
 		else
 		{
-			printf("line is <%s>\n", line);
-			printf("not a valid map because char at %ld is <%c>\n", i, line[i]);
 			return (0);
 		}
 		i++;
@@ -787,7 +797,7 @@ t_parsed_data	*file_to_data(char *file_name)
 			}
 			poke_colour_data(d, colour_data);
 		}
-		else if (line[0] == '\0')
+		else if (line && line[0] == '\0')
 		{
 			// empty line;
 			free(line);
@@ -807,7 +817,7 @@ t_parsed_data	*file_to_data(char *file_name)
 			// empty line
 			free(line);
 		}
-		if (is_valid_line_map(line) == 1)
+		else if (is_valid_line_map(line) == 1)
 		{
 			// doing map line
 			if (map_line_i + 1 >= map_buff_height)
@@ -840,6 +850,8 @@ t_parsed_data	*file_to_data(char *file_name)
 	// clean up
 	close(fd);
 	// replace map spaces with zeros
+
+
 	replace_map_spaces_with_zeros(d);
 	// do map line extension
 	extend_map_lines_to_rectangle(d);

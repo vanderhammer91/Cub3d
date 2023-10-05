@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 17:37:58 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:35:56 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,24 @@ void	c3d_collider_check_all(t_game *game)
 		}
 		if (has_set)
 		{
-			if (i == 0)
+			if (this_ray.rot == 0)
 				game->player.rb = 1;
-			else if (i == 1)
+			else if (this_ray.rot == 90)
 				game->player.ub = 1;
-			else if (i == 2)
+			else if (this_ray.rot == 180)
 				game->player.lb = 1;
-			else if (i == 3)
+			else if (this_ray.rot == 270)
 				game->player.db = 1;
 		}
 		else
-		{
-			if (i == 0)
+		{	
+			if (this_ray.rot == 0)
 				game->player.rb = 0;
-			else if (i == 1)
+			else if (this_ray.rot == 90)
 				game->player.ub = 0;
-			else if (i == 2)
+			else if (this_ray.rot == 180)
 				game->player.lb = 0;
-			else if (i == 3)
+			else if (this_ray.rot == 270)
 				game->player.db = 0;
 		}
 		i++;

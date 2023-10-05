@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/04 18:45:31 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:03:55 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 		else
 			new_bound->is_vert = 0;
 	}
+	else if (wall_type == 3)
+	{
+		new_bound->direction = EXIT;
+		if (s_y != e_y)
+			new_bound->is_vert = 1;
+		else
+			new_bound->is_vert = 0;
+	}
 	else if (new_bound->end.y > new_bound->start.y)
 		new_bound->direction = EAST;
 	else if (new_bound->end.y < new_bound->start.y)
@@ -107,7 +115,7 @@ void c3d_remove_bound(t_game *game, int bound_index)
 
 int	is_space_char(char c)
 {
-	if (c == '0' || c == '2' || c == '3' || c == 'X')
+	if (c == '0' || c == '2' || c == '3' || c == 'X' || c == '4')
 		return (1);
 	return (0);
 }
@@ -174,7 +182,7 @@ int	c3d_set_wall_bounds(t_game *game)
 				
 				
 			}
-			else if (game->raw[i][j] == '2')
+			else if (game->raw[i][j] == '2' || game->raw[i][j] == '4')
 			{
 					if (game->raw[i][j-1] == '1' && game->raw[i][j + 1] == '1')
 					{
@@ -182,15 +190,21 @@ int	c3d_set_wall_bounds(t_game *game)
 						s_y = (i + 0.5) * m;
 						e_x = (j + 1) * m;
 						e_y = (i + 0.5) * m;
-						add_bound(game, s_x, s_y, e_x, e_y, 1);
+						if (game->raw[i][j] == '2')
+							add_bound(game, s_x, s_y, e_x, e_y, 1);
+						else
+							add_bound(game, s_x, s_y, e_x, e_y, 3);
 					}
-					if (game->raw[i - 1][j] == '1' && game->raw[i + 1][j] == '1')
+					else if (game->raw[i - 1][j] == '1' && game->raw[i + 1][j] == '1')
 					{
 						s_x = (j + 0.5) * m;
 						s_y = i * m;
 						e_x = (j + 0.5) * m;
 						e_y = (i + 1) * m;
-						add_bound(game, s_x, s_y, e_x, e_y, 1);
+						if (game->raw[i][j] == '2')
+							add_bound(game, s_x, s_y, e_x, e_y, 1);
+						else
+							add_bound(game, s_x, s_y, e_x, e_y, 3);
 					}
 			}
 			else if (game->raw[i][j] == 'X')

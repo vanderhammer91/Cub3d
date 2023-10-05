@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/04 18:37:18 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:16:15 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ void	c3d_initialize_textures(t_game *game)
 	game->title_texture = mlx_xpm_file_to_image(game->mlx,
 			"images/title_screen.xpm", &width, &height);
 	game->pillar_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/pillar.xpm", &width, &height);
+			"images/pillar/pillar3.xpm", &width, &height);
+	game->exit_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/exit.xpm", &width, &height);
+	game->exit_msg_texture = mlx_xpm_file_to_image(game->mlx,
+			"images/you_win.xpm", &game->msg_width, &game->msg_height);
+	if (!game->exit_msg_texture)
+		printf("bazinga!\n");
 }
 
 

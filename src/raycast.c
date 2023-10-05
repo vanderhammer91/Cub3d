@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/04 18:54:43 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:12:44 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,35 @@ int retrieve_colour(void *img, int x, int y)
     return (colour);
 }
 
+int shade_pixel(int pixel_colour, float raylength)
+{
+    // Calculate the shading factor based on the ray length
+    float shading = 0.005 * raylength; // Adjusted shading factor
+
+    // Ensure that the shading factor is within the range [0, 1]
+   	if (shading < 0) shading = 0;
+    if (shading > 1) shading = 1;
+
+    // Extract the RGB components from the pixel color
+    int red = (pixel_colour >> 16) & 0xFF;
+    int green = (pixel_colour >> 8) & 0xFF;
+    int blue = pixel_colour & 0xFF;
+
+    // Apply the shading factor to each RGB component
+    red = (int)(red * shading);
+    green = (int)(green * shading);
+    blue = (int)(blue * shading);
+
+    // Combine the shaded RGB components back into a single integer
+    int shaded_colour = (red << 16) | (green << 8) | blue;
+
+    // Return the shaded color
+    return shaded_colour;
+}
+
+
+
+
 void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ray_y, t_bound *closest_wall)
 {
 //	int 	colour;
@@ -85,7 +114,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	int		x_offset = 0;
 	int 	y_offset = 500;
 	int		cw = 5;
-	int		cpolo = 0xb0b7c2;
+//	int		cpolo = 0xb0b7c2;
 
 	y = 0;
  	if (closest_wall->direction == SOUTH)
@@ -97,9 +126,13 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 		tx = 63 - tx;
     	while (y < raylength)
     	{
+			
     	  	int pixel_colour = retrieve_colour(game->south_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour = cpolo;
+			{
+				pixel_colour = retrieve_colour(game->pillar_texture, tx, ty);
+			}
+			pixel_colour = shade_pixel(pixel_colour, raylength);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
@@ -115,7 +148,10 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	{
     	 	int pixel_colour = retrieve_colour(game->north_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour = cpolo;
+			{
+				pixel_colour = retrieve_colour(game->pillar_texture, tx, ty);
+			}
+			pixel_colour = shade_pixel(pixel_colour, raylength);
     	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
@@ -131,7 +167,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	{
     	  	int pixel_colour = retrieve_colour(game->east_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour = cpolo + 50;		
+				pixel_colour= retrieve_colour(game->pillar_texture, tx, ty);
+			pixel_colour = shade_pixel(pixel_colour, raylength);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
@@ -148,7 +185,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	{
     	 	int pixel_colour = retrieve_colour(game->west_texture, tx, ty);
 			if (closest_wall->texture == PILLAR)
-				pixel_colour = cpolo + 50;
+				pixel_colour= retrieve_colour(game->pillar_texture, tx, ty);
+			pixel_colour = shade_pixel(pixel_colour, raylength);
 			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
@@ -170,11 +208,38 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 					ty + img_state * 128);
 			int alpha = (pixel_colour >> 24) & 0xFF; 
             if (!alpha)
+			{
+				pixel_colour = shade_pixel(pixel_colour, raylength);
 				rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			}
     	    ty += ty_step;
     	    y++;
     	}
 	}
+	
+	else if (closest_wall->direction == EXIT)
+	{
+		int img_state = game->walls[game->closest_wall_index]->img_state;
+		if (!game->exit_texture)
+			printf("NO EXIT TEXTURE!\n");
+		start_y = y_offset - raylength * 0.5;
+    	ty = 0;
+    	ty_step = 128.0 / (float)raylength;
+		if (closest_wall->is_vert == 0)
+    		tx = (int)(ray_x) % 128;
+		else
+    		tx = (int)(ray_y) % 128;
+    	while (y < raylength)
+    	{
+    	 	int pixel_colour = retrieve_colour(game->exit_texture, tx * 2,
+					ty + img_state * 128);
+			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+    	    ty += ty_step;
+    	    y++;
+    	}
+
+	}
+
 }
 
 void c3d_player_look(t_game *game) {

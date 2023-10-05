@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/04 16:27:41 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:16:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ enum e_wall_type {
 	NORTH,
 	SOUTH,
 	DOOR,
+	EXIT,
 	UNSET
 };
 
@@ -102,7 +103,11 @@ typedef struct s_game
 	void	*gun_texture;
 	void	*title_texture;
 	void	*pillar_texture;
+	void	*exit_texture;
+	void	*exit_msg_texture;
 	void	*e_texture;
+	int		msg_width;
+	int		msg_height;
 	int		game_state;
 	int		door_state;
 	int		true_state;

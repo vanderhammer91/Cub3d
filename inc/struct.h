@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 22:20:35 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:53:54 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ typedef struct s_game
 	int		floorcolour;
 	int		gun_state;
 	int		num_walls;
-
 	float	pt_dist;
 	enum	e_wall_type	closest_wall_dir;
 	t_bound	*closest_wall;

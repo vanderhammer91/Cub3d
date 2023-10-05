@@ -6,12 +6,57 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 17:23:28 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:44:06 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init_bounds.h"
 
+int	rgb_to_hex(int r, int g, int b)
+{
+	int res;
+
+	res = 0;
+	res = r << 4 & g << 2 & b;
+	return (res);
+}
+
+
+t_game *initialize_game(t_parsed_data *d)
+{
+    t_game *game = malloc(sizeof(t_game));
+    if (game == NULL) {
+        return NULL;
+    }
+	game->prev_x = 0;
+    game->mlx = NULL;
+    game->mlx_win = NULL;
+	game->w_width = 1200;
+	game->w_height = 1000;
+	game->game_state = 0;
+	game->door_state = 0;
+	game->true_state = 0;
+	game->raw = d->map;
+    game->num_walls = 0;
+	game->player.rb = 0;
+	game->player.lb = 0;
+	game->player.ub = 0;
+	game->player.db = 0;
+	game->skycolour = rgb_to_hex(d->ceiling_r, d->ceiling_g, d->ceiling_b);
+	game->floorcolour = rgb_to_hex(d->floor_r, d->floor_g, d->floor_b);
+	game->keys.U_KEY_DOWN = 0;
+	game->keys.D_KEY_DOWN = 0;
+	game->keys.L_KEY_DOWN = 0;
+	game->keys.R_KEY_DOWN = 0;
+	game->keys.SH_KEY_DOWN = 0;
+	game->keys.SP_KEY_DOWN = 0;
+	game->keys.L_ROT_KEY_DOWN = 0;
+	game->keys.R_ROT_KEY_DOWN = 0;
+	game->gun_state = 7;
+	game->parsed_data = d;
+	return game;
+} 
+/*
 t_game *initialize_game(void)
 {
     t_game *game = malloc(sizeof(t_game));
@@ -45,4 +90,4 @@ t_game *initialize_game(void)
 
 	return game;
 } 
-
+*/

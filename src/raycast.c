@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 16:12:44 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:46:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,12 +295,16 @@ void c3d_player_look(t_game *game) {
         }
         ray_angle = fabs(this_ray.rot - game->player.rot) * M_PI / 180.0;
         pt_dist = (200 / (get_raylength(this_ray, closest)* cos(ray_angle))) * 200;
+		if (pt_dist > 3000)
+			pt_dist = 3000;
 		if (this_ray.rot == game->player.rot)
 		{
 			game->closest_wall_dir = closest_wall->direction;
 			game->pt_dist = pt_dist;
 		}
         second_pt_dist = (200 / (get_raylength(this_ray, second_closest)* cos(ray_angle))) * 200;
+		if (second_pt_dist > 3000)
+			second_pt_dist = 3000;
         if (has_collided)
 		{
 			if (closest_wall->direction == DOOR)

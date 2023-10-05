@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 17:16:35 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:55:46 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,44 @@ typedef struct s_keys
 	int	ENTER_KEY_DOWN;
 }	t_keys;
 
+
+typedef struct s_parsed_data
+{
+    char    			*north_texture;
+    char    			*south_texture;
+    char    			*west_texture;
+    char    			*east_texture;
+    int     			floor_r;
+    int     			floor_g;
+    int     			floor_b;
+    int     			ceiling_r;
+    int     			ceiling_g;
+    int     			ceiling_b;
+    char    			**map;
+}   t_parsed_data;
+
+typedef struct s_direction_and_string
+{
+    enum e_wall_type    dir;
+    char                *str;
+}   t_direction_and_string;
+
+typedef struct s_char_and_rgb
+{
+    char    c;
+    int     r;
+    int     g;
+    int     b;
+}   t_char_and_rgb;
+
+typedef struct s_coord
+{
+    int x;
+    int y;
+}   t_coord;
+
+
+
 typedef struct s_game
 { 
 	void	*mlx;
@@ -124,8 +162,11 @@ typedef struct s_game
 	int		gun_state;
 	t_bound	**walls;
 	int num_walls;
+	t_parsed_data	*parsed_data;
 	t_player player;
 	t_keys keys;
 }	t_game;
+
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 16:03:55 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:16:36 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	c3d_set_wall_bounds(t_game *game)
 	while (i < map_height)
 	{
 		j = 0;
-		while (j < map_width)
+		while (j <= map_width)
 		{
 			if (game->raw[i][j] == '1')
 			{

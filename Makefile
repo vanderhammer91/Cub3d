@@ -29,8 +29,9 @@ SRC_FILES = draw.c			\
 			key_events.c	\
 			init.c			\
 			init_bounds.c	\
-			box_collider.c	\
 			init_player.c	\
+			box_collider.c	\
+			parse.c 		\
 			main.c
 
 SRC_DIR = src

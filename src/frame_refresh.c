@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 17:39:08 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:44:18 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ int	c3d_update_player_pos(t_game *game)
 	}
 	if (game->keys.R_ROT_KEY_DOWN)
 	{
-		game->player.rot -= 0.3 * speed;	
+		game->player.rot -= 0.5 * speed;	
 		if (game->player.rot < 0)
 			game->player.rot += 360;
 	}
 	if (game->keys.L_ROT_KEY_DOWN)
 	{
-		game->player.rot += 0.3 * speed;
+		game->player.rot += 0.5 * speed;
 		if (game->player.rot >= 360)
 			game->player.rot -= 360;
 	}

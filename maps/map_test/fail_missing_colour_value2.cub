@@ -3,7 +3,7 @@ SO images/south.xpm
 WE images/west.xpm
 EA images/east.xpm
 
-F 220,100,0
+F 220,,100
 C 225,30,0
 
 1111111111111111111111111

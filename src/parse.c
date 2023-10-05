@@ -9,7 +9,7 @@
 // Except for the map, each type of information from an element can be separated by one or more spaces
 // spaces are valid and are up to you to handle
 
-t_parsed_data	*new_parsed_data()
+t_parsed_data	*new_parsed_data(void)
 {
 	t_parsed_data	*data;
 
@@ -29,7 +29,6 @@ t_parsed_data	*new_parsed_data()
 	data->ceiling_g = -1;
 	data->ceiling_b = -1;
 	data->map = NULL;
-
 	return (data);
 }
 
@@ -52,12 +51,14 @@ void	free_char_array(char **arr)
 
 void	print_char_array(char **arr)
 {
+	size_t	i;
+
 	printf("----char_array----\n");
 	if (!arr)
 		printf("(null)\n");
 	else
 	{
-		size_t i = 0;
+		i = 0;
 		while (arr[i])
 		{
 			printf("line %ld (p: %p): <%s>\n", i, arr[i], arr[i]);
@@ -65,7 +66,6 @@ void	print_char_array(char **arr)
 		}
 	}
 	printf("----end----\n");
-
 }
 
 void	delete_parsed_data(t_parsed_data *d)
@@ -91,28 +91,39 @@ void	delete_parsed_data(t_parsed_data *d)
 }
 
 
-// Check for valid path string. Note that the main check is that the string
-// consists of alphanumeric chars and / chars. Does not check for order, doubled
-// slash chars, path name validity etc. Maybe add that in later.
+//TODO decide what is a valid filename? apparently can contain any byte other than NUL or /
+// Ref: https://stackoverflow.com/questions/4814040/allowed-characters-in-filename
 size_t	valid_path_string_length(char *line)
 {
 	size_t	i;
 
 	i = 0;
-	/*
-	if (ft_strncmp(line, "./", 2) != 0)
-	{
-		return (i);
-	}
-	i += 2;
-	*/
-	//TODO decide what is a valid filename? apparently can contain any byte other than NUL or /
-	// Ref: https://stackoverflow.com/questions/4814040/allowed-characters-in-filename
-	while (ft_isalnum(line[i]) || line[i] == '/' || line[i] == '_' || line[i] == '.')
+	while (ft_isalnum(line[i]) || line[i] == '/' || \
+		line[i] == '_' || line[i] == '.')
 	{
 		i++;
 	}
 	return (i);
+}
+
+int line_starts_with_direction_chars(char *line)
+{
+	if (!line)
+	{
+		return (0);
+	}
+	if (!line[0] || !line[1])
+	{
+		return (0);
+	}
+	if (ft_strncmp(line, "NO ", 3) == 0 || \
+		ft_strncmp(line, "SO ", 3) == 0 || \
+		ft_strncmp(line, "WE ", 3) == 0 || \
+		ft_strncmp(line, "EA ", 3) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 int	is_valid_line_texture(char *line)
@@ -121,78 +132,68 @@ int	is_valid_line_texture(char *line)
 	size_t	path_length;
 
 	if (!line)
-	{
 		return (0);
-	}
 	i = 0;
-
 	while (line[i] == ' ')
-	{
 		i++;
-	}
-	if (!line[i] || !line[i + 1] || \
-		(ft_strncmp(&line[i], "NO ", 3) != 0 && ft_strncmp(&line[i], "SO ", 3) != 0 &&
-		ft_strncmp(&line[i], "WE ", 3) != 0 && ft_strncmp(&line[i], "EA ", 3) != 0))
-	{
+	if (line_starts_with_direction_chars(&line[i]) == 0)
 		return (0);
-	}
 	i += 3;
 	while (line[i] == ' ')
-	{
 		i++;
-	}
 	path_length = valid_path_string_length(&line[i]);
 	if (path_length == 0)
-	{
 		return (0);
-	}
 	i += path_length;
 	while (line[i] == ' ')
-	{
 		i++;
-	}
 	if (line[i] == '\0')
-	{
 		return (1);
-	}
 	return (0);
 }
 
+enum e_wall_type	str_to_direction(char *str)
+{
+	if (ft_strncmp(str, "NO", 2) == 0)
+	{
+		return (NORTH);
+	}
+	if (ft_strncmp(str, "SO", 2) == 0)
+	{
+		return (SOUTH);
+	}
+	if (ft_strncmp(str, "WE", 2) == 0)
+	{
+		return (WEST);
+	}
+	if (ft_strncmp(str, "EA", 2) == 0)
+	{
+		return (EAST);
+	}
+	return (UNSET);
+}
 t_direction_and_string	line_to_texture_data(char *line)
 {
-	char 					*trimmed_line;
+	char					*trimmed_line;
 	t_direction_and_string	res;
 	size_t					offset;
 
 	res.dir = UNSET;
 	trimmed_line = ft_strtrim(line, " ");
 	if (!trimmed_line)
-	{
 		return (res);
-	}
-	if (ft_strncmp(trimmed_line, "NO ", 3) == 0)
-		res.dir = NORTH;
-	else if (ft_strncmp(trimmed_line, "SO ", 3) == 0)
-		res.dir = SOUTH;
-	else if (ft_strncmp(trimmed_line, "WE ", 3) == 0)
-		res.dir = WEST;
-	else if (ft_strncmp(trimmed_line, "EA ", 3) == 0)
-		res.dir = EAST;
-	else
+	res.dir = str_to_direction(trimmed_line);
+	if (res.dir == UNSET)
 	{
 		free(trimmed_line);
-		return res;
+		return (res);
 	}
 	offset = 3;
 	while (trimmed_line[offset] == ' ')
-	{
 		offset++;
-	}
 	res.str = ft_strdup(&trimmed_line[offset]);
 	if (!res.str)
-	{
 		res.dir = UNSET;
-	}
 	free(trimmed_line);
 	return (res);
 }
@@ -286,17 +287,11 @@ t_char_and_rgb line_to_colour_data(char *line)
 	res.c = '\0';
 	trimmed_line = ft_strtrim(line, " ");
 	if (!trimmed_line)
-	{
 		return (res);
-	}
 	if (ft_strncmp(trimmed_line, "F ", 2) == 0)
-	{
 		res.c = 'F';
-	}
 	if (ft_strncmp(trimmed_line, "C ", 2) == 0)
-	{
 		res.c = 'C';
-	}
 	split_strs = ft_split(&trimmed_line[2], ',');
 	free(trimmed_line);
 	if (arr_len(split_strs) != 3)
@@ -309,7 +304,8 @@ t_char_and_rgb line_to_colour_data(char *line)
 	res.g = ft_atoi(split_strs[1]);
 	res.b = ft_atoi(split_strs[2]);
 	free_char_array(split_strs);
-	if (res.r < 0 || res.r > 255 || res.g < 0 || res.g > 255 || res.b < 0 || res.b > 255)
+	if (res.r < 0 || res.r > 255 || \
+		res.g < 0 || res.g > 255 || res.b < 0 || res.b > 255)
 	{
 		res.c = '\0';
 		return (res);
@@ -319,11 +315,13 @@ t_char_and_rgb line_to_colour_data(char *line)
 
 int	can_poke_colour_data(t_parsed_data *data, t_char_and_rgb rgb)
 {
-	if (rgb.c == 'F' && data->floor_r == -1 && data->floor_g == -1 && data->floor_b == -1)
+	if (rgb.c == 'F' && data->floor_r == -1 && \
+		data->floor_g == -1 && data->floor_b == -1)
 	{
 		return (1);
 	}
-	if (rgb.c == 'C' && data->ceiling_r == -1 && data->ceiling_g == -1 && data->ceiling_b == -1)
+	if (rgb.c == 'C' && data->ceiling_r == -1 && \
+		data->ceiling_g == -1 && data->ceiling_b == -1)
 	{
 		return (1);
 	}
@@ -351,10 +349,6 @@ char	**ft_realloc(char **ptr, size_t old, size_t new)
 	char	**new_ptr;
 	size_t	i;
 
-	// if(!ptr)
-	// {
-	// 	return (NULL);
-	// }
 	if (new < old)
 	{
 		free(ptr);
@@ -378,7 +372,7 @@ char	**ft_realloc(char **ptr, size_t old, size_t new)
 		i++;
 	}
 	free(ptr);
-	return(new_ptr);
+	return (new_ptr);
 }
 
 int	is_valid_line_map(char *line)
@@ -418,7 +412,7 @@ size_t	get_max_map_width(t_parsed_data *d)
 	}
 	max_width = 0;
 	i = 0;
-	while(d->map[i])
+	while (d->map[i])
 	{
 		if (ft_strlen(d->map[i]) > max_width)
 		{

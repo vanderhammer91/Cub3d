@@ -744,6 +744,26 @@ void	set_starting_coordinates_and_direction(t_parsed_data *d)
 }
 */
 
+int	is_file_name_valid(char *file_name)
+{
+	size_t	len;
+
+	if (!file_name)
+	{
+		return (0);
+	}
+	len = ft_strlen(file_name);
+	if (len < 4)
+	{
+		return (0);
+	}
+	if (ft_strncmp(&file_name[len - 4], ".cub", 5) != 0)
+	{
+		return (0);
+	}
+	return (1);
+}
+
 t_parsed_data	*file_to_data(char *file_name)
 {
 	int						fd;
@@ -754,6 +774,10 @@ t_parsed_data	*file_to_data(char *file_name)
 	size_t					map_buff_height;
 	size_t					map_line_i;
 
+	if (is_file_name_valid(file_name) == 0)
+	{
+		return (NULL);
+	}
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 11:58:31 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:47:32 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,11 +242,14 @@ void draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
 	int alpha;
     int *texture_data = (int*)mlx_get_data_addr(game->t_lib.gun_texture, &bpp, &size_line, &endian);
 	int m_off = (((int)(game->player.pos.x) + (int)(game->player.pos.y))  % 80) * 0.2;
+	int	y;
+	int	x;
+	int	texture_y;
 
-    for (int y = 0; y < 523; y++)
+    for (y = 0; y < 523; y++)
     {
-        int texture_y = sprite_y + y;
-        for (int x = 0; x < 1000; x++)
+        texture_y = sprite_y + y;
+        for (x = 0; x < 1000; x++)
         {
             colour = texture_data[texture_y * 1000 + x];
 			alpha = (colour >> 24) & 0xFF; 
@@ -286,6 +289,7 @@ void	frame_refresh_title(t_game *game)
 	int	*texture_data;
 	int	x;
 	int	y;
+
 	sprite_y = game->splash_state * W_HEIGHT; 
    	texture_data = NULL;	
     texture_data = (int*)mlx_get_data_addr(game->t_lib.title_texture, &bpp, &size_line, &endian);

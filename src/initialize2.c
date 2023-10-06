@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 11:48:52 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:45:59 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ int	c3d_set_wall_bounds(t_game *game)
 	game->num_walls = 0;
 	map_height = get_mapheight(game);
 	map_width = ft_strlen(game->raw[i]) - 1;
-	printf("map width here is: %d\n", map_width);
-
 	while (i < map_height)
 	{
 		j = 0;

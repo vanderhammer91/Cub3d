@@ -6,12 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:56:55 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 18:56:09 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:57:00 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gen_utils.h"
-# include "parse.h"
 
 void	free_array(char **my_array)
 {

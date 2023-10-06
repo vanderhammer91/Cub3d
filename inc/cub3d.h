@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:41:56 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:07:59 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:58:17 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,7 @@
 # include "draw.h"
 # include "frame_refresh.h"
 # include "init_player.h"
-
-# define W_HEIGHT 1000
-# define W_WIDTH 1200
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+# include "definitions.h"
 
 void	c3d_init_rays(t_game *game);
 

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frame_refresh.h                                    :+:      :+:    :+:   */
+/*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:20:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:58:54 by ivanderw         ###   ########.fr       */
+/*   Created: 2023/10/06 12:57:56 by ivanderw          #+#    #+#             */
+/*   Updated: 2023/10/06 13:01:47 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAME_REFRESH_H
-# define FRAME_REFRESH_H
+#ifndef DEFINITIONS_H
+# define DEFINITIONS_H
 
-# include "libraries.h"
-# include "draw.h"
-# include "box_collider.h"
-# include "raycast.h"
-# include "definitions.h"
+# define W_HEIGHT 1000
+# define W_WIDTH 1200
 
-double get_safe_angle(double angle);
-int	frame_refresh(t_game *game);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 #endif

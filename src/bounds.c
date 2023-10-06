@@ -6,13 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:44:26 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 10:36:55 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:55:44 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-//#include "bounds.h"
-
+#include "bounds.h"
 
 void free_bounds(t_bound* head)
 {

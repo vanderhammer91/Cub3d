@@ -6,14 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:47:32 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:56:49 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "frame_refresh.h"
-#include <stdio.h>
-#include <math.h>  
 
 double get_safe_angle(double angle)
 {

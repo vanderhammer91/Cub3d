@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 22:34:06 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:59:41 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	draw_dir_arrow(t_game *game)
 
 void	c3d_draw_overlay(t_game *game)
 {
-	//printf("%f\n", game->pt_dist);
 	if (game->pt_dist > 700)
 	{	
 		if(game->closest_wall_dir == DOOR)
@@ -118,13 +117,14 @@ void	c3d_draw_overlay(t_game *game)
 			mlx_put_image_to_window(game->mlx, game->mlx_win, game->t_lib.e_texture, 100, 900);
 			if (game->keys.E_KEY_DOWN == 1)
 			{
-			//	printf("door state was: %d\n", game->walls[game->closest_wall_index]->door_state);
-						if (game->walls[game->closest_wall_index]->door_state == 0)
+				if (game->walls[game->closest_wall_index]->door_state == 0)
+				{
 					game->walls[game->closest_wall_index]->door_state = 1;
+				}
 				else if (game->walls[game->closest_wall_index]->door_state == 10)
+				{
 					game->walls[game->closest_wall_index]->door_state = 11;
-
-			//	printf("door state is: %d\n", game->walls[game->closest_wall_index]->door_state);
+				}
 			}
 		}
 	}
@@ -142,7 +142,6 @@ void c3d_draw_minimap(t_game *game, void *img)
 	int	i;
 	t_point new_start;
 	t_point new_end;
-
 	rect(game->img, 0, 0, 300, 300, 0x0c212e);
 	rect(game->img, 145, 145, 10, 10, 0x00FFFF);
 	i = 0;
@@ -190,8 +189,7 @@ void	check_walls_2(t_game *game, int i)
 	{
 		game->walls[i]->door_state++;
 		game->walls[i]->img_state--;
-	}
-	
+	}	
 	else if (game->walls[i]->door_state == 18 || game->walls[i]->door_state == 19)
 	{
 		game->walls[i]->door_state = 0;
@@ -199,9 +197,13 @@ void	check_walls_2(t_game *game, int i)
 	}
 
 	if (game->walls[i]->img_state > 5)
+	{
 		game->walls[i]->is_active = 0;
+	}
 	else
+	{
 		game->walls[i]->is_active = 1;
+	}
 }
 
 void	check_walls_3(t_game *game, int i)
@@ -319,7 +321,6 @@ void	frame_refresh_exit(t_game *game)
 	mlx_destroy_image(game->mlx, game->img);
 }
 
-
 int	frame_refresh_main(t_game *game)
 {
 	game->frame++;
@@ -335,12 +336,12 @@ int	frame_refresh_main(t_game *game)
 	game->img = mlx_new_image(game->mlx, 1400, 1000);	
 	c3d_update_player_pos(game);
 
-	//sky and floor colour respectively parse this in.
-	rect(game->img, 0, 0, 1200, 500, 0x000066);
-	//	rect(game->img, 0, 400, 1000, 400, game->floorcolour);
-	
+	//floor and sky colour from .CUB
+	rect(game->img, 0, 0, 1200, 500, game->skycolour);
+	rect(game->img, 0, 500, 1200, 500, game->floorcolour);
+
 	//raycasting
-	c3d_player_look(game);
+	c3d_player_cast(game);
 
 	//output
 	rect(game->img, 600, 540, 10, 10, 0xFFFFFF);

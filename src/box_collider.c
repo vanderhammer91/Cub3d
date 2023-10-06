@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 15:35:56 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:35:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,8 @@ int	c3d_collider_feedback(t_game *game)
 	while (i < 4)
 	{
 		radians = i * (M_PI / 2);
-
 		start.x = 150;
 		start.y = 150;
-
-		//green line in the direction the player is facing.
 		unitVector.x = cos(radians) * radius;
 		unitVector.y = sin(radians) * radius;
 		end.x = start.x + unitVector.x;

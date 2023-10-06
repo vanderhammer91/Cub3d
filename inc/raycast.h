@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:12:21 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:11:34 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:28:53 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "draw.h"
 # include "initialize.h"
 
- void	c3d_player_look(t_game *game);
+ void	c3d_player_cast(t_game *game);
 float	get_raylength(t_ray ray, t_point end);
 t_point	*ray_cast(t_bound *current_wall, t_ray *this_ray);
 int		retrieve_colour(void *img, int x, int y);

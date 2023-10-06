@@ -6,30 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:45:59 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 22:21:44 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initialize.h"
-
-/*
-void	c3d_print_bounds(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (game->walls[i])
-	{
-		 printf("bound [%d]:\n", i);
-        	printf("wall start pt: %f, %f \n", game->walls[i]->start.x,
-			game->walls[i]->start.y);    
-        	printf("wall end pt: %f, %f \n", game->walls[i]->end.x,
-			game->walls[i]->end.y);
-		printf("%d\n", game->walls[i]->type);
-		i++;
-	}
-}
-*/
 
 void	c3d_free_bounds(t_game *game)
 {
@@ -43,8 +24,8 @@ void	c3d_free_bounds(t_game *game)
 	}
 }
 
-
-void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, enum e_wall_type wall_type ) 
+void	add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y,
+		enum e_wall_type wall_type)
 {
 	t_bound *new_bound = malloc(sizeof(t_bound));
     if (new_bound == NULL)

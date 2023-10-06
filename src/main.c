@@ -34,11 +34,11 @@ int	main(int argc, char **argv)
 
 	//mlx initialization.
 	m_game->mlx = mlx_init();
-	m_game->mlx_win = mlx_new_window(m_game->mlx, m_game->w_width,
-		m_game->w_height, "Cub3d");
+	m_game->mlx_win = mlx_new_window(m_game->mlx, W_WIDTH,
+		W_HEIGHT, "Cub3d");
 	c3d_initialize_textures(m_game, data);
 	c3d_initialize_textures2(m_game);
-	m_game->img = mlx_new_image(m_game->mlx, m_game->w_width, m_game->w_height);
+	m_game->img = mlx_new_image(m_game->mlx, W_WIDTH, W_HEIGHT);
 
 	//key events
 	mlx_hook(m_game->mlx_win, 2, 1L<<0, key_press, m_game);	 

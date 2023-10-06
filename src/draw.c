@@ -6,34 +6,40 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:47 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/03 17:45:31 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:11:13 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void img_pixel_put(void *img, int x, int y, int color)
+void	img_pixel_put(void *img, int x, int y, int color)
 {
-    char    *dst;
-    int     bpp;
-    int     size_line;
-    int     endian;
-	
-    if (x < 0 || y < 0 || x >= 2000 || y >= 1000)
-        return;
+	char	*dst;
+	int		bpp;
+	int		size_line;
+	int		endian;
 
-    dst = mlx_get_data_addr(img, &bpp, &size_line, &endian);
-    *(unsigned int*)(dst + y * size_line + x * bpp / 8) = color;
+	if (x < 0 || y < 0 || x >= 2000 || y >= 1000)
+		return ;
+	dst = mlx_get_data_addr(img, &bpp, &size_line, &endian);
+	*(unsigned int *)(dst + y * size_line + x * bpp / 8) = color;
 }
 
-void rect(void *img, int x, int y, int width, int height, int color)
+void	rect(void *img, int x, int y, int width, int height, int color)
 {
-    int i, j;
-
-    for (i = 0; i < width; i++) {
-        for (j = 0; j < height; j++) {
+	int	i;
+	int	j;
+	
+	i = 0;
+	while (i < width)
+	{
+		j = 0;
+        for (j < height)
+		{
             img_pixel_put(img, x + i, y + j, color);
+			j++;
         }
+		i++;
     }
 }
 

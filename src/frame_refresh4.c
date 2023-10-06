@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:56:27 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 20:23:54 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 20:32:44 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,11 @@ void	c3d_check_walls_call(t_game *game)
 	}
 }
 
-typedef struct s_gunstate
-{
-	int	sprite_y;
-	int	bpp;
-	int	size_line;
-	int	endian;
-	int	colour;
-	int	alpha;
-	int	*texture_data;
-	int	m_off;
-	int	texture_y;
-}		t_gunstate;
-
 void	draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
 {
-	t_gunstate	gunst;
-	int			x;
-	int			y;
+	t_img_handler	gunst;
+	int				x;
+	int				y;
 
 	gunst.sprite_y = gun_state * 523;
 	gunst.texture_data = (int *)mlx_get_data_addr(game->t_lib.gun_texture,

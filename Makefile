@@ -27,6 +27,7 @@ SRC_FILES = draw.c			\
 			frame_refresh2.c\
 			frame_refresh3.c\
 			frame_refresh4.c\
+			frame_refresh5.c\
 			bounds.c		\
 			raycast.c		\
 			raw_utils.c 	\

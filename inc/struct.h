@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 17:31:40 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 20:32:53 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,25 @@ typedef struct s_line
 	int	e2;
 }	t_line;
 
+typedef struct s_img_handler
+{
+	int	sprite_y;
+	int	bpp;
+	int	size_line;
+	int	endian;
+	int	colour;
+	int	alpha;
+	int	*texture_data;
+	int	m_off;
+	int	texture_y;
+}	t_img_handler;
+
 typedef	struct s_texture_lib
 {
 	void	*north_texture;
 	void	*east_texture;
 	void	*south_texture;
 	void	*west_texture;
-
 	void	*ad_texture;
 	void	*door_texture;
 	void	*e_texture;

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 17:46:58 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:52:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ int	frame_refresh_main(t_game *game)
 	set_point(&start, 600, 540);
 	set_point(&end, 10, 10);
 	rect(game->img, &start, &end, 0xFFFFFF);
-	c3d_draw_minimap(game, game->img);
+	c3d_draw_minimap(game);
 	test_hitrays(game);
 	draw_gun_state(game, game->gun_state, 350, 475);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);

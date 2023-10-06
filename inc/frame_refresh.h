@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:20:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 16:59:01 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:49:25 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	c3d_draw_overlay(t_game *game);
 /*		frame_refresh2.c*/
 int		c3d_update_player_pos(t_game *game);
 
+/*		frame_refresh3.c*/
+void	c3d_draw_minimap(t_game *game, void *img);
 
 #endif

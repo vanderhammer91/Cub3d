@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 11:18:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:35:03 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_game *c3d_initialize_game(t_parsed_data *d)
     game->mlx_win = NULL;
 	game->w_width = 1200;
 	game->w_height = 1000;
+	game->speed	= 0;
 	game->game_state = 0;
 	game->door_state = 0;
 	game->true_state = 0;

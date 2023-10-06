@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 15:47:24 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:31:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct s_game
 	int		w_width;
 	int		prev_x;
 	int		frame;
+	int		speed;
 	int		msg_width;
 	int		msg_height;
 	int		game_state;

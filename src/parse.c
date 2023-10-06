@@ -3,12 +3,12 @@
 
 
 
-// Map must be comprised of 0, 1, N, S, E, W
-// Must be closed/surronded by walls (flood fill)
-// Map content must be last, otherwise other lines can be beforehand
-// Except for the map, each type of information from an element can be separated by one or more spaces
-// spaces are valid and are up to you to handle
-
+/* Map must be comprised of 0, 1, N, S, E, W
+ * Must be closed/surronded by walls (flood fill)
+ * Map content must be last, otherwise other lines can be beforehand
+ * Except for the map, each type of information from an element can be separated by one or more spaces
+ * spaces are valid and are up to you to handle
+*/
 t_parsed_data	*new_parsed_data()
 {
 	t_parsed_data	*data;

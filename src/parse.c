@@ -1,7 +1,4 @@
 #include "parse.h"
-#include "raw_utils.h"
-
-
 
 /* Map must be comprised of 0, 1, N, S, E, W
  * Must be closed/surronded by walls (flood fill)

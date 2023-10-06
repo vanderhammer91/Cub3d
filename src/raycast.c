@@ -6,12 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:52:18 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:06:22 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
-#include "frame_refresh.h"
 
 t_point *ray_cast(t_bound *current_wall, t_ray *this_ray)
 {

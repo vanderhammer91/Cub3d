@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 11:15:58 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:58:31 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,8 +278,19 @@ void	c3d_check_gun_state(t_game *game)
 
 void	frame_refresh_title(t_game *game)
 {
+    int bpp;
+    int size_line;
+    int endian;
+	int	colour;	
+	int sprite_y;
+	int	*texture_data;
+	int	x;
+	int	y;
+	sprite_y = game->splash_state * W_HEIGHT; 
+   	texture_data = NULL;	
+    texture_data = (int*)mlx_get_data_addr(game->t_lib.title_texture, &bpp, &size_line, &endian);
 	mlx_clear_window(game->mlx, game->mlx_win);
-	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);	
+	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	if (game->keys.ENTER_KEY_DOWN)
 		game->game_state = 1;
 	game->frame++;
@@ -291,17 +302,10 @@ void	frame_refresh_title(t_game *game)
 		{
 			game->splash_state = 0;
 		}		
-	}			
-	int sprite_y = game->splash_state * W_HEIGHT;  
-    int bpp;
-    int size_line;
-    int endian;
-	int	colour;
-    int *texture_data = (int*)mlx_get_data_addr(game->t_lib.title_texture, &bpp, &size_line, &endian);
-    
-	for (int y = 0; y < W_HEIGHT; y++)
+	}
+	for (y = 0; y < W_HEIGHT; y++)
     {
-        for (int x = 0; x < W_WIDTH; x++)
+        for (x = 0; x < W_WIDTH; x++)
         {
           colour = texture_data[((y + sprite_y) * W_WIDTH) + x];
 			img_pixel_put(game->img, x, y, colour);            	

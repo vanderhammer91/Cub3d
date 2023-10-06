@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 22:53:54 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:47:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,20 @@ typedef struct s_coord
     int y;
 }   t_coord;
 
+typedef struct s_line
+{
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+}	t_line;
+
 typedef	struct s_texture_lib
 {
 	void	*north_texture;
@@ -138,7 +152,6 @@ typedef	struct s_texture_lib
 	void	*pillar_texture;
 	void	*title_texture;
 }	t_texture_lib;
-
 
 typedef struct s_game
 { 

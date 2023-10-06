@@ -21,6 +21,7 @@ MLX = mlx/libmlx.a
 #	o-----------------o
 
 SRC_FILES = draw.c			\
+			draw1.c			\
 			frame_refresh.c	\
 			bounds.c		\
 			raycast.c		\

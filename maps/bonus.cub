@@ -3,8 +3,8 @@ SO images/wall.xpm
 WE images/wall.xpm
 EA images/wall.xpm
 
-F 220,100,0
-C 225,30,0
+F 0,0,0
+C 0,100,225
 
 1111111111111111111111111
 100000050011X0X0X0X0X0X01

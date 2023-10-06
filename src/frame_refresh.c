@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:56:49 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:32:10 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ double get_safe_angle(double angle)
 	while (angle > 360)
 		angle -= 360;
 	return (angle);
+}
+
+void	set_point(t_point *point, int x, int y)
+{
+	point->x = x;
+	point->y = y;
 }
 
 int	c3d_update_player_pos(t_game *game)
@@ -139,8 +145,13 @@ void c3d_draw_minimap(t_game *game, void *img)
 	int	i;
 	t_point new_start;
 	t_point new_end;
-	rect(game->img, 0, 0, 300, 300, 0x0c212e);
-	rect(game->img, 145, 145, 10, 10, 0x00FFFF);
+
+	set_point(&new_start, 0, 0);
+	set_point(&new_end, 300, 300);
+	rect(game->img, &new_start, &new_end, 0x0c212e);
+	set_point(&new_start, 145, 145);
+	set_point(&new_end, 10, 10);
+	rect(game->img, &new_start, &new_end, 0x00FFFF);
 	i = 0;
 	while (i < game->num_walls)
 	{
@@ -330,6 +341,9 @@ void	frame_refresh_exit(t_game *game)
 
 int	frame_refresh_main(t_game *game)
 {
+	t_point	start;
+	t_point	end;
+		
 	game->frame++;
 	if (game->frame >= 8)
 		game->frame = 0;
@@ -344,14 +358,21 @@ int	frame_refresh_main(t_game *game)
 	c3d_update_player_pos(game);
 
 	//floor and sky colour from .CUB
-	rect(game->img, 0, 0, 1200, 500, game->skycolour);
-	rect(game->img, 0, 500, 1200, 500, game->floorcolour);
+	
+	set_point(&start, 0, 0);
+	set_point(&end, 1200, 500);
+	rect(game->img, &start, &end, game->skycolour);
+	set_point(&start, 0, 500);
+	set_point(&end, 1200, 500);
+	rect(game->img, &start, &end, game->floorcolour);
 
 	//raycasting
 	c3d_player_cast(game);
 
 	//output
-	rect(game->img, 600, 540, 10, 10, 0xFFFFFF);
+	set_point(&start, 600, 540);
+	set_point(&end, 10, 10);
+	rect(game->img, &start, &end, 0xFFFFFF);
 	c3d_draw_minimap(game, game->img);
 	test_hitrays(game);
 	draw_gun_state(game, game->gun_state, 350, 475);

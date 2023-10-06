@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:47 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 14:11:13 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:23:55 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	img_pixel_put(void *img, int x, int y, int color)
 	dst = mlx_get_data_addr(img, &bpp, &size_line, &endian);
 	*(unsigned int *)(dst + y * size_line + x * bpp / 8) = color;
 }
-
+/*
 void	rect(void *img, int x, int y, int width, int height, int color)
 {
 	int	i;
@@ -42,46 +42,82 @@ void	rect(void *img, int x, int y, int width, int height, int color)
 		i++;
     }
 }
+*/
 
-
-void line(void *img, t_point a, t_point b, int color)
-{	
-	int	x1 = round(a.x);
-	int	y1 = round(a.y);
-	int	x2 = round(b.x);
-	int y2 = round(b.y);
-	int thickness = 1;
-	int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int sx = (x1 < x2) ? 1 : -1;
-    int sy = (y1 < y2) ? 1 : -1;
-    int err = dx - dy;
+void	rect(void *img, t_point *start, t_point *end, int colour)
+{
 	int	i;
 	int	j;
 
-    while (1) {	
-		i = -thickness / 2;
-		while (i <= (thickness / 2))
+	i = 0;
+	while (i < end->x)
+	{
+		j = 0;
+		while (j < end->y)
 		{
-			j = -thickness / 2;
-			while (j <= (thickness / 2))
+			img_pixel_put(img, start->x + i, start->y + j, colour);
+			j++;
+		}
+		i++;
+	}
+}
+
+typedef struct s_line
+{
+	int	x1;
+	int	y1;
+	int	x2;
+	int y2;
+	int dx;
+    int dy;
+    int sx;
+    int sy;
+    int err;
+} t_line;
+
+void	line(void *img, t_point a, t_point b, int color)
+{
+	t_line	line;
+	int	i;
+	int	j;
+
+	line.x1 = round(a.x);
+	line.y1 = round(a.y);
+	line.x2 = round(b.x);
+	line.y2 = round(b.y);
+	line.dx = abs(line.x2 - line.x1);
+    line.dy = abs(line.y2 - line.y1);
+    line.sx = (line.x1 < line.x2) ? 1 : -1;
+    line.sy = (line.y1 < line.y2) ? 1 : -1;
+    line.err = line.dx - line.dy;
+    while (1)
+	{	
+		i = -1 / 2;
+		while (i <= (1 / 2))
+		{
+			j = -1 / 2;
+			while (j <= (1 / 2))
 			{
-				img_pixel_put(img, x1 + i, y1 + j, color);
+				img_pixel_put(img, line.x1 + i, line.y1 + j, color);
 				j++;
 			}
 			i++;
 		}
-        if (x1 == x2 && y1 == y2) {
+        if (line.x1 == line.x2 && line.y1 == line.y2)
+		{
             break;
         }
-        int e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            x1 += sx;
+        int e2 = 2 * line.err;
+        if (e2 > -line.dy)
+		{
+            line.err -= line.dy;
+            line.x1 += line.sx;
         }
-        if (e2 < dx) {
-            err += dx;
-            y1 += sy;
+        if (e2 < line.dx)
+		{
+            line.err += line.dx;
+			line.y1 += line.sy;
+            //a.y = round(a.y + sy);
         }
     }
 }

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 13:06:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:59:05 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	int		cw = 5;
 	int		pixel_colour;
 	int		img_state;
+	t_point	start;
+	t_point end;
 
 	y = 0;
  	if (closest_wall->type == SOUTH)
@@ -121,7 +123,13 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 			if (closest_wall->texture == PILLAR)
 				pixel_colour = retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
-			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+
+			start.x = x_offset + i * cw;
+			start.y = start_y + y;
+			end.x = cw;
+			end.y = 1;
+			rect(game->img, &start, &end, pixel_colour);
+			//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -138,7 +146,12 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 			if (closest_wall->texture == PILLAR)
 				pixel_colour = retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
-    	 	rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			start.x = x_offset + i * cw;
+			start.y = start_y + y;
+			end.x = cw;
+			end.y = 1;
+			rect(game->img, &start, &end, pixel_colour);
+			//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -155,7 +168,12 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 			if (closest_wall->texture == PILLAR)
 				pixel_colour= retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
-			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			start.x = x_offset + i * cw;
+			start.y = start_y + y;
+			end.x = cw;
+			end.y = 1;
+			rect(game->img, &start, &end, pixel_colour);
+			//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -173,7 +191,12 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 			if (closest_wall->texture == PILLAR)
 				pixel_colour= retrieve_colour(game->t_lib.pillar_texture, tx, ty);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
-			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			start.x = x_offset + i * cw;
+			start.y = start_y + y;
+			end.x = cw;
+			end.y = 1;
+			rect(game->img, &start, &end, pixel_colour);
+			//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}
@@ -190,7 +213,15 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	  	pixel_colour = retrieve_colour(game->t_lib.ad_texture, tx * 2, ty + img_state * 64);
 			pixel_colour = shade_pixel(pixel_colour, raylength);
 			if (pixel_colour != 0x000000)
-				rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			{
+				start.x = x_offset + i * cw;
+				start.y = start_y + y;
+				end.x = cw;
+				end.y = 1;
+				rect(game->img, &start, &end, pixel_colour);
+				//rect(game->img, new_point(x_offset + i * cw, start_y + y), new_point(cw, 1), pixel_colour);
+				//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			}
     	    ty += ty_step;
     	    y++;
     	}
@@ -213,7 +244,13 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
             if (!alpha)
 			{
 				pixel_colour = shade_pixel(pixel_colour, raylength);
-				rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+				start.x = x_offset + i * cw;
+				start.y = start_y + y;
+				end.x = cw;
+				end.y = 1;
+				rect(game->img, &start, &end, pixel_colour);
+				//rect(game->img, new_point(x_offset + i * cw, start_y + y), new_point(cw, 1), pixel_colour);
+				//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
 			}
     	    ty += ty_step;
     	    y++;
@@ -233,7 +270,14 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	{
     	 	pixel_colour = retrieve_colour(game->t_lib.exit_texture, tx * 2,
 					ty + img_state * 128);
-			rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
+			pixel_colour = shade_pixel(pixel_colour, raylength);
+			start.x = x_offset + i * cw;
+			start.y = start_y + y;
+			end.x = cw;
+			end.y = 1;
+			rect(game->img, &start, &end, pixel_colour);
+			//rect(game->img, new_point(x_offset + i * cw, start_y + y), new_point(cw, 1), pixel_colour);
+			//rect(game->img, x_offset + i * cw, start_y + y, cw, 1, pixel_colour);
     	    ty += ty_step;
     	    y++;
     	}

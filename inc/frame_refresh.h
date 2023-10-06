@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:20:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:58:54 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:31:04 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include "raycast.h"
 # include "definitions.h"
 
-double get_safe_angle(double angle);
+void	set_point(t_point *point, int x, int y);
+double	get_safe_angle(double angle);
 int	frame_refresh(t_game *game);
 
 #endif

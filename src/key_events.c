@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:20:10 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:25:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int mouse_move(int x, int y, t_game *game)
 	(void)y;
 	if (x > game->prev_x)
 	{
-		game->player.rot += (x - game->prev_x) * 0.3;	
-		if (game->player.rot < 0)
-			game->player.rot += 360; 
+		game->player.rot += (x - game->prev_x) * 0.15;	
+		if (game->player.rot > 0)
+			game->player.rot -= 360; 
 	}
 	else if (x < game->prev_x)
 	{
-		game->player.rot += (x - game->prev_x) * 0.3;	
+		game->player.rot += (x - game->prev_x) * 0.15;	
 		if (game->player.rot < 0)
 			game->player.rot += 360; 
 	}

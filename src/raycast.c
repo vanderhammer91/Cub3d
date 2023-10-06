@@ -203,7 +203,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	}
 	else if (closest_wall->type == AD)
 	{
-		img_state = game->walls[game->closest_wall_index]->img_state;
+		img_state = game->walls[game->cwi]->img_state;
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
@@ -228,7 +228,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	}
  	else if (closest_wall->type == DOOR)
 	{
-		img_state = game->walls[game->closest_wall_index]->img_state;
+		img_state = game->walls[game->cwi]->img_state;
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 128.0 / (float)raylength;
@@ -258,7 +258,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	}	
 	else if (closest_wall->type == EXIT)
 	{
-		img_state = game->walls[game->closest_wall_index]->img_state;
+		img_state = game->walls[game->cwi]->img_state;
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 128.0 / (float)raylength;
@@ -325,7 +325,7 @@ void c3d_player_cast(t_game *game) {
                     max_dist = pt_dist;
                     closest = *point;
                     closest_wall = game->walls[j];
-					game->closest_wall_index = j;
+					game->cwi = j;
 				}
 				else if (pt_dist != -1 && pt_dist < second_max_dist) 
 				{

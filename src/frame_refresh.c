@@ -6,137 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 15:32:58 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:20:04 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frame_refresh.h"
-
-double get_safe_angle(double angle)
-{
-	while (angle < 0)
-		angle +=360;
-	while (angle > 360)
-		angle -= 360;
-	return (angle);
-}
-
-void	set_point(t_point *point, int x, int y)
-{
-	point->x = x;
-	point->y = y;
-}
-
-int	c3d_update_player_pos(t_game *game)
-{
-	int	speed;
-	double	radians;
-	double	perp_rad;
-	double new_x;
-	double new_y;
-	int		has_set = 0;
-
-	radians = game->player.rot * M_PI / 180;
-	perp_rad = get_safe_angle((game->player.rot + 90)) * (M_PI / 180);
-	speed = 3;
-	if (game->keys.SH_KEY_DOWN == 1)
-		speed *= 2;
-	new_x = 0;
-	new_y = 0;
-	if (game->keys.U_KEY_DOWN && !game->keys.D_KEY_DOWN)
-	{
-		new_x = game->player.pos.x + speed * cos(radians);
-		new_y = game->player.pos.y + speed * sin(radians);
-		has_set = 1;
-	}
-	else if (game->keys.D_KEY_DOWN && !game->keys.U_KEY_DOWN)
-	{
-		new_x = game->player.pos.x - speed * cos(radians);
-		new_y = game->player.pos.y - speed * sin(radians);
-		has_set = 1;
-	}
-	else if (game->keys.L_KEY_DOWN && !game->keys.R_KEY_DOWN)
-	{
-		new_x = game->player.pos.x - speed * cos(perp_rad);
-		new_y = game->player.pos.y - speed * sin(perp_rad);
-		has_set = 1;
-	}
-	else if (game->keys.R_KEY_DOWN && !game->keys.L_KEY_DOWN)
-	{
-		new_x = game->player.pos.x + speed * cos(perp_rad);
-		new_y = game->player.pos.y + speed * sin(perp_rad);
-		has_set = 1;
-	}	
-	if(has_set)
-	{
-		if (new_x > game->player.pos.x && !game->player.rb)
-			game->player.pos.x = new_x;		
-		if (new_x < game->player.pos.x && !game->player.lb)
-			game->player.pos.x = new_x;	
-		if (new_y < game->player.pos.y && !game->player.db)
-			game->player.pos.y = new_y;		
-		if (new_y > game->player.pos.y && !game->player.ub)
-			game->player.pos.y = new_y;	
-	}
-	if (game->keys.R_ROT_KEY_DOWN)
-	{
-		game->player.rot -= 0.5 * speed;	
-		if (game->player.rot < 0)
-			game->player.rot += 360;
-	}
-	if (game->keys.L_ROT_KEY_DOWN)
-	{
-		game->player.rot += 0.5 * speed;
-		if (game->player.rot >= 360)
-			game->player.rot -= 360;
-	}
-	return (0);
-}
-
-int	draw_dir_arrow(t_game *game)
-{
-	t_point start;
-	t_point end;
-	t_vector unitVector;
-	double radians = game->player.rot * M_PI / 180.0;
-	double radius = 15;
-
-	start.x = 150;
-	start.y = 150;	
-	unitVector.x = cos(radians) * radius;
-	unitVector.y = sin(radians) * radius;
-	end.x = start.x + unitVector.x;
-	end.y = start.y + unitVector.y;
-	line(game->img, start, end, 0x00FFFF);
-	return (0);
-}
-
-void	c3d_draw_overlay(t_game *game)
-{
-	if (game->pt_dist > 700)
-	{	
-		if(game->closest_wall_dir == DOOR)
-		{
-			mlx_put_image_to_window(game->mlx, game->mlx_win, game->t_lib.e_texture, 100, 900);
-			if (game->keys.E_KEY_DOWN == 1)
-			{
-				if (game->walls[game->closest_wall_index]->door_state == 0)
-				{
-					game->walls[game->closest_wall_index]->door_state = 1;
-				}
-				else if (game->walls[game->closest_wall_index]->door_state == 10)
-				{
-					game->walls[game->closest_wall_index]->door_state = 11;
-				}
-			}
-		}
-	}
-	if (game->pt_dist > 1200 && game->closest_wall_dir == EXIT)
-	{
-		game->game_state = 2;
-	}
-
-}
 
 void c3d_draw_minimap(t_game *game, void *img)
 {
@@ -381,8 +255,6 @@ int	frame_refresh_main(t_game *game)
 	mlx_destroy_image(game->mlx, game->img);
 	return (0);
 }
-
-
 
 int	frame_refresh(t_game *game)
 {

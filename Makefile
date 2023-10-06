@@ -23,6 +23,8 @@ MLX = mlx/libmlx.a
 SRC_FILES = draw.c			\
 			draw1.c			\
 			frame_refresh.c	\
+			frame_refresh1.c\
+			frame_refresh2.c\
 			bounds.c		\
 			raycast.c		\
 			raw_utils.c 	\

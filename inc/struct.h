@@ -174,7 +174,7 @@ typedef struct s_game
 	int		ad_state;
 	int		true_state;
 	int		splash_state;
-	int		closest_wall_index;
+	int		cwi;
 	int		close_index;
 	int		skycolour;
 	int		floorcolour;

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:20:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 19:53:10 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 20:05:16 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,11 @@ int		c3d_update_player_pos(t_game *game);
 
 /*		frame_refresh3.c*/
 void	c3d_draw_minimap(t_game *game);
+
+/*		frame_refresh4.c*/
+void	c3d_check_walls_call(t_game *game);
+void	draw_gun_state(t_game *game, int gun_state, int x_off, int y_off);
+void	c3d_check_gun_state(t_game *game);
+
 
 #endif

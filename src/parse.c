@@ -154,10 +154,10 @@ int	is_valid_line_texture(char *line)
 	return (0);
 }
 
-t_direction_and_string	line_to_texture_data(char *line)
+t_type_and_string	line_to_texture_data(char *line)
 {
 	char 					*trimmed_line;
-	t_direction_and_string	res;
+	t_type_and_string	res;
 	size_t					offset;
 
 	res.dir = UNSET;
@@ -193,7 +193,7 @@ t_direction_and_string	line_to_texture_data(char *line)
 	return (res);
 }
 
-int	can_poke_texture_data(t_parsed_data *data, t_direction_and_string pair)
+int	can_poke_texture_data(t_parsed_data *data, t_type_and_string pair)
 {
 	if (pair.dir == NORTH && data->north_texture != NULL)
 	{
@@ -214,7 +214,7 @@ int	can_poke_texture_data(t_parsed_data *data, t_direction_and_string pair)
 	return (1);
 }
 
-void	poke_texture_data(t_parsed_data *data, t_direction_and_string pair)
+void	poke_texture_data(t_parsed_data *data, t_type_and_string pair)
 {
 	if (!data)
 	{
@@ -700,7 +700,7 @@ void	remove_trailing_new_line_char(char *line)
 }
 
 /*
-void	set_starting_coordinates_and_direction(t_parsed_data *d)
+void	set_starting_coordinates_and_type(t_parsed_data *d)
 {
 	t_coord	start_loc;
 
@@ -739,7 +739,7 @@ t_parsed_data	*file_to_data(char *file_name)
 	int						fd;
 	t_parsed_data			*d;
 	char					*line;
-	t_direction_and_string	texture_data;
+	t_type_and_string	texture_data;
 	t_char_and_rgb			colour_data;
 	size_t					map_buff_height;
 	size_t					map_line_i;
@@ -849,8 +849,8 @@ t_parsed_data	*file_to_data(char *file_name)
 		delete_parsed_data(d);
 		return (NULL);
 	}
-	// store starting coord and direction
-	// set_starting_coordinates_and_direction(d);
+	// store starting coord and type
+	// set_starting_coordinates_and_type(d);
 	// do flood fill check
 	if (is_enclosed_map(d) == 0)
 	{
@@ -886,7 +886,7 @@ void	debug_print_parsed_data(t_parsed_data *d)
 	printf("ceiling (r, g, b): (%d, %d, %d)\n", d->ceiling_r, d->ceiling_g, d->ceiling_b);
 	printf("floor (r, g, b)  : (%d, %d, %d)\n", d->floor_r, d->floor_g, d->floor_b);
 //	printf("starting location (x, y) (col, row): (%d, %d)\n", d->starting_x, d->starting_y);
-//	printf("starting_direction: ");
+//	printf("starting_type: ");
 /*
 	if (d->starting_dir == UNSET)
 	{

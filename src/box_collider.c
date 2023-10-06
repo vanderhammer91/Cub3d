@@ -34,7 +34,7 @@ void	c3d_collider_check_all(t_game *game)
 		{	
 			point = NULL;
 			point = ray_cast(game->walls[j], &this_ray);
-			if (point && game->walls[j]->direction != DOOR)
+			if (point && game->walls[j]->type != DOOR)
 			{
 				pt_dist = -1;
 				pt_dist = get_raylength(this_ray, *point);
@@ -43,7 +43,7 @@ void	c3d_collider_check_all(t_game *game)
 					has_set = 1;
 				}
 			}
-			else if (point && game->walls[j]->direction == DOOR)
+			else if (point && game->walls[j]->type == DOOR)
 			{
 				if (game->walls[j]->is_active)
 				{

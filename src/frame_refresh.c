@@ -160,7 +160,7 @@ void c3d_draw_minimap(t_game *game, void *img)
 			new_end.x = bound;
 		if (new_end.y > bound)
 			new_end.y = bound;
-		if (wall->direction != DOOR)
+		if (wall->type != DOOR)
         	line(img, new_start, new_end, 0x0000FF);
 		else
 		{	
@@ -220,11 +220,11 @@ void	c3d_check_walls_call(t_game *game)
 	i = 0;
 	while (game->walls[i])
 	{
-		if (game->walls[i]->direction == DOOR)
+		if (game->walls[i]->type == DOOR)
 		{	
 			check_walls_2(game, i);
 		}
-		else if(game->walls[i]->direction == AD)
+		else if(game->walls[i]->type == AD)
 		{
 			check_walls_3(game, i);
 		}

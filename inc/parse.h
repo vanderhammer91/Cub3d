@@ -24,11 +24,11 @@ typedef struct s_parsed_data
 
 enum e_wall_type;
 
-typedef struct s_direction_and_string
+typedef struct s_type_and_string
 {
     enum e_wall_type    dir;
     char                *str;
-}   t_direction_and_string;
+}   t_type_and_string;
 
 typedef struct s_char_and_rgb
 {

@@ -38,7 +38,7 @@ enum e_wall_texture {
 typedef struct s_bound {
     t_point 			start;
     t_point 			end;
-	enum e_wall_type	direction;
+	enum e_wall_type	type;
 	enum e_wall_texture	texture;
 	int					index;
 	int					is_active;
@@ -102,11 +102,11 @@ typedef struct s_parsed_data
     char    			**map;
 }   t_parsed_data;
 
-typedef struct s_direction_and_string
+typedef struct s_type_and_string
 {
     enum e_wall_type    dir;
     char                *str;
-}   t_direction_and_string;
+}   t_type_and_string;
 
 typedef struct s_char_and_rgb
 {

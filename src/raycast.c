@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 10:30:02 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:49:46 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,10 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	int 	y_offset = 500;
 	int		cw = 5;
 	int		pixel_colour;
+	int		img_state;
 
 	y = 0;
- 	if (closest_wall->direction == SOUTH)
+ 	if (closest_wall->type == SOUTH)
 	{
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
@@ -128,7 +129,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
- 	else if (closest_wall->direction == NORTH)
+ 	else if (closest_wall->type == NORTH)
 	{
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
@@ -145,7 +146,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
-	else if (closest_wall->direction == EAST)
+	else if (closest_wall->type == EAST)
 	{
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
@@ -162,7 +163,7 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
- 	else if (closest_wall->direction == WEST)
+ 	else if (closest_wall->type == WEST)
 	{
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
@@ -180,9 +181,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
-	else if (closest_wall->direction == AD)
+	else if (closest_wall->type == AD)
 	{
-		int img_state = game->walls[game->closest_wall_index]->img_state;
+		img_state = game->walls[game->closest_wall_index]->img_state;
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
@@ -197,9 +198,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
- 	else if (closest_wall->direction == DOOR)
+ 	else if (closest_wall->type == DOOR)
 	{
-		int img_state = game->walls[game->closest_wall_index]->img_state;
+		img_state = game->walls[game->closest_wall_index]->img_state;
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 128.0 / (float)raylength;
@@ -221,9 +222,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}	
-	else if (closest_wall->direction == EXIT)
+	else if (closest_wall->type == EXIT)
 	{
-		int img_state = game->walls[game->closest_wall_index]->img_state;
+		img_state = game->walls[game->closest_wall_index]->img_state;
 		start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 128.0 / (float)raylength;
@@ -301,7 +302,7 @@ void c3d_player_cast(t_game *game) {
 			pt_dist = 3000;
 		if (this_ray.rot == game->player.rot)
 		{
-			game->closest_wall_dir = closest_wall->direction;
+			game->closest_wall_dir = closest_wall->type;
 			game->pt_dist = pt_dist;
 		}
         second_pt_dist = (200 / (get_raylength(this_ray, second_closest)* cos(ray_angle))) * 200;
@@ -309,7 +310,7 @@ void c3d_player_cast(t_game *game) {
 			second_pt_dist = 3000;
         if (has_collided)
 		{
-			if (closest_wall->direction == DOOR || closest_wall->direction == AD)
+			if (closest_wall->type == DOOR || closest_wall->type == AD)
 				c3d_draw_projection(game, second_pt_dist, i, second_closest.x, second_closest.y, 
 				second_closest_wall);
 			c3d_draw_projection(game, pt_dist, i, closest.x, closest.y, closest_wall);

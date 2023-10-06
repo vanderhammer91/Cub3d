@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 10:59:41 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:15:58 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,9 @@ void	c3d_check_gun_state(t_game *game)
 		{
 			game->gun_state++;
 			if (game->gun_state > 10)
+			{
 				game->gun_state = 0;
+			}
 		}
 		else if (game->gun_state < 7)
 		{

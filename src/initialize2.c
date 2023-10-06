@@ -6,12 +6,13 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 22:47:19 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:18:53 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initialize.h"
 
+/*
 void	c3d_print_bounds(t_game *game)
 {
 	int	i;
@@ -28,6 +29,7 @@ void	c3d_print_bounds(t_game *game)
 		i++;
 	}
 }
+*/
 
 void	c3d_free_bounds(t_game *game)
 {
@@ -45,7 +47,6 @@ void	c3d_free_bounds(t_game *game)
 void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wall_type) 
 {
 	t_bound *new_bound = malloc(sizeof(t_bound));
-//	t_bound *temp;
     if (new_bound == NULL)
 	{
 		printf("add bound: malloc failed!\n");
@@ -62,7 +63,6 @@ void add_bound(t_game *game, float s_x, float s_y, float e_x, float e_y, int wal
 	new_bound->texture = DEFAULT;
 	new_bound->door_state = 0;
 	new_bound->img_state = 0;
-	
 	if (wall_type == 2)
 	{
 		new_bound->texture = PILLAR;

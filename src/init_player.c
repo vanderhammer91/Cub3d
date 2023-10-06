@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:16:09 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/26 21:01:23 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:18:00 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	c3d_set_player_rot(t_game *game, char p_dir)
 		game->player.rot = 0;
 	}
 }
-
 
 int	c3d_set_player_pos(t_game *game)
 {

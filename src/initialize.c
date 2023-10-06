@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 10:58:55 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:18:22 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,6 @@ void	c3d_initialize_key_states(t_game *game)
 	game->keys.R_ROT_KEY_DOWN = 0;
 	game->keys.ENTER_KEY_DOWN = 0;
 }	
-
-void	print_colour_state2(int colour)
-{
-    int r = (colour >> 16) & 0xFF;
-    int g = (colour >> 8) & 0xFF;
-    int b = colour & 0xFF;
-
-    printf("R = %d, G = %d, B = %d\n", r, g, b);
-}
 
 t_game *c3d_initialize_game(t_parsed_data *d)
 {

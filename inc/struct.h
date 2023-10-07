@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 16:24:55 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:18:56 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,23 @@ typedef struct s_cast_handler
 	float	t;
 	float	u;
 }	t_cast_handler;
+
+typedef struct s_cast
+{
+    t_ray	this_ray;
+	t_point closest;
+	t_point second_closest;
+	t_bound	*closest_wall;
+	t_bound *second_closest_wall;
+	float	pt_dist;
+	float	second_pt_dist;
+	double	ray_angle;
+	int		has_collided;
+	float	max_dist;
+	float	second_max_dist;
+    int		i;
+    int		j;
+}	t_cast;
 
 typedef	struct s_texture_lib
 {

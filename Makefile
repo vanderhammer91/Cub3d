@@ -30,6 +30,7 @@ SRC_FILES = draw.c			\
 			frame_refresh5.c\
 			bounds.c		\
 			raycast.c		\
+			raycast1.c		\
 			raw_utils.c 	\
 			gen_utils.c		\
 			key_events.c	\

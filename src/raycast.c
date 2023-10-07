@@ -6,93 +6,12 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 14:59:05 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:27:50 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
-t_point *ray_cast(t_bound *current_wall, t_ray *this_ray)
-{
-	t_point *pt;
-	double radians = this_ray->rot * M_PI / 180.0;
-	
-	float x1 = current_wall->start.x;	
-	float y1 = current_wall->start.y;	
-	float x2 = current_wall->end.x;	
-	float y2 = current_wall->end.y;	
-
-	float x3 = this_ray->pos.x;
-	float y3 = this_ray->pos.y;
-	float x4 = this_ray->pos.x + cos(radians);
-	float y4 = this_ray->pos.y + sin(radians);
-		
-	float denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-	if (denominator != 0)
-	{
-		float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denominator;
-		float u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denominator;
-		if (t > 0 && t < 1 && u > 0)
-		{
-    	    	pt = malloc(sizeof(t_point));
-			if (!pt)
-			{
-				printf("c3d_internal: raycast: failed malloc\n");
-				return (NULL);
-			}
-    	    	pt->x = x1 + t * (x2 - x1);
-    	    	pt->y = y1 + t * (y2 - y1);
-    	    	return pt;
-		}
-	}
-	return NULL;
-}
-
-float	get_raylength(t_ray ray, t_point end)
-{
-	float	x_diff;
-	float	y_diff;
-
-	x_diff = end.x - ray.pos.x;
-	y_diff = end.y - ray.pos.y;
-	return (sqrt(x_diff * x_diff + y_diff * y_diff));
-}
-
-int retrieve_colour(void *img, int x, int y)
-{
-    char    *data;
-    int     bpp;
-    int     size_line;
-    int     endian;
-    int     colour;
-
-    data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
-    colour = *(int *)(data + ((x * bpp / 8) + (y * size_line)));
-    return (colour);
-}
-
-int shade_pixel(int pixel_colour, float raylength)
-{
-    float	shading;
-	int		red;
-	int		green;
-	int		blue;
-	int		shaded;
-
-	shading = 0.005 * raylength; 
-   	if (shading < 0) shading = 0;
-    if (shading > 1) shading = 1;
-
-    red = (pixel_colour >> 16) & 0xFF;
-    green = (pixel_colour >> 8) & 0xFF;
-    blue = pixel_colour & 0xFF;
-   
-   	red = (int)(red * shading);
-    green = (int)(green * shading);
-    blue = (int)(blue * shading);
-    shaded = (red << 16) | (green << 8) | blue;
-    return (shaded);
-}
 
 void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ray_y, t_bound *closest_wall)
 {

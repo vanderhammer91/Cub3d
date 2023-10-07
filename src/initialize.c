@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 22:18:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:07:20 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	c3d_initialize_textures(t_game *game, t_parsed_data *d)
 	{
 		ft_start_exit("Error: Texture file not found\n", game);
 	}
+	c3d_initialize_textures2(game);
 }
 
 void	c3d_initialize_textures2(t_game *game)

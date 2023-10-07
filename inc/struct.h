@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 20:32:53 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:24:55 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,22 @@ typedef struct s_img_handler
 	int	m_off;
 	int	texture_y;
 }	t_img_handler;
+
+typedef struct s_cast_handler
+{
+	double	radians;
+	float	x1;
+	float	y1;
+	float	x2;
+	float	y2;
+	float	x3;
+	float	y3;
+	float	x4;
+	float	y4;
+	float	denominator;
+	float	t;
+	float	u;
+}	t_cast_handler;
 
 typedef	struct s_texture_lib
 {

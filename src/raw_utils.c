@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 16:42:36 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:52:07 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:07:51 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_fileheight(char *str)
 	char	*line;
 	int		fd;
 	int		i;
-	
+
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
@@ -36,7 +36,7 @@ int	get_fileheight(char *str)
 	return (i);
 }
 
-void c3d_print_raw(t_game *game)
+void	c3d_print_raw(t_game *game)
 {
 	int	i;
 

@@ -6,14 +6,14 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:48 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 19:25:34 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:42:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_events.h"
 
 int	key_press(int keycode, t_game *game)
-{	
+{
 	if (keycode == 53)
 		ft_start_exit("", game);
 	if (game->keys.L_KEY_DOWN == 0 && keycode == 0)
@@ -25,7 +25,7 @@ int	key_press(int keycode, t_game *game)
 	else if (game->keys.U_KEY_DOWN == 0 && keycode == 13)
 		game->keys.U_KEY_DOWN = 1;
 	else if (game->keys.E_KEY_DOWN == 0 && keycode == 14)
-		game->keys.E_KEY_DOWN = 1;	
+		game->keys.E_KEY_DOWN = 1;
 	else if (game->keys.SH_KEY_DOWN == 0 && keycode == 257)
 		game->keys.SH_KEY_DOWN = 1;
 	else if (game->keys.SP_KEY_DOWN == 0 && keycode == 49)
@@ -33,13 +33,13 @@ int	key_press(int keycode, t_game *game)
 	else if (game->keys.ENTER_KEY_DOWN == 0 && keycode == 36)
 		game->keys.ENTER_KEY_DOWN = 1;
 	else if (game->keys.R_ROT_KEY_DOWN == 0 && keycode == 123)
-		game->keys.R_ROT_KEY_DOWN = 1;	
+		game->keys.R_ROT_KEY_DOWN = 1;
 	else if (game->keys.L_ROT_KEY_DOWN == 0 && keycode == 124)
-		game->keys.L_ROT_KEY_DOWN = 1;	
+		game->keys.L_ROT_KEY_DOWN = 1;
 	return (0);
 }
 
-int key_release(int keycode, t_game *game)
+int	key_release(int keycode, t_game *game)
 {
 	if (keycode == 0)
 		game->keys.L_KEY_DOWN = 0;
@@ -52,36 +52,35 @@ int key_release(int keycode, t_game *game)
 	else if (keycode == 14)
 		game->keys.E_KEY_DOWN = 0;
 	else if (keycode == 49)
-		game->keys.SP_KEY_DOWN = 0;	
+		game->keys.SP_KEY_DOWN = 0;
 	else if (keycode == 257)
 		game->keys.SH_KEY_DOWN = 0;
 	else if (keycode == 36)
-		game->keys.ENTER_KEY_DOWN = 0;	
+		game->keys.ENTER_KEY_DOWN = 0;
 	else if (keycode == 124)
-		game->keys.L_ROT_KEY_DOWN = 0;	
+		game->keys.L_ROT_KEY_DOWN = 0;
 	else if (keycode == 123)
-		game->keys.R_ROT_KEY_DOWN = 0;	
+		game->keys.R_ROT_KEY_DOWN = 0;
 	else if (keycode == 53)
 		ft_start_exit("ESC", game);
 	return (0);
 }
 
-int mouse_move(int x, int y, t_game *game)
+int	mouse_move(int x, int y, t_game *game)
 {
 	(void)y;
 	if (x > game->prev_x)
 	{
-		game->player.rot += (x - game->prev_x) * 0.15;	
+		game->player.rot += (x - game->prev_x) * 0.15;
 		if (game->player.rot > 0)
-			game->player.rot -= 360; 
+			game->player.rot -= 360;
 	}
 	else if (x < game->prev_x)
 	{
-		game->player.rot += (x - game->prev_x) * 0.15;	
+		game->player.rot += (x - game->prev_x) * 0.15;
 		if (game->player.rot < 0)
-			game->player.rot += 360; 
+			game->player.rot += 360;
 	}
 	game->prev_x = x;
-	return 0;
+	return (0);
 }
-

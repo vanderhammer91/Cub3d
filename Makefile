@@ -32,6 +32,7 @@ SRC_FILES = draw.c			\
 			raycast.c		\
 			raycast1.c		\
 			raycast2.c		\
+			raycast3.c		\
 			raw_utils.c 	\
 			gen_utils.c		\
 			key_events.c	\

@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 19:37:07 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:12:54 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct s_projection
 	int		cw;
 	int		pixel_colour;
 	int		img_state;
+	int		alpha;
 	t_point	start;
 	t_point end;
 }	t_projection;

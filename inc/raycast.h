@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:12:21 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 16:32:01 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 19:35:16 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ float	get_raylength(t_ray ray, t_point end);
 int		retrieve_colour(void *img, int x, int y);
 int		shade_pixel(int pixel_colour, float raylength);
 
-void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x,
-		int ray_y, t_bound *closest_wall);
+void	c3d_draw_projection(t_game *game, t_param para, t_bound *closest_wall);
+
+//void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x,
+//		int ray_y, t_bound *closest_wall);
 
 #endif

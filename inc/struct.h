@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 17:47:50 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 19:37:07 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,22 @@ typedef struct s_cast
     int		i;
     int		j;
 }	t_cast;
+
+typedef struct s_projection
+{
+	int		y; 
+	int		start_y;
+	float	ty;
+	float	ty_step;
+	float	tx;
+	int		x_offset;
+	int 	y_offset ;
+	int		cw;
+	int		pixel_colour;
+	int		img_state;
+	t_point	start;
+	t_point end;
+}	t_projection;
 
 typedef struct s_param
 {

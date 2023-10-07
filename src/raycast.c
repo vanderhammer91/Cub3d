@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 19:35:40 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:27:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,9 @@ void	c3d_player_set(t_game *game, t_cast *pc, int j)
 void	c3d_player_cast_projection(t_game *game, t_cast pc, int i)
 {
 	if (pc.closest_wall->type == DOOR || pc.closest_wall->type == AD)
-	{
-	//	c3d_draw_projection(game, pc.second_pt_dist, i, pc.second_closest.x, \
-	//		pc.second_closest.y, pc.second_closest_wall);
-		c3d_draw_projection(game, (t_param){pc.second_pt_dist, i, 
-				pc.second_closest.x, pc.second_closest.y}, pc.second_closest_wall);
-	}
-	//c3d_draw_projection(game, pc.pt_dist, i, pc.closest.x, pc.closest.y, \
-	//		pc.closest_wall);
-	c3d_draw_projection(game, (t_param){pc.pt_dist, i, 
+		c3d_draw_projection(game, (t_param){pc.second_pt_dist, i,
+			pc.second_closest.x, pc.second_closest.y}, pc.second_closest_wall);
+	c3d_draw_projection(game, (t_param){pc.pt_dist, i,
 		pc.closest.x, pc.closest.y}, pc.closest_wall);
 }
 

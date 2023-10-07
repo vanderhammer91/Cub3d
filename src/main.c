@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 19:12:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:56:33 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	main(int argc, char **argv)
 		printf("Error\n");
 		return (0);
 	}
+	printf("about to print parsed data\n");
 	debug_print_parsed_data(data);
+	printf("finished printing parsed data\n");
 	m_game	= initialize_game(data);
 	//c3d_set_raw(argv, m_game);
 	//c3d_print_raw(m_game);

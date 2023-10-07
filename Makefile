@@ -32,6 +32,11 @@ SRC_FILES = draw.c			\
 			init_player.c	\
 			box_collider.c	\
 			parse.c 		\
+			parse1.c		\
+			parse2.c		\
+			parse3.c		\
+			parse4.c		\
+			parse5.c		\
 			main.c
 
 SRC_DIR = src

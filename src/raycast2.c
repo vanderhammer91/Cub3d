@@ -6,14 +6,14 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:33:41 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 16:35:37 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:50:28 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
 
-void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ray_y, t_bound *closest_wall)
+typedef struct s_projection;
 {
 	int		y; 
 	int		start_y;
@@ -27,10 +27,61 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
 	int		img_state;
 	t_point	start;
 	t_point end;
+}	t_projection;
 
-	y = 0;
+/*
+ * REF:
+ * i[0] = i;
+ * i[1] = ray_x;
+ * i[2] = ray_y;
+*/
+
+
+void	c3d_draw_south_projection(t_game *game, t_projection *dp, float raylength, int i[3])
+{
+	dp->start_y = dp->y_offset - raylength * 0.5;
+	ty = 0;
+	ty_step = 64.0 / (float)raylength;
+	tx = (int)(i[1]) % 64;
+	tx = 63 - tx;
+	while (y < raylength)
+	{
+		pixel_colour = retrieve_colour(game->t_lib.south_texture, tx, ty);
+		if (closest_wall->texture == PILLAR)
+			pixel_colour = retrieve_colour(game->t_lib.pillar_texture, tx, ty);
+		pixel_colour = shade_pixel(pixel_colour, raylength);
+		start.x = x_offset + i[0] * cw;
+		start.y = start_y + y;
+		end.x = cw;
+		end.y = 1;
+		rect(game->img, &start, &end, pixel_colour);
+		ty += ty_step;
+		y++;
+    }
+}
+
+/*
+ * REF:
+(t_param)
+{
+pc.second_pt_dist (raylength)
+i 
+pc.second_closest.x (ray_x)
+pc.second_closest.y (ray_y)
+}
+*/
+
+void	c3d_draw_projection(t_game *game, t_param tp, t_bound *closest_wall)
+{
+	t_projection	dp;
+
+	dp.x_offset = 0;
+	dp.y_offset = 500;
+	dp.cw = 5;
+	dp.y = 0;
  	if (closest_wall->type == SOUTH)
 	{
+		/*
     	start_y = y_offset - raylength * 0.5;
     	ty = 0;
     	ty_step = 64.0 / (float)raylength;
@@ -52,7 +103,9 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    ty += ty_step;
     	    y++;
     	}
+		*/
 	}
+	/*
  	else if (closest_wall->type == NORTH)
 	{
     	start_y = y_offset - raylength * 0.5;
@@ -201,5 +254,5 @@ void	c3d_draw_projection(t_game *game, float raylength, int i, int ray_x, int ra
     	    y++;
     	}
 	}
+	*/
 }
-

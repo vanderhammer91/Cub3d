@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 17:18:56 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:47:50 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,14 @@ typedef struct s_cast
     int		i;
     int		j;
 }	t_cast;
+
+typedef struct s_param
+{
+	float 	raylength;
+   	int		i;
+	int		ray_x;
+	int		ray_y;	
+}	t_param;
 
 typedef	struct s_texture_lib
 {

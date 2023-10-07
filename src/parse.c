@@ -6,14 +6,14 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/07 19:32:26 by lxu              ###   ########.fr       */
+/*   Updated: 2023/10/07 19:38:31 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
 // return 1 if successful (or error). 0 if unsuccessful
-int	try_parse_as_texture_line(t_parsed_data *d, char *line, int* err)
+int	try_parse_as_texture_line(t_parsed_data *d, char *line, int *err)
 {
 	t_direction_and_string	texture_data;
 
@@ -82,11 +82,10 @@ int	parse_fd_to_map(t_parsed_data *d, int fd, char *line)
 					return (free(line), -1);
 			}
 			d->map[i] = line;
-			// d->map[i + 1] = NULL;
 			i++;
 		}
 		else
-			return(free (line), -1);
+			return (free(line), -1);
 		line = get_next_line_cleaned(fd);
 	}
 	return (0);
@@ -114,8 +113,7 @@ t_parsed_data	*file_to_data(char *file_name)
 		else
 			break ;
 	}
-	err = parse_fd_to_map(d, fd, line);
-	if (err == -1)
+	if (parse_fd_to_map(d, fd, line) == -1)
 		return (delete_parsed_data(d), close(fd), NULL);
 	close(fd);
 	d = final_checks(d);

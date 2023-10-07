@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/07 19:26:55 by lxu              ###   ########.fr       */
+/*   Updated: 2023/10/07 19:45:41 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**duplicate_map(char **map)
 	return (dup);
 }
 
-int is_valid_by_flood_fill(char **map, int x, int y)
+int	is_valid_by_flood_fill(char **map, int x, int y)
 {
 	if (x < 0 || y < 0)
 		return (0);

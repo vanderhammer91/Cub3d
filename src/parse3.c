@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/07 17:42:51 by lxu              ###   ########.fr       */
+/*   Updated: 2023/10/07 19:45:21 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	valid_path_string_length(char *line)
 	return (i);
 }
 
-int line_starts_with_direction_chars(char *line)
+int	line_starts_with_direction_chars(char *line)
 {
 	if (!line)
 	{

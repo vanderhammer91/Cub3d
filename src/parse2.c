@@ -6,12 +6,11 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/07 17:49:27 by lxu              ###   ########.fr       */
+/*   Updated: 2023/10/07 19:45:03 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
 
 // Map must be comprised of 0, 1, N, S, E, W
 // Must be closed/surronded by walls (flood fill)

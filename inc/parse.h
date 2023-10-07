@@ -34,4 +34,25 @@ t_char_and_rgb			line_to_colour_data(char *line);
 int						can_poke_colour_data(t_parsed_data *data, t_char_and_rgb rgb);
 void					poke_colour_data(t_parsed_data *data, t_char_and_rgb rgb);
 
+//parse6.c
+int						is_valid_line_map(char *line);
+
+//parse7.c
+void					replace_map_spaces_with_zeros(t_parsed_data *d);
+void					extend_map_lines_to_rectangle(t_parsed_data *d);
+
+//parse8.c
+int	map_has_only_one_start_location(t_parsed_data *d);
+t_coord	get_start_location(t_parsed_data *d);
+int	is_enclosed_map(t_parsed_data *d);
+
+//parse9.c
+int	parsed_data_is_valid(t_parsed_data *d);
+int	is_file_name_valid(char *file_name);
+char	*get_next_line_cleaned(int fd);
+
+//parse10.c
+int	initial_checks(char *file_name, int *fd, t_parsed_data **d);
+t_parsed_data	*final_checks(t_parsed_data *d);
+
 #endif

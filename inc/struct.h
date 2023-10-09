@@ -31,16 +31,16 @@ enum e_wall_texture {
 
 typedef struct s_keys
 {
-	int	U_KEY_DOWN;
-	int	D_KEY_DOWN;
-	int	L_KEY_DOWN;
-	int	R_KEY_DOWN;
-	int	SH_KEY_DOWN;
-	int	SP_KEY_DOWN;
-	int	E_KEY_DOWN;
-	int	L_ROT_KEY_DOWN;
-	int	R_ROT_KEY_DOWN;
-	int	ENTER_KEY_DOWN;
+	int	u_key_down;
+	int	d_key_down;
+	int	l_key_down;
+	int	r_key_down;
+	int	sh_key_down;
+	int	sp_key_down;
+	int	e_key_down;
+	int	l_rot_key_down;
+	int	r_rot_key_down;
+	int	enter_key_down;
 }	t_keys;
 
 typedef struct s_point

@@ -55,7 +55,7 @@ void	c3d_draw_overlay(t_game *game)
 		{
 			mlx_put_image_to_window(game->mlx, game->mlx_win,
 				game->t_lib.e_texture, 100, 900);
-			if (game->keys.E_KEY_DOWN == 1)
+			if (game->keys.e_key_down == 1)
 			{
 				if (game->walls[game->cwi]->door_state == 0)
 				{

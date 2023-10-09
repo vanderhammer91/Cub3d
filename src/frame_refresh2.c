@@ -43,13 +43,13 @@ int	c3d_update_player_pos_1(t_game *game, double *new_x, double *new_y)
 	int		has_set;
 
 	has_set = 1;
-	if (game->keys.U_KEY_DOWN && !game->keys.D_KEY_DOWN)
+	if (game->keys.u_key_down && !game->keys.d_key_down)
 		c3d_update_player_pos_2(game, new_x, new_y, 1);
-	else if (game->keys.D_KEY_DOWN && !game->keys.U_KEY_DOWN)
+	else if (game->keys.d_key_down && !game->keys.u_key_down)
 		c3d_update_player_pos_2(game, new_x, new_y, 2);
-	else if (game->keys.L_KEY_DOWN && !game->keys.R_KEY_DOWN)
+	else if (game->keys.l_key_down && !game->keys.r_key_down)
 		c3d_update_player_pos_2(game, new_x, new_y, 3);
-	else if (game->keys.R_KEY_DOWN && !game->keys.L_KEY_DOWN)
+	else if (game->keys.r_key_down && !game->keys.l_key_down)
 		c3d_update_player_pos_2(game, new_x, new_y, 4);
 	else
 		has_set = 0;
@@ -72,7 +72,7 @@ int	c3d_update_player_pos(t_game *game)
 	double	new_y;
 
 	game->speed = 3;
-	if (game->keys.SH_KEY_DOWN == 1)
+	if (game->keys.sh_key_down == 1)
 		game->speed *= 2;
 	has_set = c3d_update_player_pos_1(game, &new_x, &new_y);
 	if (has_set)
@@ -86,9 +86,9 @@ int	c3d_update_player_pos(t_game *game)
 		if (new_y > game->player.pos.y && !game->player.ub)
 			game->player.pos.y = new_y;
 	}
-	if (game->keys.R_ROT_KEY_DOWN)
+	if (game->keys.r_rot_key_down)
 		c3d_update_player_rot(game, -0.5);
-	else if (game->keys.L_ROT_KEY_DOWN)
+	else if (game->keys.l_rot_key_down)
 		c3d_update_player_rot(game, 0.5);
 	return (0);
 }

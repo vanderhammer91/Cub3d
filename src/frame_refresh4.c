@@ -97,7 +97,7 @@ void	draw_gun_state(t_game *game, int gun_state, int x_off, int y_off)
 
 void	c3d_check_gun_state(t_game *game)
 {
-	if (game->keys.SP_KEY_DOWN && game->gun_state == 7)
+	if (game->keys.sp_key_down && game->gun_state == 7)
 	{
 		game->gun_state++;
 	}

@@ -42,7 +42,7 @@ void	frame_refresh_title(t_game *game)
 			&m_state.bpp, &m_state.size_line, &m_state.endian);
 	mlx_clear_window(game->mlx, game->mlx_win);
 	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
-	if (game->keys.ENTER_KEY_DOWN)
+	if (game->keys.enter_key_down)
 		game->game_state = 1;
 	game->frame++;
 	if (game->frame >= 8)

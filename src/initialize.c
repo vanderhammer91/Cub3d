@@ -23,15 +23,15 @@ int	rgb_to_hex(int r, int g, int b)
 
 void	c3d_initialize_key_states(t_game *game)
 {
-	game->keys.U_KEY_DOWN = 0;
-	game->keys.D_KEY_DOWN = 0;
-	game->keys.L_KEY_DOWN = 0;
-	game->keys.R_KEY_DOWN = 0;
-	game->keys.SH_KEY_DOWN = 0;
-	game->keys.SP_KEY_DOWN = 0;
-	game->keys.L_ROT_KEY_DOWN = 0;
-	game->keys.R_ROT_KEY_DOWN = 0;
-	game->keys.ENTER_KEY_DOWN = 0;
+	game->keys.u_key_down = 0;
+	game->keys.d_key_down = 0;
+	game->keys.l_key_down = 0;
+	game->keys.r_key_down = 0;
+	game->keys.sh_key_down = 0;
+	game->keys.sp_key_down = 0;
+	game->keys.l_rot_key_down = 0;
+	game->keys.r_rot_key_down = 0;
+	game->keys.enter_key_down = 0;
 	game->game_state = 0;
 	game->door_state = 0;
 	game->true_state = 0;

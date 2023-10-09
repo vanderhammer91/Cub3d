@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 16:07:20 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:30:46 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ t_game	*c3d_initialize_game(t_parsed_data *d)
 	game->door_state = 0;
 	game->true_state = 0;
 	game->ad_state = 0;
+	game->splash_state = 0;
 	game->raw = d->map;
 	game->num_walls = 0;
 	game->player.rb = 0;
 	game->player.lb = 0;
 	game->player.ub = 0;
 	game->player.db = 0;
+	game->player.rot = 0;
+	game->player.pos.x = 0;
+	game->player.pos.y = 0;
 	game->skycolour = rgb_to_hex(d->ceiling_r, d->ceiling_g, d->ceiling_b);
 	game->floorcolour = rgb_to_hex(d->floor_r, d->floor_g, d->floor_b);
 	c3d_initialize_key_states(game);

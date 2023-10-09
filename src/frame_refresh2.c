@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:19:35 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 17:46:21 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:11:34 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	c3d_update_player_rot(t_game *game, double it)
 	game->player.rot = game->player.rot + (it * game->speed);
 	if (game->player.rot < 0)
 		game->player.rot += 360;
+	else if (game->player.rot > 360)
+		game->player.rot -= 360;
 }
 
 int	c3d_update_player_pos(t_game *game)

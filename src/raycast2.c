@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:33:41 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 11:29:24 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:34:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp,
 		dp->end.y = 1;
 		rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 64)
+		{
+			dp->ty = 63;
+		}
 		dp->y++;
 	}
 }
@@ -59,6 +63,10 @@ void	c3d_draw_north_projection(t_game *game, t_projection *dp, t_param tp,
 		dp->end.y = 1;
 		rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 64)
+		{
+			dp->ty = 63;
+		}
 		dp->y++;
 	}
 }
@@ -84,6 +92,10 @@ void	c3d_draw_east_projection(t_game *game, t_projection *dp, t_param tp,
 		dp->end.y = 1;
 		rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 64)
+		{
+			dp->ty = 63;
+		}
 		dp->y++;
 	}
 }
@@ -110,6 +122,10 @@ void	c3d_draw_west_projection(t_game *game, t_projection *dp, t_param tp,
 		dp->end.y = 1;
 		rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 64)
+		{
+			dp->ty = 63;
+		}
 		dp->y++;
 	}
 }

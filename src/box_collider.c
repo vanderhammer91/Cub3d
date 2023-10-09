@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 14:08:01 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:14:17 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	c3d_collider_check_all(t_game *game)
 		this_ray.rot = i * 90;
 		has_set = 0;
 		j = 0;
-		while (game->walls[j])
+		while (j < game->num_walls)
 			c3d_collider_check_all_do1(game->walls[j++], &this_ray, &has_set);
 		c3d_set_bumpers(game, this_ray, has_set);
 		i++;

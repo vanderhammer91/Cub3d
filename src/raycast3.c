@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:20:54 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 20:30:25 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:40:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	c3d_draw_ad_projection(t_game *game, t_projection *dp, t_param tp)
 			rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		}
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 64)
+		{
+			dp->ty = 63;
+		}
 		dp->y++;
 	}
 }
@@ -63,6 +67,10 @@ void	c3d_draw_door_projection(t_game *game, t_projection *dp, t_param tp,
 			rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		}
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 128)
+		{
+			dp->ty = 127;
+		}
 		dp->y++;
 	}
 }
@@ -89,6 +97,10 @@ void	c3d_draw_exit_projection(t_game *game, t_projection *dp, t_param tp,
 		dp->end.y = 1;
 		rect(game->img, &dp->start, &dp->end, dp->pixel_colour);
 		dp->ty += dp->ty_step;
+		if (dp->ty >= 128)
+		{
+			dp->ty = 127;
+		}
 		dp->y++;
 	}
 }

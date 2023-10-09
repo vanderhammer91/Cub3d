@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:09:20 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 20:27:40 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:11:01 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	c3d_player_cast_init(t_game *game, t_cast *pc, int i)
 {
 	pc->has_collided = 0;
-	pc->max_dist = 100000;
-	pc->second_max_dist = 100000;
+	pc->max_dist = 10000;
+	pc->second_max_dist = 10000;
 	pc->this_ray.pos.x = game->player.pos.x;
 	pc->this_ray.pos.y = game->player.pos.y;
 	pc->this_ray.rot = get_safe_angle(game->player.rot + i * 0.25 - 35);
@@ -79,7 +79,7 @@ void	c3d_player_cast(t_game *game)
 	{
 		c3d_player_cast_init(game, &pc, pc.i);
 		pc.j = 0;
-		while (game->walls[pc.j])
+		while (pc.j < game->num_walls)
 			c3d_player_set(game, &pc, pc.j++);
 		pc.ray_angle = fabs(pc.this_ray.rot - game->player.rot) * M_PI / 180.0;
 		pc.pt_dist = (200 / (get_raylength(pc.this_ray, pc.closest) \

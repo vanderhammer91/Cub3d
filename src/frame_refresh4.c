@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:56:27 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 20:32:44 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:04:30 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	c3d_check_walls_call(t_game *game)
 	int	i;
 
 	i = 0;
-	while (game->walls[i])
+	while (i < game->num_walls)
 	{
 		if (game->walls[i]->type == DOOR)
 		{

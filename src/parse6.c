@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/07 19:20:36 by lxu              ###   ########.fr       */
+/*   Updated: 2023/10/09 11:52:15 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	is_valid_line_map(char *line)
 	{
 		if (line[i] == '0' || line[i] == '1' || line[i] == ' ' || \
 			line[i] == 'X' || line[i] == '2' || line[i] == '4' || \
-		line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+			line[i] == '5' || line[i] == 'N' || line[i] == 'S' || \
+			line[i] == 'E' || line[i] == 'W')
 		{
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/09 11:22:38 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:51:21 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ enum e_wall_type	str_to_direction(char *str)
 t_type_and_string	line_to_texture_data(char *line)
 {
 	char					*trimmed_line;
-	t_type_and_string	res;
+	t_type_and_string		res;
 	size_t					offset;
 
 	res.dir = UNSET;

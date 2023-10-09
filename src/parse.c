@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/09 11:20:45 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:47:12 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_parsed_data	*file_to_data(char *file_name)
 			break ;
 	}
 	if (parse_fd_to_map(d, fd, line) == -1)
-		return (delete_parsed_data(d), close(fd), NULL);
+		return (printf("dbg3\n"), delete_parsed_data(d), close(fd), NULL);
 	close(fd);
 	d = final_checks(d);
 	return (d);

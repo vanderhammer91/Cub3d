@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 21:16:12 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:19:37 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,6 @@ typedef struct s_bound
 	int					img_state;
 	struct s_bound		*next;
 }	t_bound;
-
-typedef struct s_vector
-{
-	float	x;
-	float	y;
-}	t_vector;
 
 typedef struct s_ray
 {

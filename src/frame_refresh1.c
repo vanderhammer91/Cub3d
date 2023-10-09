@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:07:44 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 16:18:20 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:18:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	draw_dir_arrow(t_game *game)
 {
 	t_point		start;
 	t_point		end;
-	t_vector	unit_vector;
+	t_point		unit_vector;
 	double		radians;
 	double		radius;
 

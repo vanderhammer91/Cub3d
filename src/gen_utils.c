@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:56:55 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 18:58:25 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:10:02 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,18 @@ int	on_x_press(t_game *game)
 {
 	ft_start_exit("", game);
 	return (1);
+}
+
+void	free_bounds(t_bound *head)
+{
+	t_bound	*current;
+	t_bound	*temp;
+
+	current = head;
+	while (current != NULL)
+	{
+		temp = current;
+		current = current->next;
+		free(temp);
+	}
 }

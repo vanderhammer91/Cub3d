@@ -6,132 +6,131 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:23:16 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 12:43:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:20:03 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initialize.h"
 
+
+
 int	c3d_set_wall_bounds(t_game *game)
 {
 	int	i;
 	int	j;
-	int	m = 64;
-	int	map_height;
-	int	map_width;
 	int count;
-	int s_x, s_y, e_x, e_y;
+	t_bvertices bv;
 
 	count = 0;
 	i = 0;
 	game->walls = malloc(sizeof(t_bound) * 200);
 	game->num_walls = 0;
-	map_height = get_mapheight(game);
-	map_width = ft_strlen(game->raw[i]) - 1;
-	while (i < map_height)
+	game->map_height = get_mapheight(game);
+	game->map_width = ft_strlen(game->raw[i]) - 1;
+	while (i < game->map_height)
 	{
 		j = 0;
-		while (j <= map_width)
+		while (j <= game->map_width)
 		{
 			if (game->raw[i][j] == '1')
 			{
 				if ((i - 1) > -1 && (is_space_char(game->raw[i - 1][j]) || is_player_char(game->raw[i - 1][j])))
 				{	
-					s_x = (j + 1) * m;
-					s_y = i * m;
-					e_x = j * m;
-					e_y = i * m;
-					add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, SOUTH);	
+					bv.s_x = (j + 1) * 64;
+					bv.s_y = i * 64;
+					bv.e_x = j * 64;
+					bv.e_y = i * 64;
+					add_bound(game, bv, SOUTH);	
 				}	
-				if ((j + 1) < map_width-1 && (is_space_char(game->raw[i][j + 1]) || is_player_char(game->raw[i][j + 1])))
+				if ((j + 1) < game->map_width-1 && (is_space_char(game->raw[i][j + 1]) || is_player_char(game->raw[i][j + 1])))
 				{	
-					s_x = (j + 1) * m;
-					s_y = (i + 1) * m;
-					e_x = (j + 1) * m;
-					e_y = i * m;
-					add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, EAST);	
+					bv.s_x = (j + 1) * 64;
+					bv.s_y = (i + 1) * 64;
+					bv.e_x = (j + 1) * 64;
+					bv.e_y = i * 64;
+					add_bound(game, bv, EAST);	
 				}
-				if ((i + 1) < map_height && (is_space_char(game->raw[i + 1][j]) || is_player_char(game->raw[i + 1][j])))
+				if ((i + 1) < game->map_height && (is_space_char(game->raw[i + 1][j]) || is_player_char(game->raw[i + 1][j])))
 				{
-					s_x = j * m;
-					s_y = (i + 1) * m;
-					e_x = (j + 1) * m;
-					e_y = (i + 1) * m;
-					add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, NORTH);	
+					bv.s_x = j * 64;
+					bv.s_y = (i + 1) * 64;
+					bv.e_x = (j + 1) * 64;
+					bv.e_y = (i + 1) * 64;
+					add_bound(game, bv, NORTH);	
 				}
 				
 				if ((j - 1) > -1 && (is_space_char(game->raw[i][j - 1]) || is_player_char(game->raw[i][j - 1])))
 				{	
-					s_x = j * m;
-					s_y = i * m;
-					e_x = j * m;
-					e_y = (i + 1) * m;
-					add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, WEST);	
+					bv.s_x = j * 64;
+					bv.s_y = i * 64;
+					bv.e_x = j * 64;
+					bv.e_y = (i + 1) * 64;
+					add_bound(game, bv, WEST);	
 				}	
 			}
 			else if (game->raw[i][j] == '2' || game->raw[i][j] == '4')
 			{
 					if (game->raw[i][j-1] == '1' && game->raw[i][j + 1] == '1')
 					{
-						s_x = j * m;
-						s_y = (i + 0.5) * m;
-						e_x = (j + 1) * m;
-						e_y = (i + 0.5) * m;
+						bv.s_x = j * 64;
+						bv.s_y = (i + 0.5) * 64;
+						bv.e_x = (j + 1) * 64;
+						bv.e_y = (i + 0.5) * 64;
 						if (game->raw[i][j] == '2')
-							add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, DOOR);	
+							add_bound(game, bv, DOOR);	
 						else
-							add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, EXIT);	
+							add_bound(game, bv, EXIT);	
 					}
 					else if (game->raw[i - 1][j] == '1' && game->raw[i + 1][j] == '1')
 					{
-						s_x = (j + 0.5) * m;
-						s_y = i * m;
-						e_x = (j + 0.5) * m;
-						e_y = (i + 1) * m;
+						bv.s_x = (j + 0.5) * 64;
+						bv.s_y = i * 64;
+						bv.e_x = (j + 0.5) * 64;
+						bv.e_y = (i + 1) * 64;
 						if (game->raw[i][j] == '2')
-							add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, DOOR);	
+							add_bound(game, bv, DOOR);	
 						else
-							add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, EXIT);
+							add_bound(game, bv, EXIT);
 					}
 			}
 			else if (game->raw[i][j] == '5')
 			{
-				s_x = (j - 2) * m;
-				s_y = (i + 0.1) * m;
-				e_x = (j + 1) * m;
-				e_y = (i + 0.1) * m;
-				add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, AD);
+				bv.s_x = (j - 2) * 64;
+				bv.s_y = (i + 0.1) * 64;
+				bv.e_x = (j + 1) * 64;
+				bv.e_y = (i + 0.1) * 64;
+				add_bound(game, bv, AD);
 			}
 			else if (game->raw[i][j] == 'X')
 			{
-				int os = 25;
+			//	int os = 25;
 				//top face.
-				s_x = ((j + 1) * m) - os ;
-				s_y = ((i) * m) + os;
-				e_x = ((j) * m) + os;
-				e_y = ((i) * m) + os;
-				add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, SOUTH);
+				bv.s_x = ((j + 1) * 64) - 25 ;
+				bv.s_y = ((i) * 64) + 25;
+				bv.e_x = ((j) * 64) + 25;
+				bv.e_y = ((i) * 64) + 25;
+				add_bound(game, bv, SOUTH);
 
 				//left face
-				s_x = ((j) * m) + os;
-				s_y = ((i) * m) + os;
-				e_x = ((j) * m) + os;
-				e_y = ((i + 1) * m) - os;
-				add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, EAST);
+				bv.s_x = ((j) * 64) + 25;
+				bv.s_y = ((i) * 64) + 25;
+				bv.e_x = ((j) * 64) + 25;
+				bv.e_y = ((i + 1) * 64) - 25;
+				add_bound(game, bv, EAST);
 
 				//bot face.
-				s_x = ((j) * m) + os;
-				s_y = ((i + 1) * m) - os;
-				e_x = ((j + 1) * m) - os;
-				e_y = ((i + 1) * m) - os;
-				add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, NORTH);
+				bv.s_x = ((j) * 64) + 25;
+				bv.s_y = ((i + 1) * 64) - 25;
+				bv.e_x = ((j + 1) * 64) - 25;
+				bv.e_y = ((i + 1) * 64) - 25;
+				add_bound(game, bv, NORTH);
 
 				//right face
-				s_x = ((j + 1) * m) - os;
-				s_y = ((i + 1) * m) - os;
-				e_x = ((j + 1) * m) - os;
-				e_y = ((i) * m) + os;
-				add_bound(game, (t_bvertices){s_x, s_y, e_x, e_y}, WEST);
+				bv.s_x = ((j + 1) * 64) - 25;
+				bv.s_y = ((i + 1) * 64) - 25;
+				bv.e_x = ((j + 1) * 64) - 25;
+				bv.e_y = ((i) * 64) + 25;
+				add_bound(game, bv, WEST);
 			}			
 			j++;
 		}	

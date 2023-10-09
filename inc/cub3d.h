@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:41:56 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 20:24:46 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:12:38 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "key_events.h"
 # include "gen_utils.h"
 # include "raycast.h"
-# include "bounds.h"
 # include "draw.h"
 # include "frame_refresh.h"
 # include "init_player.h"

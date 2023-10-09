@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:09:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 20:27:36 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:56:13 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define INITIALIZE_H
 
 # include "libraries.h"
-# include "bounds.h"
 # include "raw_utils.h"
 # include "gen_utils.h"
 # include "init_player.h"

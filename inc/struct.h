@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 20:47:24 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:16:12 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ typedef struct s_point
 	float	y;
 }	t_point;
 
-typedef struct s_bound {
-	t_point 			start;
-	t_point 			end;
+typedef struct s_bound
+{
+	t_point				start;
+	t_point				end;
 	enum e_wall_type	type;
 	enum e_wall_texture	texture;
 	int					index;
@@ -60,20 +61,19 @@ typedef struct s_bound {
 	int					door_state;
 	int					img_state;
 	struct s_bound		*next;
-} 	t_bound;
+}	t_bound;
 
 typedef struct s_vector
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
 }	t_vector;
 
 typedef struct s_ray
 {
 	t_point	pos;
-	double rot;
+	double	rot;
 }	t_ray;
-
 
 typedef struct s_player
 {
@@ -86,50 +86,48 @@ typedef struct s_player
 	int		db;
 }			t_player;
 
-
-
 typedef struct s_bvertices
 {
 	int	s_x;
 	int	s_y;
 	int	e_x;
 	int	e_y;
-} 	t_bvertices;
+}	t_bvertices;
 
 typedef struct s_parsed_data
 {
-    char    			*north_texture;
-    char    			*south_texture;
-    char    			*west_texture;
-    char    			*east_texture;
-    int     			floor_r;
-    int     			floor_g;
-    int     			floor_b;
-    int     			ceiling_r;
-    int     			ceiling_g;
-    int     			ceiling_b;
-    char    			**map;
-}   t_parsed_data;
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	int		floor_r;
+	int		floor_g;
+	int		floor_b;
+	int		ceiling_r;
+	int		ceiling_g;
+	int		ceiling_b;
+	char	**map;
+}	t_parsed_data;
 
 typedef struct s_type_and_string
 {
-    enum e_wall_type    dir;
-    char                *str;
-}   t_type_and_string;
+	enum e_wall_type	dir;
+	char				*str;
+}	t_type_and_string;
 
 typedef struct s_char_and_rgb
 {
-    char    c;
-    int     r;
-    int     g;
-    int     b;
-}   t_char_and_rgb;
+	char	c;
+	int		r;
+	int		g;
+	int		b;
+}	t_char_and_rgb;
 
 typedef struct s_coord
 {
-    int x;
-    int y;
-}   t_coord;
+	int	x;
+	int	y;
+}	t_coord;
 
 typedef struct s_line
 {
@@ -176,47 +174,47 @@ typedef struct s_cast_handler
 
 typedef struct s_cast
 {
-    t_ray	this_ray;
-	t_point closest;
-	t_point second_closest;
+	t_ray	this_ray;
+	t_point	closest;
+	t_point	second_closest;
 	t_bound	*closest_wall;
-	t_bound *second_closest_wall;
+	t_bound	*second_closest_wall;
 	float	pt_dist;
 	float	second_pt_dist;
-	double	ray_angle;
-	int		has_collided;
 	float	max_dist;
 	float	second_max_dist;
-    int		i;
-    int		j;
+	double	ray_angle;
+	int		has_collided;
+	int		i;
+	int		j;
 }	t_cast;
 
 typedef struct s_projection
 {
-	int		y; 
+	int		y;
 	int		start_y;
 	float	ty;
 	float	ty_step;
 	float	tx;
 	int		x_offset;
-	int 	y_offset ;
+	int		y_offset;
 	int		cw;
 	int		pixel_colour;
 	int		img_state;
 	int		alpha;
 	t_point	start;
-	t_point end;
+	t_point	end;
 }	t_projection;
 
 typedef struct s_param
 {
-	float 	raylength;
-   	int		i;
+	float	raylength;
+	int		i;
 	int		ray_x;
 	int		ray_y;	
 }	t_param;
 
-typedef	struct s_texture_lib
+typedef struct s_texture_lib
 {
 	void	*north_texture;
 	void	*east_texture;
@@ -233,45 +231,39 @@ typedef	struct s_texture_lib
 }	t_texture_lib;
 
 typedef struct s_game
-{ 
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-
-	char	**raw;
-	char	*door_path;
-	char	*door_frame[22];
-
-	int		w_height;
-	int		w_width;
-	int		map_height;
-	int		map_width;
-	int		prev_x;
-	int		frame;
-	int		speed;
-	int		msg_width;
-	int		msg_height;
-	int		game_state;
-	int		door_state;
-	int		ad_state;
-	int		true_state;
-	int		splash_state;
-	int		cwi;
-	int		close_index;
-	int		skycolour;
-	int		floorcolour;
-	int		gun_state;
-	int		num_walls;
-	float	pt_dist;
-	enum	e_wall_type	closest_wall_dir;
-	t_bound	*closest_wall;
-	t_bound	**walls;
-	t_parsed_data	*parsed_data;
-	t_texture_lib	t_lib;
-	t_player		player;
-	t_keys			keys;
+{
+	void				*mlx;
+	void				*mlx_win;
+	void				*img;
+	char				**raw;
+	int					w_height;
+	int					w_width;
+	int					map_height;
+	int					map_width;
+	int					prev_x;
+	int					frame;
+	int					speed;
+	int					msg_width;
+	int					msg_height;
+	int					game_state;
+	int					door_state;
+	int					ad_state;
+	int					true_state;
+	int					splash_state;
+	int					cwi;
+	int					close_index;
+	int					skycolour;
+	int					floorcolour;
+	int					gun_state;
+	int					num_walls;
+	float				pt_dist;
+	enum e_wall_type	closest_wall_dir;
+	t_bound				*closest_wall;
+	t_bound				**walls;
+	t_parsed_data		*parsed_data;
+	t_texture_lib		t_lib;
+	t_player			player;
+	t_keys				keys;
 }	t_game;
-
-
 
 #endif

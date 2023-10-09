@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:09:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 12:30:35 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:36:16 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	add_bound(t_game *game, t_bvertices bv, enum e_wall_type wall_type);
 void	c3d_remove_bound(t_game *game, int bound_index);
 int		is_space_char(char c);
 
+t_bound  **malloc_bounds(t_game *game);
 
 
 #endif

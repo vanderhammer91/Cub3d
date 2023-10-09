@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:23:16 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 15:02:26 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:26:39 by lxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int	c3d_set_wall_bounds(t_game *game)
 	game->num_walls = 0;
 	game->map_height = get_mapheight(game);
 	game->map_width = ft_strlen(game->raw[i]) - 1;
+	game->walls = malloc_bounds(game);
 	while (i < game->map_height)
 	{
 		j = 0;

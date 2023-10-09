@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:56:55 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 18:02:51 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:58:25 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_start_exit(char *error_msg, t_game *game)
 		printf("%s\n", error_msg);
 	delete_parsed_data(game->parsed_data);
 	delete_bounds_data(game);
+	free(game);
 	exit(0);
 }
 

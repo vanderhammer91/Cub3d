@@ -4,8 +4,8 @@
 
 NAME = cub3d
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-LFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+LFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit #-fsanitize=address -g
 
 #	o-----------------o
 #	|    INCLUDES     |
@@ -37,9 +37,10 @@ SRC_FILES = draw.c			\
 			gen_utils.c		\
 			key_events.c	\
 			initialize.c	\
+			initialize1.c	\
 			initialize2.c	\
 			initialize3.c	\
-			initialize5.c	\
+			initialize4.c	\
 			init_player.c	\
 			box_collider.c	\
 			parse.c 		\

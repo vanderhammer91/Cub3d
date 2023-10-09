@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:19:22 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 17:09:43 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:46:27 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ t_point	*ray_cast(t_bound *current_wall, t_ray *this_ray)
 {
 	t_point			*pt;
 	t_cast_handler	tc;
-	if (!current_wall)
-		return (NULL);
 
 	ray_cast_init(current_wall, this_ray, &tc);
 	if (tc.denominator != 0)

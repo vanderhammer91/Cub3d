@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 16:30:46 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:06:17 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,16 @@ void	c3d_initialize_key_states(t_game *game)
 	game->keys.L_ROT_KEY_DOWN = 0;
 	game->keys.R_ROT_KEY_DOWN = 0;
 	game->keys.ENTER_KEY_DOWN = 0;
+	game->game_state = 0;
+	game->door_state = 0;
+	game->true_state = 0;
+	game->ad_state = 0;
+	game->splash_state = 0;
 }
 
 t_game	*c3d_initialize_game(t_parsed_data *d)
 {
-	t_game	*game;
+	t_game			*game;	
 
 	game = malloc(sizeof(t_game));
 	if (game == NULL)
@@ -45,11 +50,6 @@ t_game	*c3d_initialize_game(t_parsed_data *d)
 	game->mlx = NULL;
 	game->mlx_win = NULL;
 	game->speed = 0;
-	game->game_state = 0;
-	game->door_state = 0;
-	game->true_state = 0;
-	game->ad_state = 0;
-	game->splash_state = 0;
 	game->raw = d->map;
 	game->num_walls = 0;
 	game->player.rb = 0;

@@ -4,8 +4,8 @@
 
 NAME = cub3d
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-LFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+LFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit #-fsanitize=address -g
 
 #	o-----------------o
 #	|    INCLUDES     |

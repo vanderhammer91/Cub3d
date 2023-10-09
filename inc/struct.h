@@ -6,18 +6,12 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 14:15:42 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:47:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-typedef struct s_point
-{
-    float x;
-    float y;
-} t_point;
 
 enum e_wall_type {
 	EAST,
@@ -35,9 +29,29 @@ enum e_wall_texture {
 	DEFAULT
 };
 
+typedef struct s_keys
+{
+	int	U_KEY_DOWN;
+	int	D_KEY_DOWN;
+	int	L_KEY_DOWN;
+	int	R_KEY_DOWN;
+	int	SH_KEY_DOWN;
+	int	SP_KEY_DOWN;
+	int	E_KEY_DOWN;
+	int	L_ROT_KEY_DOWN;
+	int	R_ROT_KEY_DOWN;
+	int	ENTER_KEY_DOWN;
+}	t_keys;
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+}	t_point;
+
 typedef struct s_bound {
-    t_point 			start;
-    t_point 			end;
+	t_point 			start;
+	t_point 			end;
 	enum e_wall_type	type;
 	enum e_wall_texture	texture;
 	int					index;
@@ -46,7 +60,7 @@ typedef struct s_bound {
 	int					door_state;
 	int					img_state;
 	struct s_bound		*next;
-} 						t_bound;
+} 	t_bound;
 
 typedef struct s_vector
 {
@@ -72,19 +86,7 @@ typedef struct s_player
 	int		db;
 }			t_player;
 
-typedef struct s_keys
-{
-	int U_KEY_DOWN;
-	int D_KEY_DOWN;
-	int L_KEY_DOWN;
-	int R_KEY_DOWN;
-	int	SH_KEY_DOWN;
-	int	SP_KEY_DOWN;
-	int	E_KEY_DOWN;
-	int L_ROT_KEY_DOWN;
-	int R_ROT_KEY_DOWN;
-	int	ENTER_KEY_DOWN;
-}	t_keys;
+
 
 typedef struct s_bvertices
 {

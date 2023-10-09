@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:11:07 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 22:27:35 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:28:51 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	c3d_set_wall_bounds(t_game *game)
 					s_y = (i + 1) * m;
 					e_x = (j + 1) * m;
 					e_y = i * m;
-					add_bound(game, s_x, s_y, e_x, e_y, EAST);	
+					add_bound(game, s_x, s_y, e_x, e_y, WEST);	
 				}
 				if ((i + 1) < map_height && (is_space_char(game->raw[i + 1][j]) || is_player_char(game->raw[i + 1][j])))
 				{
@@ -130,7 +130,7 @@ int	c3d_set_wall_bounds(t_game *game)
 					s_y = i * m;
 					e_x = j * m;
 					e_y = (i + 1) * m;
-					add_bound(game, s_x, s_y, e_x, e_y, WEST);
+					add_bound(game, s_x, s_y, e_x, e_y, EAST);
 				}	
 			}
 			else if (game->raw[i][j] == '2' || game->raw[i][j] == '4')

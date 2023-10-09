@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:20:54 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 18:55:44 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:41:07 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	c3d_draw_ad_projection(t_game *game, t_projection *dp, t_param tp)
 	dp->ty = 0;
 	dp->ty_step = 64.0 / (float)tp.raylength;
 	dp->tx = (int)(tp.ray_x) % 128;
+	dp->tx = 127 - dp->tx;
 	while (dp->y < tp.raylength)
 	{
 		dp->pixel_colour = retrieve_colour(game->t_lib.ad_texture, dp->tx * 2,

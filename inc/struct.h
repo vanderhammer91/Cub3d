@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:23:24 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/07 20:12:54 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:20:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ typedef struct s_keys
 	int	ENTER_KEY_DOWN;
 }	t_keys;
 
+typedef struct s_bvertices
+{
+	int	s_x;
+	int	s_y;
+	int	e_x;
+	int	e_y;
+} 	t_bvertices;
 
 typedef struct s_parsed_data
 {

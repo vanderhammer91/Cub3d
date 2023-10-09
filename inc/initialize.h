@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:09:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/05 21:15:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:30:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,13 @@ void	c3d_free_bounds(t_game *game);
 int	c3d_set_wall_bounds(t_game *game);
 void	c3d_print_bounds(t_game *game);
 void	c3d_remove_bound(t_game *game, int bound_index);
+
+void	c3d_free_bounds(t_game *game);
+void	init_bound(t_bound *new_bound, t_bvertices bv, enum e_wall_type wall_type);
+void	add_bound(t_game *game, t_bvertices bv, enum e_wall_type wall_type);
+void	c3d_remove_bound(t_game *game, int bound_index);
+int		is_space_char(char c);
+
+
 
 #endif

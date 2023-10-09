@@ -38,6 +38,7 @@ SRC_FILES = draw.c			\
 			key_events.c	\
 			initialize.c	\
 			initialize2.c	\
+			initialize3.c	\
 			init_player.c	\
 			box_collider.c	\
 			parse.c 		\

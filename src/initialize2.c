@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:23:16 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 20:06:31 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:17:43 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	c3d_add_northbound(t_game *game, int i, int j)
 	add_bound(game, bv, NORTH);
 }
 
-void	c3d_add_eastbound(t_game *game, int i, int j)
+void	c3d_add_westbound(t_game *game, int i, int j)
 {
 	t_bvertices	bv;	
 
@@ -31,7 +31,7 @@ void	c3d_add_eastbound(t_game *game, int i, int j)
 	bv.s_y = (i + 1) * 64;
 	bv.e_x = (j + 1) * 64;
 	bv.e_y = i * 64;
-	add_bound(game, bv, EAST);
+	add_bound(game, bv, WEST);
 }
 
 void	c3d_set_wall_bounds_init(t_game *game, int *i, int *texture_width)
@@ -51,13 +51,13 @@ void	c3d_set_wall_bounds_do(t_game *game, int i, int j)
 		c3d_add_southbound(game, i, j);
 	if ((j + 1) < game->map_width - 1 && (is_space_char(game->raw[i][j + 1]) || \
 				is_player_char(game->raw[i][j + 1])))
-		c3d_add_eastbound(game, i, j);
+		c3d_add_westbound(game, i, j);
 	if ((i + 1) < game->map_height && (is_space_char(game->raw[i + 1][j]) || \
 				is_player_char(game->raw[i + 1][j])))
 		c3d_add_northbound(game, i, j);
 	if ((j - 1) > -1 && (is_space_char(game->raw[i][j - 1]) || \
 				is_player_char(game->raw[i][j - 1])))
-		c3d_add_westbound(game, i, j);
+		c3d_add_eastbound(game, i, j);
 }
 
 int	c3d_set_wall_bounds(t_game *game)
@@ -74,12 +74,6 @@ int	c3d_set_wall_bounds(t_game *game)
 		{
 			if (game->raw[i][j] == '1')
 				c3d_set_wall_bounds_do(game, i, j);
-			else if (game->raw[i][j] == '2' || game->raw[i][j] == '4')
-				c3d_add_doors_and_exits(game, i, j);
-			else if (game->raw[i][j] == '5')
-				c3d_add_ad(game, i, j);
-			else if (game->raw[i][j] == 'X')
-				c3d_add_pillar(game, i, j);
 			j++;
 		}
 		i++;

@@ -6,13 +6,14 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:33:41 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 16:08:42 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:34:40 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
-void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp)
+void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp,
+		t_bound *closest_wall)
 {
 	dp->start_y = dp->y_offset - tp.raylength * 0.5;
 	dp->ty = 0;
@@ -23,6 +24,9 @@ void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp)
 	{
 		dp->pixel_colour = retrieve_colour(game->t_lib.south_texture, dp->tx,
 				dp->ty);
+		if (closest_wall->texture == PILLAR)
+			dp->pixel_colour = retrieve_colour(game->t_lib.pillar_texture,
+					dp->tx, dp->ty);
 		dp->pixel_colour = shade_pixel(dp->pixel_colour, tp.raylength);
 		dp->start.x = dp->x_offset + tp.i * dp->cw;
 		dp->start.y = dp->start_y + dp->y;
@@ -38,7 +42,8 @@ void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp)
 	}
 }
 
-void	c3d_draw_north_projection(t_game *game, t_projection *dp, t_param tp)
+void	c3d_draw_north_projection(t_game *game, t_projection *dp, t_param tp,
+		t_bound *closest_wall)
 {
 	dp->start_y = dp->y_offset - tp.raylength * 0.5;
 	dp->ty = 0;
@@ -48,6 +53,9 @@ void	c3d_draw_north_projection(t_game *game, t_projection *dp, t_param tp)
 	{
 		dp->pixel_colour = retrieve_colour(game->t_lib.north_texture, dp->tx,
 				dp->ty);
+		if (closest_wall->texture == PILLAR)
+			dp->pixel_colour = retrieve_colour(game->t_lib.pillar_texture,
+					dp->tx, dp->ty);
 		dp->pixel_colour = shade_pixel(dp->pixel_colour, tp.raylength);
 		dp->start.x = dp->x_offset + tp.i * dp->cw;
 		dp->start.y = dp->start_y + dp->y;
@@ -63,7 +71,8 @@ void	c3d_draw_north_projection(t_game *game, t_projection *dp, t_param tp)
 	}
 }
 
-void	c3d_draw_east_projection(t_game *game, t_projection *dp, t_param tp)
+void	c3d_draw_east_projection(t_game *game, t_projection *dp, t_param tp,
+		t_bound *closest_wall)
 {
 	dp->start_y = dp->y_offset - tp.raylength * 0.5;
 	dp->ty = 0;
@@ -73,6 +82,9 @@ void	c3d_draw_east_projection(t_game *game, t_projection *dp, t_param tp)
 	{
 		dp->pixel_colour = retrieve_colour(game->t_lib.east_texture, dp->tx,
 				dp->ty);
+		if (closest_wall->texture == PILLAR)
+			dp->pixel_colour = retrieve_colour(game->t_lib.pillar_texture,
+					dp->tx, dp->ty);
 		dp->pixel_colour = shade_pixel(dp->pixel_colour, tp.raylength);
 		dp->start.x = dp->x_offset + tp.i * dp->cw;
 		dp->start.y = dp->start_y + dp->y;
@@ -88,7 +100,8 @@ void	c3d_draw_east_projection(t_game *game, t_projection *dp, t_param tp)
 	}
 }
 
-void	c3d_draw_west_projection(t_game *game, t_projection *dp, t_param tp)
+void	c3d_draw_west_projection(t_game *game, t_projection *dp, t_param tp,
+		t_bound *closest_wall)
 {
 	dp->start_y = dp->y_offset - tp.raylength * 0.5;
 	dp->ty = 0;
@@ -99,6 +112,9 @@ void	c3d_draw_west_projection(t_game *game, t_projection *dp, t_param tp)
 	{
 		dp->pixel_colour = retrieve_colour(game->t_lib.west_texture, dp->tx,
 				dp->ty);
+		if (closest_wall->texture == PILLAR)
+			dp->pixel_colour = retrieve_colour(game->t_lib.pillar_texture,
+					dp->tx, dp->ty);
 		dp->pixel_colour = shade_pixel(dp->pixel_colour, tp.raylength);
 		dp->start.x = dp->x_offset + tp.i * dp->cw;
 		dp->start.y = dp->start_y + dp->y;
@@ -123,11 +139,17 @@ void	c3d_draw_projection(t_game *game, t_param tp, t_bound *closest_wall)
 	dp.cw = 5;
 	dp.y = 0;
 	if (closest_wall->type == SOUTH)
-		c3d_draw_south_projection(game, &dp, tp);
+		c3d_draw_south_projection(game, &dp, tp, closest_wall);
 	else if (closest_wall->type == NORTH)
-		c3d_draw_north_projection(game, &dp, tp);
+		c3d_draw_north_projection(game, &dp, tp, closest_wall);
 	else if (closest_wall->type == EAST)
-		c3d_draw_east_projection(game, &dp, tp);
+		c3d_draw_east_projection(game, &dp, tp, closest_wall);
 	else if (closest_wall->type == WEST)
-		c3d_draw_west_projection(game, &dp, tp);
+		c3d_draw_west_projection(game, &dp, tp, closest_wall);
+	else if (closest_wall->type == AD)
+		c3d_draw_ad_projection(game, &dp, tp);
+	else if (closest_wall->type == DOOR)
+		c3d_draw_door_projection(game, &dp, tp, closest_wall);
+	else if (closest_wall->type == EXIT)
+		c3d_draw_exit_projection(game, &dp, tp, closest_wall);
 }

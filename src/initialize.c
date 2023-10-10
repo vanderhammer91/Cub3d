@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:55:03 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 20:06:17 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:12:37 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,4 @@ void	c3d_initialize_textures(t_game *game, t_parsed_data *d)
 	{
 		ft_start_exit("Error: Texture file not found\n", game);
 	}
-	c3d_initialize_textures2(game);
-}
-
-void	c3d_initialize_textures2(t_game *game)
-{
-	int	width;
-	int	height;
-
-	game->t_lib.door_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/door_128.xpm", &width, &height);
-	game->t_lib.e_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/e_msg.xpm", &width, &height);
-	game->t_lib.exit_msg_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/you_win.xpm", &game->msg_width, &game->msg_height);
-	game->t_lib.exit_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/exit.xpm", &width, &height);
-	game->t_lib.gun_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/gun_sprite.xpm", &width, &height);
-	game->t_lib.pillar_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/pillar/pillar1.xpm", &width, &height);
-	game->t_lib.title_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/title_screen.xpm", &width, &height);
-	game->t_lib.ad_texture = mlx_xpm_file_to_image(game->mlx,
-			"images/ad_64.xpm", &width, &height);
 }

@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:09:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 20:56:13 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:16:28 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ void	add_bound(t_game *game, t_bvertices bv, enum e_wall_type wall_type);
 void	c3d_remove_bound(t_game *game, int bound_index);
 int		is_space_char(char c);
 
+/*		initialize2.c*/
+void	c3d_add_northbound(t_game *game, int i, int j);
+void	c3d_add_westbound(t_game *game, int i, int j);
+int		c3d_set_wall_bounds(t_game *game);
+
 /*		initialize3.c*/
 void	c3d_add_southbound(t_game *game, int i, int j);
-void	c3d_add_westbound(t_game *game, int i, int j);
-void	c3d_add_doors_and_exits(t_game *game, int i, int j);
-void	c3d_add_ad(t_game *game, int i, int j);
-void	c3d_add_pillar(t_game *game, int i, int j);
+void	c3d_add_eastbound(t_game *game, int i, int j);
 
 /*		initialize4.c*/
 t_bound	**malloc_bounds(t_game *game);

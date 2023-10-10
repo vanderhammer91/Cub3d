@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   box_collider.h                                     :+:      :+:    :+:   */
+/*   box_collider_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:54:00 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 18:48:54 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 20:13:55 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BOX_COLLIDER_H
-# define BOX_COLLIDER_H
+#ifndef BOX_COLLIDER_BONUS_H
+# define BOX_COLLIDER_BONUS_H
 
 # include "libraries.h"
 # include "draw.h"

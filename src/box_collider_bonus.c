@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:27:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 17:14:17 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:56:56 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "box_collider.h"
+#include "box_collider_bonus.h"
 
 void	c3d_collider_check_all_do1(t_bound *this_wall,
 		t_ray *this_ray, int *has_set)

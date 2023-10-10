@@ -6,12 +6,12 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:09:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 17:39:09 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:25:38 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INITIALIZE_H
-# define INITIALIZE_H
+#ifndef INITIALIZE_BONUS_H
+# define INITIALIZE_BONUS_H
 
 # include "libraries.h"
 # include "raw_utils.h"
@@ -51,7 +51,6 @@ int		c3d_set_wall_bounds(t_game *game);
 /*		bonus additions*/
 void	c3d_add_doors_and_exits(t_game *game, int i, int j);
 void	c3d_add_pillar(t_game *game, int i, int j);
-
 
 /*		initialize4.c*/
 t_bound	**malloc_bounds(t_game *game);

@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:18:51 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 16:01:29 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:58:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "frame_refresh.h"
+#include "frame_refresh_bonus.h"
 
 void	frame_refresh_exit(t_game *game)
 {

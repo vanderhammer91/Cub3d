@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:56:27 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 17:04:30 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:58:35 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "frame_refresh.h"
+#include "frame_refresh_bonus.h"
 
 void	check_walls_2(t_game *game, int i)
 {

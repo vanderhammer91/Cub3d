@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:12:21 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 16:08:55 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:25:51 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,5 @@ void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp);
 void	c3d_draw_east_projection(t_game *game, t_projection *dp, t_param tp);
 void	c3d_draw_west_projection(t_game *game, t_projection *dp, t_param tp);
 void	c3d_draw_projection(t_game *game, t_param para, t_bound *closest_wall);
-
-
 
 #endif

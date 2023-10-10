@@ -20,8 +20,7 @@ MLX = mlx/libmlx.a
 #	|     SOURCES     |
 #	o-----------------o
 
-SRC_FILES = box_collider.c	\
-			draw.c			\
+SRC_FILES = draw.c			\
 			draw1.c			\
 			frame_refresh.c	\
 			frame_refresh1.c\
@@ -50,28 +49,26 @@ SRC_FILES = box_collider.c	\
 			raycast.c		\
 			raycast1.c		\
 			raycast2.c		\
-			raycast3.c		\
-	
 
 
-BONUS	=	box_collider.c			\
+BONUS	=	box_collider_bonus.c	\
 			draw.c					\
 			draw1.c					\
 			frame_refresh_bonus.c	\
 			frame_refresh1_bonus.c	\
-			frame_refresh2.c		\
+			frame_refresh2_bonus.c	\
 			frame_refresh3_bonus.c	\
 			frame_refresh4_bonus.c	\
 			frame_refresh5_bonus.c	\
 			gen_utils.c				\
 			init_player.c			\
 			initialize_bonus.c		\
-			initialize1.c			\
+			initialize1_bonus.c		\
 			initialize2_bonus.c		\
 			initialize3_bonus.c		\
-			initialize4.c			\
+			initialize4_bonus.c		\
 			key_events.c			\
-			main.c					\
+			main_bonus.c			\
 			parse.c 				\
 			parse1.c 				\
 			parse2.c 				\
@@ -84,8 +81,8 @@ BONUS	=	box_collider.c			\
 			parse9.c 				\
 			parse10.c 				\
 			raw_utils.c 			\
-			raycast.c				\
-			raycast1.c				\
+			raycast_bonus.c			\
+			raycast1_bonus.c		\
 			raycast2_bonus.c		\
 			raycast3_bonus.c		\
 

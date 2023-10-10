@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:46:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 15:09:06 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:58:41 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "frame_refresh.h"
+#include "frame_refresh_bonus.h"
 
 void	c3d_draw_minimap_border(t_game *game)
 {

@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:07:44 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 15:05:27 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:58:53 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "frame_refresh.h"
+#include "frame_refresh_bonus.h"
 
 double	get_safe_angle(double angle)
 {

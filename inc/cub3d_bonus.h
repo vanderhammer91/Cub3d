@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frame_refresh.h                                    :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:20:29 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 18:53:06 by ivanderw         ###   ########.fr       */
+/*   Created: 2023/08/31 15:41:56 by ivanderw          #+#    #+#             */
+/*   Updated: 2023/10/10 18:50:32 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAME_REFRESH_H
-# define FRAME_REFRESH_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "libraries.h"
+# include "initialize_bonus.h"
+# include "key_events.h"
+# include "gen_utils.h"
+# include "raycast_bonus.h"
 # include "draw.h"
-# include "raycast.h"
+# include "frame_refresh_bonus.h"
+# include "init_player.h"
 # include "definitions.h"
 
-void	set_point(t_point *point, int x, int y);
-double	get_safe_angle(double angle);
-int		frame_refresh(t_game *game);
+void	c3d_init_rays(t_game *game);
 
-/*		frame_refresh1.c*/
-double	get_safe_angle(double angle);
-void	set_point(t_point *point, int x, int y);
-int		draw_dir_arrow(t_game *game);
+/*		map_utilies.c		*/
+int		set_parse(char **argv);
+void	print_parse(void);
 
-/*		frame_refresh2.c*/
-int		c3d_update_player_pos(t_game *game);
+/*		other_utilies.c		*/			
+int		c3d_set_raw(char **argv, t_game *game);
+void	c3d_print_raw(t_game *game);
+int		get_mapheight(t_game *game);
 
 #endif

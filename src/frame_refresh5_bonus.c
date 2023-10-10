@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:28:17 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 20:55:32 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:58:30 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "frame_refresh.h"
+#include "frame_refresh_bonus.h"
 
 void	frame_refresh_title_put_image(t_game *game, t_img_handler m_state)
 {

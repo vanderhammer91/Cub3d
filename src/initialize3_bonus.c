@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:55:34 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 16:16:38 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:38:41 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,6 @@ void	c3d_add_doors_and_exits(t_game *game, int i, int j)
 		else
 			add_bound(game, bv, EXIT);
 	}
-}
-
-void	c3d_add_ad(t_game *game, int i, int j)
-{
-	t_bvertices	bv;
-
-	bv.s_x = (j - 2) * 64;
-	bv.s_y = (i + 0.1) * 64;
-	bv.e_x = (j + 1) * 64;
-	bv.e_y = (i + 0.1) * 64;
-	add_bound(game, bv, AD);
 }
 
 void	c3d_add_pillar(t_game *game, int i, int j)

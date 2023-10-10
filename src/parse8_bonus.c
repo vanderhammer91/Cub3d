@@ -6,7 +6,7 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:13:50 by lxu               #+#    #+#             */
-/*   Updated: 2023/10/10 17:22:08 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:53:27 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ int	is_valid_by_flood_fill(char **map, int x, int y)
 		return (0);
 	if (x >= (int)ft_strlen(map[y]))
 		return (0);
-	if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' \
-		|| map[y][x] == 'W' || map[y][x] == 'E')
+	if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || \
+		map[y][x] == 'X' || map[y][x] == '2' || map[y][x] == '4' || \
+		map[y][x] == '5' || map[y][x] == 'W' || map[y][x] == 'E')
 	{
 		map[y][x] = 'x';
 		if (is_valid_by_flood_fill(map, x - 1, y) == 0 || \

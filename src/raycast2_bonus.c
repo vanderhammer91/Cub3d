@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:33:41 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 17:34:40 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:26:30 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycast.h"
+#include "raycast_bonus.h"
 
 void	c3d_draw_south_projection(t_game *game, t_projection *dp, t_param tp,
 		t_bound *closest_wall)
@@ -146,8 +146,6 @@ void	c3d_draw_projection(t_game *game, t_param tp, t_bound *closest_wall)
 		c3d_draw_east_projection(game, &dp, tp, closest_wall);
 	else if (closest_wall->type == WEST)
 		c3d_draw_west_projection(game, &dp, tp, closest_wall);
-	else if (closest_wall->type == AD)
-		c3d_draw_ad_projection(game, &dp, tp);
 	else if (closest_wall->type == DOOR)
 		c3d_draw_door_projection(game, &dp, tp, closest_wall);
 	else if (closest_wall->type == EXIT)

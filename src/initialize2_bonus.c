@@ -6,11 +6,11 @@
 /*   By: lxu <lxu@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:23:16 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 17:35:22 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:37:19 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "initialize.h"
+#include "initialize_bonus.h"
 
 void	c3d_add_northbound(t_game *game, int i, int j)
 {
@@ -74,6 +74,10 @@ int	c3d_set_wall_bounds(t_game *game)
 		{
 			if (game->raw[i][j] == '1')
 				c3d_set_wall_bounds_do(game, i, j);
+			else if (game->raw[i][j] == '2' || game->raw[i][j] == '4')
+				c3d_add_doors_and_exits(game, i, j);
+			else if (game->raw[i][j] == 'X')
+				c3d_add_pillar(game, i, j);
 			j++;
 		}
 		i++;

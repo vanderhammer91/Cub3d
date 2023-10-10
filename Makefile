@@ -50,7 +50,6 @@ SRC_FILES = draw.c			\
 			raycast1.c		\
 			raycast2.c		\
 
-
 BONUS	=	box_collider_bonus.c	\
 			draw.c					\
 			draw1.c					\
@@ -142,7 +141,6 @@ clean:
 fclean: clean
 	$(MAKE) fclean -C libft
 	rm -f $(NAME)
-	rm -f $(BONUS_NAME)
 
 re: fclean all
 

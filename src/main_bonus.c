@@ -6,11 +6,11 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:36:40 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/09 19:08:03 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 20:00:24 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -18,10 +18,10 @@ int	main(int argc, char **argv)
 	t_parsed_data	*data;
 
 	if (argc != 2)
-		return (1);
+		return (err("Error: bad arguments\n"));
 	data = file_to_data(argv[1]);
 	if (!data)
-		return (printf("Error\n"), 0);
+		return (err("Error\n"));
 	debug_print_parsed_data(data);
 	m_game = c3d_initialize_game(data);
 	c3d_set_wall_bounds(m_game);

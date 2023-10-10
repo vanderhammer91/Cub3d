@@ -26,6 +26,7 @@ SRC_FILES = draw.c			\
 			frame_refresh1.c\
 			frame_refresh2.c\
 			gen_utils.c		\
+			gen_utils1.c	\
 			init_player.c	\
 			initialize.c	\
 			initialize1.c	\
@@ -60,6 +61,7 @@ BONUS	=	box_collider_bonus.c	\
 			frame_refresh4_bonus.c	\
 			frame_refresh5_bonus.c	\
 			gen_utils.c				\
+			gen_utils1.c			\
 			init_player.c			\
 			initialize_bonus.c		\
 			initialize1_bonus.c		\

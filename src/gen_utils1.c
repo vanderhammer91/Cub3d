@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_utils.h                                        :+:      :+:    :+:   */
+/*   gen_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 10:58:52 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/10 19:55:57 by ivanderw         ###   ########.fr       */
+/*   Created: 2023/10/10 19:54:57 by ivanderw          #+#    #+#             */
+/*   Updated: 2023/10/10 19:59:25 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GEN_UTILS_H
-# define GEN_UTILS_H
+#include "gen_utils.h"
 
-# include "libraries.h"
-# include "parse.h"
-
-void	delete_bounds_data(t_game *game);
-void	free_array(char **my_array);
-void	ft_start_exit(char *error_msg, t_game *m_game);
-int		on_x_press(t_game *game);
-void	free_bounds(t_bound *head);
-
-int		err(char *str);
-
-#endif
+int	err(char *str)
+{
+	while (*str)
+	{
+		write(2, str++, 1);
+	}
+	return (1);
+}

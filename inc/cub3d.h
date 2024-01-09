@@ -6,7 +6,7 @@
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:41:56 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:58:17 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:12:38 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "key_events.h"
 # include "gen_utils.h"
 # include "raycast.h"
-# include "bounds.h"
 # include "draw.h"
 # include "frame_refresh.h"
 # include "init_player.h"
@@ -31,8 +30,8 @@ int		set_parse(char **argv);
 void	print_parse(void);
 
 /*		other_utilies.c		*/			
-int	c3d_set_raw(char **argv, t_game *game);
-void c3d_print_raw(t_game *game);
-int	get_mapheight(t_game *game);
+int		c3d_set_raw(char **argv, t_game *game);
+void	c3d_print_raw(t_game *game);
+int		get_mapheight(t_game *game);
 
 #endif

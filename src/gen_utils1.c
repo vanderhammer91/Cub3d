@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bounds.c                                           :+:      :+:    :+:   */
+/*   gen_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 13:44:26 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/10/06 12:55:44 by ivanderw         ###   ########.fr       */
+/*   Created: 2023/10/10 19:54:57 by ivanderw          #+#    #+#             */
+/*   Updated: 2023/10/10 19:59:25 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bounds.h"
+#include "gen_utils.h"
 
-void free_bounds(t_bound* head)
+int	err(char *str)
 {
-    t_bound* current = head;
-    while (current != NULL) {
-        t_bound* temp = current;
-        current = current->next;
-        free(temp);
-    }
+	while (*str)
+	{
+		write(2, str++, 1);
+	}
+	return (1);
 }

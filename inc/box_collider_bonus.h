@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   box_collider.h                                     :+:      :+:    :+:   */
+/*   box_collider_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivanderw <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:54:00 by ivanderw          #+#    #+#             */
-/*   Updated: 2023/09/22 20:56:08 by ivanderw         ###   ########.fr       */
+/*   Updated: 2023/10/10 20:13:55 by ivanderw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BOX_COLLIDER_H
-# define BOX_COLLIDER_H
+#ifndef BOX_COLLIDER_BONUS_H
+# define BOX_COLLIDER_BONUS_H
 
 # include "libraries.h"
 # include "draw.h"
-# include "raycast.h"
+# include "raycast_bonus.h"
 
 int		test_right_hitray(t_game *game);
 void	c3d_collider_check_right(t_game *game);
